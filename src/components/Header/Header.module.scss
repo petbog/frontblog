@@ -1,0 +1,44 @@
+.header {
+    height: 100px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    &_logo h3 {
+        padding: 7px 57px;
+        font-size: 22px;
+        letter-spacing: 1px;
+        border: 1px solid black;
+        border-radius: 13px;
+        cursor: pointer;
+    }
+}
+
+.link {
+    width: 300px;
+    display: flex;
+    justify-content: space-between;
+
+    &__article {
+        padding: 11px 17px;
+        font-size: 16px;
+        color: #264ea2;
+        text-decoration: none;
+        border-radius: 10px;
+        border: 1px solid #264ea2;
+        cursor: pointer;
+        background-color: #fff;
+    }
+
+    &__exid {
+        padding: 11px 17px;
+        font-size: 16px;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 10px;
+        border:none;
+        cursor: pointer;
+        background-color: #264ea2;
+    }
+}
