@@ -2,7 +2,7 @@ import s from './Header.module.scss'
 
 const Header = () => {
 
-    const isAuth = true
+    const isAuth = false
 
     return (
         <div className={s.header}>
@@ -15,7 +15,7 @@ const Header = () => {
                         <button className={s.link__article}>Написать статью</button>
                         <button className={s.link__exid}>Выйти</button>
                     </>) : (<>
-                        <button className={s.link__forward}>Войти</button>
+                        <div className={s.link__forward}>Войти</div>
                         <button className={s.link__create}>Создать аккаунт</button>
                     </>)
                 }
