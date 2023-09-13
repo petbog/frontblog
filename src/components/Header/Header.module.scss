@@ -158,4 +158,12 @@
 
 .innerLinkForward {
     text-decoration: none;
+
+}
+
+.innerLinkForward:active, /* активная/посещенная ссылка */
+.innerLinkForward:hover,  /* при наведении */
+.innerLinkForward {
+  text-decoration: none;
+  color: #666;
 }

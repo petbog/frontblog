@@ -11,7 +11,7 @@ const Auth = () => {
     const [src, setSrc] = useState(eye_off)
     const [emailDirty, setEmailDirty] = useState(false)
     const [passDirty, setPassDirty] = useState(false)
-    const [emailError, setEmailError] = useState('Gmail не может быть пустым')
+    const [emailError, setEmailError] = useState('Email не может быть пустым')
     const [passError, setPassError] = useState('Пароль не может быть пустым')
 
 
@@ -40,7 +40,7 @@ const Auth = () => {
         setEmail(e.target.value)
         var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         if (!re.test(String(e.target.value).toLowerCase())) {
-            setEmailError('Некоректный gmail')
+            setEmailError('Некоректный email')
         } else {
             setEmailError('')
         }
@@ -58,43 +58,45 @@ const Auth = () => {
             setPassError('')
         }
     }
-    
+
     return (
         <>
             <Header />
             <div className={classes.container}>
-            <div className={classes.Form_inner}>
-            <div className={classes.Form_container}>
-                <p className={classes.form_title}>Логин</p>
-                <input
-                    name="email"
-                    onBlur={(e) => blurHandle(e)}
-                    className={classes.Form_email}
-                    type='email'
-                    value={email}
-                    onChange={(e) => emailHandler(e)}
-                    placeholder='gmail'
-                />
-                {(emailDirty && emailError) && <div className={classes.errorPoppup}>{emailError}</div>}
-            </div>
-            <div className={classes.Form_container}>
-                <p className={classes.form_title}>Пароль</p>
-                <input
-                    name="password"
-                    onBlur={(e) => blurHandle(e)}
-                    className={classes.Form_pass}
-                    type={type}
-                    value={pass}
-                    onChange={(e) => passwordHandler(e)}
-                    placeholder='password'
-                />
-                {(passDirty && passError) && <div className={classes.errorPoppup}>{passError}</div>}
-                <img onClick={handleToggle} className={classes.form_img} src={src} alt="" />
-            </div>
-            <div className={classes.Button_container}>
-                <button className={classes.Form_button} >Отправить</button>
-            </div>
-        </div>
+                <div className={classes.Form_inner}>
+                    <div className={classes.Form_container}>
+                        <p className={classes.form_title}>Логин</p>
+                        <input
+                            name="email"
+                            onBlur={(e) => blurHandle(e)}
+                            className={classes.Form_email}
+                            type='email'
+                            value={email}
+                            onChange={(e) => emailHandler(e)}
+                            placeholder=''
+                        />
+                        <label className={classes.Form_email__label}>Введите email</label>
+                        {(emailDirty && emailError) && <div className={classes.errorPoppup}>{emailError}</div>}
+                    </div>
+                    <div className={classes.Form_container_pass}>
+                        <p className={classes.form_title}>Пароль</p>
+                        <input
+                            name="password"
+                            onBlur={(e) => blurHandle(e)}
+                            className={classes.Form_pass}
+                            type={type}
+                            value={pass}
+                            onChange={(e) => passwordHandler(e)}
+                            placeholder=''
+                        />
+                        <label  className={classes.Form_pass__label}>Введите password</label>
+                        {(passDirty && passError) && <div className={classes.errorPoppup}>{passError}</div>}
+                        <img onClick={handleToggle} className={classes.form_img} src={src} alt="" />
+                    </div>
+                    <div className={classes.Button_container}>
+                        <button className={classes.Form_button} >Отправить</button>
+                    </div>
+                </div>
             </div>
 
         </>
