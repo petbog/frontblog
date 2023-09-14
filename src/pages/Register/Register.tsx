@@ -1,22 +1,33 @@
-import { ChangeEvent, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import Header from '../../components/Header/Header'
 import classes from './Register.module.scss'
 import eye_off from '../../img/eye_off.svg'
 import eye from '../../img/eye.svg'
+import { addUser, fetchRegister } from '../../redux/Slice/authSlise';
+import { useAppDispatch } from '../../redux/store';
 
 
 
 const Register: React.FC = () => {
     const [email, setEmail] = useState('')
     const [pass, setPass] = useState('')
+    const [name, setName] = useState('')
+    const [obj, setObj] = useState({
+        email,
+        pass,
+        name
+    })
     const [type, setType] = useState("password")
     const [src, setSrc] = useState(eye_off)
     const [emailDirty, setEmailDirty] = useState(false)
     const [passDirty, setPassDirty] = useState(false)
+    const [nameDirty, setNameDirty] = useState(false)
     const [emailError, setEmailError] = useState('Gmail не может быть пустым')
     const [passError, setPassError] = useState('Пароль не может быть пустым')
-    const [imgUrl, setImageUrl] = useState<string>('')
+    const [nameError, setNameError] = useState('Имя не может быть пустым')
+    const [imgUrl, setImageUrl] = useState<File | null>(null)
     const imgRef = useRef<HTMLInputElement>(null)
+    const dispatch = useAppDispatch()
 
 
     const handleToggle = () => {
@@ -37,6 +48,9 @@ const Register: React.FC = () => {
             case 'password':
                 setPassDirty(true)
                 break
+            case 'name':
+                setNameDirty(true)
+                break
         }
     }
 
@@ -51,6 +65,7 @@ const Register: React.FC = () => {
 
     }
 
+
     const passwordHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         setPass(e.target.value)
         if (e.target.value.length < 6 || e.target.value.length > 9) {
@@ -63,6 +78,17 @@ const Register: React.FC = () => {
         }
     }
 
+    const nameHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setName(e.target.value)
+        if (e.target.value.length > 1 || e.target.value.length < 1) {
+            setNameError('')
+            if (!e.target.value) {
+                setNameError('Укажите имя')
+            }
+        } else {
+            setNameError('')
+        }
+    }
     const handleClickImg = () => {
         if (imgRef.current) {
             imgRef.current.click()
@@ -70,22 +96,39 @@ const Register: React.FC = () => {
     }
 
     const onClickRemoveImage = () => {
-        setImageUrl('')
+        setImageUrl(null)
     }
 
-    const handleChangeFile: React.MouseEventHandler<HTMLInputElement> = (event) => {
+    const handleChangeFile: React.MouseEventHandler<HTMLInputElement> = async (event) => {
         const inputElement = event.target as HTMLInputElement;
         const files = inputElement.files;
-      
-        if (files) {
-            for (let i = 0; i < files.length; i++) {
-                const file = files[i];
-                // Делаем что-то с файлом
-               console.log(file);
-            }
+        if (files && files.length > 0) {
+            // Выбран хотя бы один файл, можно работать с ним
+            const file = files[0];
+            // Делаем что-то с файлом
+            await setImageUrl(file);
+        } else {
+
+            console.log("Файл не выбран");
         }
     };
 
+    const handleRegister = () => {
+        setObj({
+            email,
+            pass,
+            name
+        })
+        dispatch(addUser(obj))
+
+    }
+
+
+
+    // useEffect(() => {
+    //     dispatch(fetchRegister(obj))
+
+    // }, [])
     return (
         <>
             <Header />
@@ -100,10 +143,24 @@ const Register: React.FC = () => {
                                     <div onClick={onClickRemoveImage}>
                                         Удалить
                                     </div>
-                                    <img src={`http://localhost:4444${imgUrl}`} alt="Uploaded" />
+                                    {/* <img src={imgUrl} alt="Uploaded" /> */}
                                 </>
                             )
                         }
+                    </div>
+                    <div className={classes.Form_container}>
+                        <p className={classes.form_title}>Имя</p>
+                        <input
+                            name="name"
+                            onBlur={(e) => blurHandle(e)}
+                            className={classes.Form_email}
+                            type='email'
+                            value={name}
+                            onChange={(e) => nameHandler(e)}
+                            placeholder=''
+                        />
+                        <label className={classes.Form_email__label}>Ваше имя</label>
+                        {(nameDirty && nameError) && <div className={classes.errorPoppup}>{nameError}</div>}
                     </div>
                     <div className={classes.Form_container}>
                         <p className={classes.form_title}>Логин</p>
@@ -135,7 +192,7 @@ const Register: React.FC = () => {
                         <img onClick={handleToggle} className={classes.form_img} src={src} alt="" />
                     </div>
                     <div className={classes.Button_container}>
-                        <button className={classes.Form_button} >Отправить</button>
+                        <button className={classes.Form_button} onClick={handleRegister} >Отправить</button>
                     </div>
                 </div>
             </div>
