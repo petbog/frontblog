@@ -9,8 +9,9 @@ export type userParams = {
 }
 
 
-export const fetchRegister = createAsyncThunk('auth/fetchRegister', async (params: userParams) => {
+export const fetchRegister = createAsyncThunk('auth/fetchRegister', async (params: userParams[]) => {
     const { data } = await instanse.post(`/auth/register`, params)
+    console.log(data)
     return data
 })
 
@@ -44,8 +45,8 @@ const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-        addUser:(state,action)=>{
-            state.items =action.payload
+        addUser: (state, action) => {
+            state.items = action.payload
         }
     },
     extraReducers: (builder) => {
@@ -65,7 +66,8 @@ const authSlice = createSlice({
 })
 
 export const selectIsAuth = (state: RootState) => Boolean(state.auth.data)
-export const { addUser} = authSlice.actions
+export const itemsAuth = (state: RootState) => state.auth
+export const { addUser } = authSlice.actions
 export const authReduser = authSlice.reducer
 
 

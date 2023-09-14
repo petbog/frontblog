@@ -3,20 +3,16 @@ import Header from '../../components/Header/Header'
 import classes from './Register.module.scss'
 import eye_off from '../../img/eye_off.svg'
 import eye from '../../img/eye.svg'
-import { addUser, fetchRegister } from '../../redux/Slice/authSlise';
-import { useAppDispatch } from '../../redux/store';
+import { addUser, fetchRegister, itemsAuth } from '../../redux/Slice/authSlise';
+import { RootState, useAppDispatch } from '../../redux/store';
+import { useSelector } from 'react-redux';
 
 
 
 const Register: React.FC = () => {
     const [email, setEmail] = useState('')
-    const [pass, setPass] = useState('')
-    const [name, setName] = useState('')
-    const [obj, setObj] = useState({
-        email,
-        pass,
-        name
-    })
+    const [password, setPass] = useState('')
+    const [fullName, setName] = useState('')
     const [type, setType] = useState("password")
     const [src, setSrc] = useState(eye_off)
     const [emailDirty, setEmailDirty] = useState(false)
@@ -28,6 +24,7 @@ const Register: React.FC = () => {
     const [imgUrl, setImageUrl] = useState<File | null>(null)
     const imgRef = useRef<HTMLInputElement>(null)
     const dispatch = useAppDispatch()
+    const { items } = useSelector(itemsAuth)
 
 
     const handleToggle = () => {
@@ -114,21 +111,23 @@ const Register: React.FC = () => {
     };
 
     const handleRegister = () => {
-        setObj({
+        const newObj = {
             email,
-            pass,
-            name
-        })
-        dispatch(addUser(obj))
+            password,
+            fullName
+        }
+
+        dispatch(addUser(newObj))
 
     }
 
 
 
-    // useEffect(() => {
-    //     dispatch(fetchRegister(obj))
+    useEffect(() => {
+        dispatch(fetchRegister(items))
+    }, [items])
 
-    // }, [])
+
     return (
         <>
             <Header />
@@ -155,7 +154,7 @@ const Register: React.FC = () => {
                             onBlur={(e) => blurHandle(e)}
                             className={classes.Form_email}
                             type='email'
-                            value={name}
+                            value={fullName}
                             onChange={(e) => nameHandler(e)}
                             placeholder=''
                         />
@@ -183,7 +182,7 @@ const Register: React.FC = () => {
                             onBlur={(e) => blurHandle(e)}
                             className={classes.Form_pass}
                             type={type}
-                            value={pass}
+                            value={password}
                             onChange={(e) => passwordHandler(e)}
                             placeholder=''
                         />
