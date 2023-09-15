@@ -6,6 +6,7 @@ import eye from '../../img/eye.svg'
 import { addUser, fetchRegister, itemsAuth } from '../../redux/Slice/authSlise';
 import { RootState, useAppDispatch } from '../../redux/store';
 import { useSelector } from 'react-redux';
+import { isArray } from 'util';
 
 
 
@@ -24,7 +25,10 @@ const Register: React.FC = () => {
     const [imgUrl, setImageUrl] = useState<File | null>(null)
     const imgRef = useRef<HTMLInputElement>(null)
     const dispatch = useAppDispatch()
-    const { items } = useSelector(itemsAuth)
+    const { items, data } = useSelector(itemsAuth)
+
+    // const token = data.token
+    // console.log(token)
 
 
     const handleToggle = () => {
@@ -127,6 +131,11 @@ const Register: React.FC = () => {
         dispatch(fetchRegister(items))
     }, [items])
 
+    if ('token' in data) {
+        const token = data.token
+        window.localStorage.setItem('token', token)
+      }
+    
 
     return (
         <>

@@ -11,7 +11,6 @@ export type userParams = {
 
 export const fetchRegister = createAsyncThunk('auth/fetchRegister', async (params: userParams[]) => {
     const { data } = await instanse.post(`/auth/register`, params)
-    console.log(data)
     return data
 })
 
@@ -29,14 +28,32 @@ type itemRegister = {
     name: string,
 }
 
+type dataType = {
+    createdAt: string,
+    email: string,
+    fullName: string,
+    token: string,
+    updatedAt: string,
+    __v: number,
+    _id: string,
+}
+
 interface authType {
-    data: []
+    data: dataType;
     status: Status;
     items: itemRegister[]
 }
 
 const initialState: authType = {
-    data: [],
+    data: {
+        createdAt: '',
+        email: '',
+        fullName: '',
+        token: '',
+        updatedAt: '',
+        __v: 0,
+        _id: '',
+    },
     status: Status.LOADING,
     items: []
 }
@@ -51,7 +68,15 @@ const authSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder.addCase(fetchRegister.pending, (state, action) => {
-            state.data = [];
+            state.data = {
+                createdAt: '',
+                email: '',
+                fullName: '',
+                token: '',
+                updatedAt: '',
+                __v: 0,
+                _id: '',
+            };;
             state.status = Status.LOADING;
         });
         builder.addCase(fetchRegister.fulfilled, (state, action) => {
@@ -59,7 +84,15 @@ const authSlice = createSlice({
             state.status = Status.SUCCESS;
         });
         builder.addCase(fetchRegister.rejected, (state, action) => {
-            state.data = [];
+            state.data = {
+                createdAt: '',
+                email: '',
+                fullName: '',
+                token: '',
+                updatedAt: '',
+                __v: 0,
+                _id: '',
+            };
             state.status = Status.ERROR
         });
     }
