@@ -22,13 +22,11 @@ const Register: React.FC = () => {
     const [emailError, setEmailError] = useState('Gmail не может быть пустым')
     const [passError, setPassError] = useState('Пароль не может быть пустым')
     const [nameError, setNameError] = useState('Имя не может быть пустым')
-    const [imgUrl, setImageUrl] = useState<File | null>(null)
+    const [avatarUrl, setImageUrl] = useState<string>('')
     const imgRef = useRef<HTMLInputElement>(null)
     const dispatch = useAppDispatch()
     const { items, data } = useSelector(itemsAuth)
 
-    // const token = data.token
-    // console.log(token)
 
 
     const handleToggle = () => {
@@ -97,17 +95,18 @@ const Register: React.FC = () => {
     }
 
     const onClickRemoveImage = () => {
-        setImageUrl(null)
+        setImageUrl('')
     }
 
-    const handleChangeFile: React.MouseEventHandler<HTMLInputElement> = async (event) => {
+    const handleChangeFile: React.ChangeEventHandler<HTMLInputElement> = (event) => {
         const inputElement = event.target as HTMLInputElement;
         const files = inputElement.files;
         if (files && files.length > 0) {
             // Выбран хотя бы один файл, можно работать с ним
             const file = files[0];
             // Делаем что-то с файлом
-            await setImageUrl(file);
+            const urlitem = URL.createObjectURL(file)
+            setImageUrl(urlitem);
         } else {
 
             console.log("Файл не выбран");
@@ -118,7 +117,8 @@ const Register: React.FC = () => {
         const newObj = {
             email,
             password,
-            fullName
+            fullName,
+            avatarUrl
         }
 
         dispatch(addUser(newObj))
@@ -134,8 +134,8 @@ const Register: React.FC = () => {
     if ('token' in data) {
         const token = data.token
         window.localStorage.setItem('token', token)
-      }
-    
+    }
+
 
     return (
         <>
@@ -143,17 +143,23 @@ const Register: React.FC = () => {
             <div className={classes.container}>
                 <div className={classes.Form_inner}>
                     <div className={classes.img}>
-                        <div onClick={() => handleClickImg()} className={classes.img__items}></div>
-                        <input ref={imgRef} type="file" onClick={handleChangeFile} hidden />
+                        {/* <div onClick={() => handleClickImg()} className={classes.img__items}></div>
+                        <input ref={imgRef} type="file" onChange={handleChangeFile} hidden /> */}
                         {
-                            imgUrl && (
+                            avatarUrl ? (
                                 <>
                                     <div onClick={onClickRemoveImage}>
                                         Удалить
                                     </div>
-                                    {/* <img src={imgUrl} alt="Uploaded" /> */}
+                                    <img className={classes.activImg} src={avatarUrl} alt="Uploaded" />
                                 </>
                             )
+                                :
+                                (
+                                    <>
+                                        <div onClick={() => handleClickImg()} className={classes.img__items}></div>
+                                        <input ref={imgRef} type="file" onChange={handleChangeFile} hidden /></>
+                                )
                         }
                     </div>
                     <div className={classes.Form_container}>

@@ -4,15 +4,18 @@ import { RootState } from '../store'
 
 export type userParams = {
     email: string,
-    pass: string,
-    name: string
+    password: string,
+    fullName: string,
+    avatarUrl: string
 }
 
+export const fetchRegister = createAsyncThunk('auth/fetchRegister', async (params: userParams) => {
 
-export const fetchRegister = createAsyncThunk('auth/fetchRegister', async (params: userParams[]) => {
-    const { data } = await instanse.post(`/auth/register`, params)
-    return data
-})
+
+    const { data } = await instanse.post(`/auth/register`, params);
+
+    return data;
+});
 
 
 
@@ -24,8 +27,9 @@ export enum Status {
 
 type itemRegister = {
     email: string,
-    pass: string,
-    name: string,
+    password: string,
+    fullName: string,
+    avatarUrl: string
 }
 
 type dataType = {
@@ -41,7 +45,7 @@ type dataType = {
 interface authType {
     data: dataType;
     status: Status;
-    items: itemRegister[]
+    items: itemRegister
 }
 
 const initialState: authType = {
@@ -55,7 +59,12 @@ const initialState: authType = {
         _id: '',
     },
     status: Status.LOADING,
-    items: []
+    items: {
+        email: '',
+        password: '',
+        fullName: '',
+        avatarUrl: ''
+    }
 }
 
 const authSlice = createSlice({
