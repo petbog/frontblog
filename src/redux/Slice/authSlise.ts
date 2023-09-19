@@ -6,16 +6,30 @@ export type userParams = {
     email: string,
     password: string,
     fullName: string,
-    avatarUrl: string
+    avatarUrl: null | string
 }
 
 export const fetchRegister = createAsyncThunk('auth/fetchRegister', async (params: userParams) => {
-
 
     const { data } = await instanse.post(`/auth/register`, params);
 
     return data;
 });
+
+export const fetchMe = createAsyncThunk('me/fetchMe', async () => {
+    const { data } = await instanse.get('/auth/me')
+    return data
+})
+
+export type loginParams = {
+    email: string;
+    password: string;
+}
+
+export const fetchLogin = createAsyncThunk('login/fetchLogin', async (params: loginParams) => {
+    const { data } = await instanse.post('/auth/login', params)
+    return data
+})
 
 
 
@@ -29,7 +43,7 @@ type itemRegister = {
     email: string,
     password: string,
     fullName: string,
-    avatarUrl: string
+    avatarUrl: null | string
 }
 
 type dataType = {
@@ -63,7 +77,7 @@ const initialState: authType = {
         email: '',
         password: '',
         fullName: '',
-        avatarUrl: ''
+        avatarUrl: null
     }
 }
 
@@ -73,9 +87,21 @@ const authSlice = createSlice({
     reducers: {
         addUser: (state, action) => {
             state.items = action.payload
+        },
+        removeUser: (state) => {
+            state.data = {
+                createdAt: '',
+                email: '',
+                fullName: '',
+                token: '',
+                updatedAt: '',
+                __v: 0,
+                _id: '',
+            }
         }
     },
     extraReducers: (builder) => {
+        //регистрация
         builder.addCase(fetchRegister.pending, (state, action) => {
             state.data = {
                 createdAt: '',
@@ -104,12 +130,70 @@ const authSlice = createSlice({
             };
             state.status = Status.ERROR
         });
+        //обо мне
+        builder.addCase(fetchMe.pending, (state, action) => {
+            state.data = {
+                createdAt: '',
+                email: '',
+                fullName: '',
+                token: '',
+                updatedAt: '',
+                __v: 0,
+                _id: '',
+            };;
+            state.status = Status.LOADING;
+        });
+        builder.addCase(fetchMe.fulfilled, (state, action) => {
+            state.data = action.payload;
+            state.status = Status.SUCCESS;
+        });
+        builder.addCase(fetchMe.rejected, (state, action) => {
+            state.data = {
+                createdAt: '',
+                email: '',
+                fullName: '',
+                token: '',
+                updatedAt: '',
+                __v: 0,
+                _id: '',
+            };
+            state.status = Status.ERROR
+        });
+        //логинизация
+        builder.addCase(fetchLogin.pending, (state, action) => {
+            state.data = {
+                createdAt: '',
+                email: '',
+                fullName: '',
+                token: '',
+                updatedAt: '',
+                __v: 0,
+                _id: '',
+            };;
+            state.status = Status.LOADING;
+        });
+        builder.addCase(fetchLogin.fulfilled, (state, action) => {
+            state.data = action.payload;
+            state.status = Status.SUCCESS;
+        });
+        builder.addCase(fetchLogin.rejected, (state, action) => {
+            state.data = {
+                createdAt: '',
+                email: '',
+                fullName: '',
+                token: '',
+                updatedAt: '',
+                __v: 0,
+                _id: '',
+            };
+            state.status = Status.ERROR
+        });
     }
 })
 
-export const selectIsAuth = (state: RootState) => Boolean(state.auth.data)
+export const selectIsAuth = (state: RootState) => Boolean(state.auth.data.email)
 export const itemsAuth = (state: RootState) => state.auth
-export const { addUser } = authSlice.actions
+export const { addUser, removeUser } = authSlice.actions
 export const authReduser = authSlice.reducer
 
 

@@ -1,9 +1,19 @@
 import { Link, useLocation } from 'react-router-dom'
 import s from './Header.module.scss'
+import { useDispatch, useSelector } from 'react-redux'
+import { removeUser, selectIsAuth } from '../../redux/Slice/authSlise'
 
 const Header = () => {
+  const authUser = useSelector(selectIsAuth)
   const location = useLocation()
-  const isAuth = false
+  const dispatch = useDispatch()
+
+  const exaedUser = () => {
+    if (window.confirm('Вы действительно хотите выйти?')) {
+      dispatch(removeUser())
+      window.localStorage.removeItem('token')
+    }
+  }
 
   return (
     <div className={s.header}>
@@ -17,10 +27,10 @@ const Header = () => {
       <div className={s.link}>
         {
           location.pathname === '/' ? (
-            isAuth ? (
+            authUser ? (
               <>
                 <div className={s.link__article}>Написать статью</div>
-                <button className={s.link__exid}>Выйти</button>
+                <div onClick={exaedUser} className={s.link__exid}>Выйти</div>
               </>
             ) : (
               <>

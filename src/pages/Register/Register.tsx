@@ -3,10 +3,11 @@ import Header from '../../components/Header/Header'
 import classes from './Register.module.scss'
 import eye_off from '../../img/eye_off.svg'
 import eye from '../../img/eye.svg'
-import { addUser, fetchRegister, itemsAuth } from '../../redux/Slice/authSlise';
-import { RootState, useAppDispatch } from '../../redux/store';
+import { addUser, fetchRegister, itemsAuth, selectIsAuth } from '../../redux/Slice/authSlise';
+import {  useAppDispatch } from '../../redux/store';
 import { useSelector } from 'react-redux';
 import { isArray } from 'util';
+import { Navigate } from 'react-router-dom';
 
 
 
@@ -22,10 +23,11 @@ const Register: React.FC = () => {
     const [emailError, setEmailError] = useState('Gmail не может быть пустым')
     const [passError, setPassError] = useState('Пароль не может быть пустым')
     const [nameError, setNameError] = useState('Имя не может быть пустым')
-    const [avatarUrl, setImageUrl] = useState<string>('')
+    const [avatarUrl, setImageUrl] = useState<null | string>(null)
     const imgRef = useRef<HTMLInputElement>(null)
     const dispatch = useAppDispatch()
     const { items, data } = useSelector(itemsAuth)
+    const AuthUser = useSelector(selectIsAuth)
 
 
 
@@ -95,7 +97,7 @@ const Register: React.FC = () => {
     }
 
     const onClickRemoveImage = () => {
-        setImageUrl('')
+        setImageUrl(null)
     }
 
     const handleChangeFile: React.ChangeEventHandler<HTMLInputElement> = (event) => {
@@ -118,7 +120,9 @@ const Register: React.FC = () => {
             email,
             password,
             fullName,
-            avatarUrl
+        }
+        if(avatarUrl !== null){
+            Object.assign(newObj, { avatarUrl });
         }
 
         dispatch(addUser(newObj))
@@ -137,6 +141,9 @@ const Register: React.FC = () => {
     }
 
 
+    if (AuthUser) {
+    return <Navigate to='/' />
+  }
     return (
         <>
             <Header />
@@ -145,7 +152,7 @@ const Register: React.FC = () => {
                     <div className={classes.img}>
                         {/* <div onClick={() => handleClickImg()} className={classes.img__items}></div>
                         <input ref={imgRef} type="file" onChange={handleChangeFile} hidden /> */}
-                        {
+                        {/* {
                             avatarUrl ? (
                                 <>
                                     <div onClick={onClickRemoveImage}>
@@ -160,7 +167,7 @@ const Register: React.FC = () => {
                                         <div onClick={() => handleClickImg()} className={classes.img__items}></div>
                                         <input ref={imgRef} type="file" onChange={handleChangeFile} hidden /></>
                                 )
-                        }
+                        } */}
                     </div>
                     <div className={classes.Form_container}>
                         <p className={classes.form_title}>Имя</p>

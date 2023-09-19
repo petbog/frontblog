@@ -1,12 +1,21 @@
 import classes from "./Auth.module.scss"
 import Header from "../../components/Header/Header"
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import eye_off from '../../img/eye_off.svg'
 import eye from '../../img/eye.svg'
+import { useAppDispatch } from "../../redux/store";
+import { fetchLogin, itemsAuth, selectIsAuth } from "../../redux/Slice/authSlise";
+import { useSelector } from "react-redux";
+import { Navigate } from "react-router-dom";
+
 
 const Auth = () => {
     const [email, setEmail] = useState('')
-    const [pass, setPass] = useState('')
+    const [password, setPass] = useState('')
+    const [dateObj, setDateObj] = useState({
+        email,
+        password
+    })
     const [type, setType] = useState("password")
     const [src, setSrc] = useState(eye_off)
     const [emailDirty, setEmailDirty] = useState(false)
@@ -14,6 +23,9 @@ const Auth = () => {
     const [emailError, setEmailError] = useState('Email не может быть пустым')
     const [passError, setPassError] = useState('Пароль не может быть пустым')
 
+    const dispatch = useAppDispatch()
+    const authUser = useSelector(selectIsAuth)
+    const { data } = useSelector(itemsAuth)
 
     const handleToggle = () => {
         if (type === "password") {
@@ -58,6 +70,26 @@ const Auth = () => {
             setPassError('')
         }
     }
+    useEffect(() => {
+        setDateObj({
+            email,
+            password
+        })
+    }, [email, password])
+
+    const handleLogin = async () => {
+        dispatch(fetchLogin(dateObj))
+
+
+    }
+       if ('token' in data) {
+            const token = data.token
+            window.localStorage.setItem('token', token)
+        }
+
+    if (authUser) {
+        return <Navigate to='/' />
+    }
 
     return (
         <>
@@ -65,7 +97,7 @@ const Auth = () => {
             <div className={classes.container}>
                 <div className={classes.Form_inner}>
                     <div className={classes.Form_container}>
-                        <p className={classes.form_title}>Логин</p>
+                        <p className={classes.form_title}>Почта</p>
                         <input
                             name="email"
                             onBlur={(e) => blurHandle(e)}
@@ -85,16 +117,16 @@ const Auth = () => {
                             onBlur={(e) => blurHandle(e)}
                             className={classes.Form_pass}
                             type={type}
-                            value={pass}
+                            value={password}
                             onChange={(e) => passwordHandler(e)}
                             placeholder=''
                         />
-                        <label  className={classes.Form_pass__label}>Введите password</label>
+                        <label className={classes.Form_pass__label}>Введите password</label>
                         {(passDirty && passError) && <div className={classes.errorPoppup}>{passError}</div>}
                         <img onClick={handleToggle} className={classes.form_img} src={src} alt="" />
                     </div>
                     <div className={classes.Button_container}>
-                        <button className={classes.Form_button} >Отправить</button>
+                        <button onClick={handleLogin} className={classes.Form_button} >Отправить</button>
                     </div>
                 </div>
             </div>
