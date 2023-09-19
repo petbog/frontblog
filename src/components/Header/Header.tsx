@@ -25,49 +25,63 @@ const Header = () => {
       </Link>
 
       <div className={s.link}>
-        {
-          location.pathname === '/' ? (
-            authUser ? (
-              <>
-                <div className={s.link__article}>Написать статью</div>
-                <div onClick={exaedUser} className={s.link__exid}>Выйти</div>
-              </>
-            ) : (
-              <>
-                <Link className={s.innerLinkForward} to='/auth'>
-                  <div className={s.link__forward}>Войти</div>
-                </Link>
-                <Link className={s.innerLinkForward} to='/register' >
-                  <button className={s.link__create}>Создать аккаунт</button>
-                </Link>
-              </>
-            )
-          ) : (
-            location.pathname === '/register' ? (
-              <>
-                <Link className={s.innerLinkForward} to='/'>
-                  <div className={s.link__forward}>На главную</div>
-                </Link>
-                <Link className={s.innerLinkForward} to='/auth'>
-                  <div className={s.link__forward}>Войти</div>
-                </Link>
-              </>
-            ) : (
-              <>
-                <Link className={s.innerLinkForward} to='/'>
-                  <div className={s.link__forward}>На главную</div>
-                </Link>
-                <Link to='/register'>
-                  <button className={s.link__create}>Создать аккаунт</button>
-                </Link>
-              </>
-            )
-          )
-        }
+      {
+  location.pathname === '/' ? (
+    authUser ? (
+      <>
+        <Link to='/addPost' className={s.link__article}>Написать статью</Link>
+        <div onClick={exaedUser} className={s.link__exid}>Выйти</div>
+      </>
+    ) : (
+      <>
+        <Link className={s.innerLinkForward} to='/auth'>
+          <div className={s.link__forward}>Войти</div>
+        </Link>
+        <Link className={s.innerLinkForward} to='/register'>
+          <button className={s.link__create}>Создать аккаунт</button>
+        </Link>
+      </>
+    )
+  ) : (
+    location.pathname === '/register' ? (
+      <>
+        <Link className={s.innerLinkForward} to='/'>
+          <div className={s.link__forward}>На главную</div>
+        </Link>
+        <Link className={s.innerLinkForward} to='/auth'>
+          <div className={s.link__forward}>Войти</div>
+        </Link>
+      </>
+    ) : (
+      location.pathname === '/addPost' ? (
+        <>
+          <>
+          <Link className={s.hidden} to='/register'>
+            <button className={s.link__create}>Создать аккаунт</button>
+          </Link>
+          <Link className={s.innerLinkForward} to='/'>
+            <div className={s.link__forward}>На главную</div>
+          </Link>
+        </>
+        </>
+      ) : (
+        <></>
+      )
+    )
+  )
+}
 
       </div>
     </div>
   )
 }
+
+  // : (location.pathname === '/addPost' ? (
+  //       <>
+  //         <Link className={s.innerLinkForward} to='/'>
+  //           <div className={s.link__forward}>На главную</div>
+  //         </Link>
+  //       </>
+  //       ) : null)
 
 export default Header

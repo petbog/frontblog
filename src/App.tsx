@@ -6,6 +6,8 @@ import Register from './pages/Register/Register';
 import { useEffect } from "react";
 import { useAppDispatch } from './redux/store';
 import { fetchMe } from './redux/Slice/authSlise';
+import AddPost from './components/AddPost/AddPost';
+
 
 function App() {
   const dispatch = useAppDispatch()
@@ -21,6 +23,7 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/auth' element={<Auth />} />
         <Route path='/register' element={<Register />} />
+        <Route path='/addPost' element={<AddPost />} />
       </Routes>
     </div>
   );
