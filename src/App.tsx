@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { useAppDispatch } from './redux/store';
 import { fetchMe } from './redux/Slice/authSlise';
 import AddPost from './components/AddPost/AddPost';
+import { Path } from './Path/Patch';
 
 
 function App() {
@@ -14,16 +15,16 @@ function App() {
 
   useEffect(() => { 
     dispatch(fetchMe())
-  }, [])
+  }, [dispatch])
 
 
   return (
     <div className="App">
       <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/auth' element={<Auth />} />
-        <Route path='/register' element={<Register />} />
-        <Route path='/addPost' element={<AddPost />} />
+        <Route path={Path.Home} element={<Home />} />
+        <Route path={Path.Auth} element={<Auth />} />
+        <Route path={Path.Register} element={<Register />} />
+        <Route path={Path.AddPost} element={<AddPost />} />
       </Routes>
     </div>
   );

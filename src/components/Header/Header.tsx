@@ -2,6 +2,7 @@ import { Link, useLocation } from 'react-router-dom'
 import s from './Header.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import { removeUser, selectIsAuth } from '../../redux/Slice/authSlise'
+import { Path } from '../../Path/Patch'
 
 const Header = () => {
   const authUser = useSelector(selectIsAuth)
@@ -17,7 +18,7 @@ const Header = () => {
 
   return (
     <div className={s.header}>
-      <Link className={s.innerLinkForward} to="/">
+      <Link className={s.innerLinkForward} to={Path.Home}>
         <div className={s.header_logo}>
           <h3> Blog </h3>
         </div>
@@ -29,15 +30,15 @@ const Header = () => {
   location.pathname === '/' ? (
     authUser ? (
       <>
-        <Link to='/addPost' className={s.link__article}>Написать статью</Link>
+        <Link to={Path.AddPost} className={s.link__article}>Написать статью</Link>
         <div onClick={exaedUser} className={s.link__exid}>Выйти</div>
       </>
     ) : (
       <>
-        <Link className={s.innerLinkForward} to='/auth'>
+        <Link className={s.innerLinkForward} to={Path.Auth}>
           <div className={s.link__forward}>Войти</div>
         </Link>
-        <Link className={s.innerLinkForward} to='/register'>
+        <Link className={s.innerLinkForward} to={Path.Register}>
           <button className={s.link__create}>Создать аккаунт</button>
         </Link>
       </>
@@ -45,10 +46,10 @@ const Header = () => {
   ) : (
     location.pathname === '/register' ? (
       <>
-        <Link className={s.innerLinkForward} to='/'>
+        <Link className={s.innerLinkForward} to={Path.Home}>
           <div className={s.link__forward}>На главную</div>
         </Link>
-        <Link className={s.innerLinkForward} to='/auth'>
+        <Link className={s.innerLinkForward} to={Path.Auth}>
           <div className={s.link__forward}>Войти</div>
         </Link>
       </>
@@ -56,10 +57,10 @@ const Header = () => {
       location.pathname === '/addPost' ? (
         <>
           <>
-          <Link className={s.hidden} to='/register'>
+          <Link className={s.hidden} to={Path.Register}>
             <button className={s.link__create}>Создать аккаунт</button>
           </Link>
-          <Link className={s.innerLinkForward} to='/'>
+          <Link className={s.innerLinkForward} to={Path.Home}>
             <div className={s.link__forward}>На главную</div>
           </Link>
         </>
@@ -76,12 +77,5 @@ const Header = () => {
   )
 }
 
-  // : (location.pathname === '/addPost' ? (
-  //       <>
-  //         <Link className={s.innerLinkForward} to='/'>
-  //           <div className={s.link__forward}>На главную</div>
-  //         </Link>
-  //       </>
-  //       ) : null)
 
 export default Header
