@@ -50,6 +50,50 @@
     }
 
 }
+.remove {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: flex-start;
+
+    &__inner {
+        padding: 11px 17px;
+        font-size: 16px;
+        color: #e0432b;
+        text-decoration: none;
+        border-radius: 10px;
+        border: 1px solid #e0432b;
+        cursor: pointer;
+        position: relative;
+
+        &::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 48px;
+            border-radius: 10px;
+            background-color: #e0432b;
+            bottom: 0;
+            left: 0;
+            transform-origin: right;
+            transform: scaleX(0);
+            transition: transform .3s ease-in-out;
+            z-index: -1;
+        }
+
+        &:hover::before {
+            transform-origin: left;
+            transform: scaleX(1);
+        }
+
+        &:hover {
+            border: 1px solid #fff;
+            color: #fff;
+            transition: all 0.1s ease;
+        }
+    }
+
+}
 
 .title {
     width: 100%;
@@ -82,7 +126,8 @@
         overflow-wrap: break-word;
         border-bottom: 2px solid black
     }
-    &__inner:focus{
+
+    &__inner:focus {
         border-bottom: 2px solid rgb(44, 28, 226)
     }
 }
@@ -104,42 +149,54 @@
     }
 }
 
-.submit{
+.submit {
     display: flex;
     justify-content: center;
-    
-    
-    &__button{
-    font-size: 16px;
-    font-weight: 200;
-    letter-spacing: 1px;
-    padding: 13px 20px 13px;
-    outline: 0;
-    border: 1px solid black;
-    cursor: pointer;
-    position: relative;
-    background-color: rgba(0, 0, 0, 0);
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-  }
-  
-  &__button::after {
-    content: "";
-    background-color: #2e6ccf;
-    width: 100%;
-    z-index: -1;
-    position: absolute;
-    height: 100%;
-    top: 7px;
-    left: 7px;
-    transition: 0.2s;
-  }
-  
-  &__button:hover::after {
-    top: 0px;
-    left: 0px;
-  }
-  
+
+
+    &__button {
+        font-size: 16px;
+        font-weight: 200;
+        letter-spacing: 1px;
+        padding: 13px 20px 13px;
+        outline: 0;
+        border: 1px solid black;
+        cursor: pointer;
+        position: relative;
+        background-color: rgba(0, 0, 0, 0);
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+    }
+
+    &__button::after {
+        content: "";
+        background-color: #2e6ccf;
+        width: 100%;
+        z-index: -1;
+        position: absolute;
+        height: 100%;
+        top: 7px;
+        left: 7px;
+        transition: 0.2s;
+    }
+
+    &__button:hover::after {
+        top: 0px;
+        left: 0px;
+    }
+
 }
 
+.img {
+    height: 435px;
+    overflow: hidden;
+    width: 100%;
+    margin: 26px 0 30px 0;
+
+    &__inner {
+        object-fit: contain;
+        width: 100%;
+        height: 100%;
+    }
+}

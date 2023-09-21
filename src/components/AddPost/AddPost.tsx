@@ -1,12 +1,33 @@
 import s from './addPost.module.scss'
 import Header from '../Header/Header'
-import { useRef, useState } from 'react'
+import React, { FC, useEffect, useRef, useState } from 'react'
+import { useAppDispatch } from '../../redux/store'
+import { addPost, dataSelector } from '../../redux/Slice/postSise'
+import instanse from '../../axios'
+import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { Path } from '../../Path/Patch'
 
-const AddPost = () => {
-
+const AddPost: FC = () => {
+    const navigate = useNavigate()
     const getFile = useRef<HTMLInputElement>(null)
-    const [text, setText] = useState('');
+    const [text, setText] = useState<string>('');
     const [textareaHeight, setTextareaHeight] = useState('auto');
+    const [title, setTitle] = useState<string>('')
+    const [tags, setTags] = useState<string>('')
+    const [imageUrl, setImageUrl] = useState<string>('')
+    const [obj, setObj] = useState({
+        title,
+        tags,
+        text,
+        imageUrl
+    })
+
+    const dispatch = useAppDispatch()
+    const {_id} = useSelector(dataSelector)
+
+
+
 
     const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         const textareaLineHeight = 24; // Задайте высоту строки вашего текста
@@ -26,19 +47,68 @@ const AddPost = () => {
         }
     }
 
+    const handleImg = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        try {
+            const formData = new FormData();
+            const file = e.target.files && e.target.files[0]; // Проверка на наличие файлов
+            if (file) {
+                formData.append('image', file);
+                const { data } = await instanse.post('/upload', formData);
+                setImageUrl(data.url);
+                console.log(data.url)
+            } else {
+                alert('Пожалуйста, выберите файл для загрузки.');
+            }
+        } catch (error) {
+            console.warn(error);
+            alert('Ошибка при загрузке файла!');
+        }
+    };
+
+    useEffect(() => {
+        setObj({
+            title,
+            tags,
+            text,
+            imageUrl
+        })
+    }, [title, tags, text, imageUrl])
+
+    const handleAddPost = () => {
+        dispatch(addPost(obj))
+        navigate(`${Path.Post}/${_id}`)
+    }
+    const remuveImg = () => {
+        setImageUrl('')
+    }
     return (
         <div className="">
             <Header />
             <div className={s.addpost}>
-                <div className={s.button}>
-                    <input ref={getFile} className={s.button__input} type="file" hidden />
-                    <div onClick={handleFile} className={s.button__inner}>Загрузить превью</div>
-                </div>
+
+                {
+                    !imageUrl ? (
+                        <div className={s.button}>
+                            <input onChange={handleImg} ref={getFile} className={s.button__input} type="file" hidden />
+                            <div onClick={handleFile} className={s.button__inner}>Загрузить превью</div>
+                        </div>
+                    ) : (
+                        <>
+                            <div className={s.remove}>
+                                <div onClick={remuveImg} className={s.remove__inner}>Удалить превью</div>
+                            </div>
+                            <div className={s.img}>
+                                <img className={s.img__inner} src={`http://localhost:4444${imageUrl}`} alt="imageUrl" />
+                            </div>
+                        </>
+
+                    )
+                }
                 <div className={s.title}>
-                    <input className={s.title__inner} type="text" placeholder='Заголовок статьи...' />
+                    <input value={title} onChange={(e) => setTitle(e.target.value)} className={s.title__inner} type="text" placeholder='Заголовок статьи...' />
                 </div>
                 <div className={s.tags}>
-                    <input className={s.tags__inner} type="text" placeholder='# Тэги' />
+                    <input value={tags} onChange={(e) => setTags(e.target.value)} className={s.tags__inner} type="text" placeholder='# Тэги' />
                 </div>
                 <div className={s.text}>
                     <textarea style={{ height: textareaHeight }}
@@ -48,7 +118,7 @@ const AddPost = () => {
                         placeholder='Введите текст...' />
                 </div>
                 <div className={s.submit}>
-                    <div className={s.submit__button}>Сохранить статью</div>
+                    <div onClick={handleAddPost} className={s.submit__button}>Сохранить статью</div>
                 </div>
             </div>
         </div>

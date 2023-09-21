@@ -3,5 +3,6 @@ export enum Path {
     Auth='/auth',
     Register='/register',
     AddPost='/addPost',
+    Post='/Post',
 
 }

@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { authReduser } from './Slice/authSlise'
 import { useDispatch } from "react-redux";
+import { postReduser } from './Slice/postSise';
 
 
 const store = configureStore({
     reducer: {
-        auth: authReduser
+        auth: authReduser,
+        post: postReduser
     }
 })
 

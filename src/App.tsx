@@ -8,6 +8,7 @@ import { useAppDispatch } from './redux/store';
 import { fetchMe } from './redux/Slice/authSlise';
 import AddPost from './components/AddPost/AddPost';
 import { Path } from './Path/Patch';
+import Post from './pages/Post/Post';
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
         <Route path={Path.Auth} element={<Auth />} />
         <Route path={Path.Register} element={<Register />} />
         <Route path={Path.AddPost} element={<AddPost />} />
+        <Route path={Path.Post} element={<Post />} />
       </Routes>
     </div>
   );
