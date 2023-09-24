@@ -1,0 +1,21 @@
+.rating {
+    display: flex;
+    justify-content: flex-start;
+    height: 100px;
+    align-items: center;
+}
+
+.button {
+    margin: 0 30px;
+    font-size: 18px;
+
+    &__inner {
+        padding: 5px 16px;
+        cursor: pointer;
+    }
+}
+
+.activ{
+    border-bottom: 2px solid #154ce1;
+    color:#154ce1 ;
+}

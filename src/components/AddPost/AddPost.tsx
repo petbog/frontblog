@@ -76,7 +76,9 @@ const AddPost: FC = () => {
 
     const handleAddPost = () => {
         dispatch(addPost(obj))
-        navigate(`${Path.Post}/${_id}`)
+        navigate(Path.Home)
+        // navigate(`${Path.Post}/${_id}`)
+        // navigate(`/Post/${_id}`)
     }
     const remuveImg = () => {
         setImageUrl('')

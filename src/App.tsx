@@ -1,5 +1,5 @@
 import './App.css';
-import { Routes, Route } from "react-router-dom"
+import { Routes, Route, useParams } from "react-router-dom"
 import Home from './pages/Home/Home';
 import Auth from './pages/Auth/Auth';
 import Register from './pages/Register/Register';
@@ -18,6 +18,7 @@ function App() {
     dispatch(fetchMe())
   }, [dispatch])
 
+  const {_id} = useParams()
 
   return (
     <div className="App">

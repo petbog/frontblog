@@ -3,5 +3,13 @@
     padding: 0 15px;
     box-sizing: border-box;
     margin: 0 auto;
+}
+.itembox{
+    display: flex;
+    justify-content: space-between;
+}
+.sortbar{
+    display: flex;
+    flex-direction: column;
     
 }
