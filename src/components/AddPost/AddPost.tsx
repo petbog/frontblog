@@ -7,6 +7,7 @@ import instanse from '../../axios'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { Path } from '../../Path/Patch'
+import { fetchMe } from '../../redux/Slice/authSlise'
 
 const AddPost: FC = () => {
     const navigate = useNavigate()
@@ -79,6 +80,7 @@ const AddPost: FC = () => {
         navigate(Path.Home)
         // navigate(`${Path.Post}/${_id}`)
         // navigate(`/Post/${_id}`)
+        dispatch(fetchMe())
     }
     const remuveImg = () => {
         setImageUrl('')

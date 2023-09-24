@@ -3,8 +3,8 @@ import instanse from '../../axios'
 import { RootState } from '../store'
 
 
-export const getPost = createAsyncThunk('post/getPost', async () => {
-    const { data } = await instanse.get('/posts')
+export const getPost = createAsyncThunk<dataType[]>('post/getPost', async () => {
+    const { data } = await instanse.get<dataType[]>('/posts')
     return data
 })
 
@@ -15,9 +15,32 @@ export enum Status {
     ERROR = 'error'
 }
 
+type userType={
+    _id:string,
+    fullName:string,
+    email:string,
+    passwordHash:string,
+    createdAt:string,
+    updatedAt:string,
+}
+
+export type dataType = {
+    _id: string,
+    title: string,
+    text: string,
+    tags: string[],
+    viewsCount: number,
+    imageUrl: string,
+    createdAt: string,
+    updatedAt: string,
+    __v:number,
+    user:userType[]
+}
+
+
 interface initialStateType {
     status: Status,
-    data: []
+    data: dataType[]
 }
 
 const initialState: initialStateType = {
@@ -32,7 +55,7 @@ const getPostSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         //получение постов
-        builder.addCase(getPost.pending, (state, action) => {
+        builder.addCase(getPost.pending, (state) => {
             state.data = [];
             state.status = Status.LOADING;
         });
@@ -40,13 +63,13 @@ const getPostSlice = createSlice({
             state.data = action.payload;
             state.status = Status.SUCCESS;
         });
-        builder.addCase(getPost.rejected, (state, action) => {
+        builder.addCase(getPost.rejected, (state) => {
             state.data = [];
             state.status = Status.ERROR;
         });
     },
 });
 
-export const getPostSelector = (state: RootState) => state.getPost
+export const getPostSelector = (state: RootState) => state.getPost.data
 export const { } = getPostSlice.actions
 export const getPostReduser = getPostSlice.reducer
