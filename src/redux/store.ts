@@ -3,13 +3,15 @@ import { authReduser } from './Slice/authSlise'
 import { useDispatch } from "react-redux";
 import { postReduser } from './Slice/postSise';
 import { getPostReduser } from './Slice/getPostSlise';
+import { tagsReduser } from './Slice/getTags';
 
 
 const store = configureStore({
     reducer: {
         auth: authReduser,
         post: postReduser,
-        getPost:getPostReduser
+        getPost:getPostReduser,
+        tags:tagsReduser
     }
 })
 

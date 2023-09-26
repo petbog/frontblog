@@ -1,0 +1,13 @@
+.box {
+    width: 370px;
+    min-height: 298px;
+    background-color: rgb(224, 221, 221);
+}
+
+.item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 23px;
+
+}

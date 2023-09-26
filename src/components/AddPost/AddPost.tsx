@@ -1,6 +1,6 @@
 import s from './addPost.module.scss'
 import Header from '../Header/Header'
-import React, { FC, useEffect, useRef, useState } from 'react'
+import React, { ChangeEvent, FC, useEffect, useRef, useState } from 'react'
 import { useAppDispatch } from '../../redux/store'
 import { addPost, dataSelector } from '../../redux/Slice/postSise'
 import instanse from '../../axios'
@@ -25,7 +25,7 @@ const AddPost: FC = () => {
     })
 
     const dispatch = useAppDispatch()
-    const {_id} = useSelector(dataSelector)
+    const { _id } = useSelector(dataSelector)
 
 
 
@@ -66,10 +66,16 @@ const AddPost: FC = () => {
         }
     };
 
+    const modifiedTags = tags
+        .split(' ')
+        .map((word) => `#${word}`)
+        .join(' ');
+
+
     useEffect(() => {
         setObj({
             title,
-            tags,
+            tags: modifiedTags,
             text,
             imageUrl
         })
@@ -85,6 +91,7 @@ const AddPost: FC = () => {
     const remuveImg = () => {
         setImageUrl('')
     }
+
     return (
         <div className="">
             <Header />
