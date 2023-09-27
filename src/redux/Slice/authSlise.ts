@@ -192,6 +192,7 @@ const authSlice = createSlice({
 })
 
 export const selectIsAuth = (state: RootState) => Boolean(state.auth.data.email)
+export const selectIdUser = (state: RootState) => state.auth.data._id
 export const itemsAuth = (state: RootState) => state.auth
 export const { addUser, removeUser } = authSlice.actions
 export const authReduser = authSlice.reducer

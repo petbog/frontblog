@@ -34,7 +34,7 @@ export type dataType = {
     createdAt: string,
     updatedAt: string,
     __v:number,
-    user:userType[]
+    user:userType
 }
 
 

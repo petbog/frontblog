@@ -2,6 +2,9 @@ import { FC, useEffect, useState } from 'react';
 import s from './LentItem.module.scss';
 import eye from '../../img/icons8-глаза-учихи-50.png';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { selectIdUser } from '../../redux/Slice/authSlise';
+import { getPostSelector } from '../../redux/Slice/getPostSlise';
 
 type propsType = {
   _id: string,
@@ -14,6 +17,23 @@ type propsType = {
 
 const LentItem: FC<propsType> = ({ _id, createdAt, imageUrl, tags, title, viewsCount }) => {
   const [formattedViewsCount, setFormattedViewsCount] = useState<string>('');
+  const[idis,setIdis]=useState<string[]>([])
+  const userId = useSelector(selectIdUser)
+  console.log(userId)
+  const userPostId  = useSelector(getPostSelector)
+  // console.log(userPostId[0].user._id)
+  useEffect(() => {
+    if (userPostId.length > 0) {
+      const userIds = userPostId.map((post) => post.user._id);
+      setIdis(userIds);
+    } else {
+      console.log("Массив userPostId пуст");
+    }
+  }, [userPostId]); // Зависимость от userPostId
+
+  const isIdInArray = idis.includes(userId);
+
+
 
   useEffect(() => {
     // Функция для форматирования даты и времени
@@ -37,6 +57,9 @@ const LentItem: FC<propsType> = ({ _id, createdAt, imageUrl, tags, title, viewsC
     <Link to={`/Post/${_id}/OnePost`} className={s.lent}>
       <div className={s.img}>
         <img className={s.img__items} src={`http://localhost:4444${imageUrl}`} alt="imageUrl" />
+        {
+          isIdInArray ? <div className={s.img__hover}>delete</div> : ''
+        }
       </div>
       <div className={s.data}>
         <div className={s.data__item}>{formattedViewsCount}</div>
