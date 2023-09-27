@@ -20,12 +20,19 @@ const Tags: FC = () => {
         dispatch(fetchTags())
     }, [fetchTags])
 
+    const handleClickTag = (tagName: string) => {
+        console.log(tagName)
+    }
+
     return (
         <div className={s.box}>
             <div className={s.item}>
                 {
-                    uniqueTags.map((item,index)=>(
-                        <div key={index} className="">{item}</div>
+                    uniqueTags.map((item, index) => (
+                        <div
+                            onClick={() => handleClickTag(item)}
+                            key={index}
+                            className="">{item}</div>
                     ))
                 }
             </div>

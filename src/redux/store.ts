@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { postReduser } from './Slice/postSise';
 import { getPostReduser } from './Slice/getPostSlise';
 import { tagsReduser } from './Slice/getTags';
+import { onePostReduser } from './Slice/onePostsSice';
 
 
 const store = configureStore({
@@ -11,7 +12,8 @@ const store = configureStore({
         auth: authReduser,
         post: postReduser,
         getPost:getPostReduser,
-        tags:tagsReduser
+        tags:tagsReduser,
+        onePost:onePostReduser,
     }
 })
 

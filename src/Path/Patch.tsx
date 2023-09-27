@@ -4,5 +4,5 @@ export enum Path {
     Register='/register',
     AddPost='/addPost',
     Post='/Post/:id',
-
+    OnePost='/Post/:id/OnePost',
 }

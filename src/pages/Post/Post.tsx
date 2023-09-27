@@ -2,14 +2,18 @@ import { useSelector } from 'react-redux'
 import Header from '../../components/Header/Header'
 import s from './Post.module.scss'
 import { dataSelector } from '../../redux/Slice/postSise'
+import { Link, useParams } from 'react-router-dom'
 
 
 const Post = () => {
     const { imageUrl, text, tags, title, updatedAt, viewsCount } = useSelector(dataSelector)
+
+
+
     return (
-        <div className="">
+        <div  className="">
             <Header />
-            <div className={s.post}>
+            <div  className={s.post}>
                 <div className={s.img}>
                     <img className={s.img__inner} src={`http://localhost:4444${imageUrl}`} alt="imageUrl" />
                 </div>

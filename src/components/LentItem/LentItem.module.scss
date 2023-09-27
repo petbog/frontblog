@@ -1,16 +1,18 @@
 .lent {
     width: 791px;
     height: 450px;
+    cursor: pointer;
+    text-decoration: none;
 }
 
 .img {
     background-color: #f1eee9;
-    max-width: 790px;
-    height: 258px;
+    width: 790px;
+    height: 300px;
     overflow: hidden;
     &__items{
         max-width: 100%;
-        height: auto;
+        height: 100%;
         object-fit: contain;
     }
 }
@@ -70,6 +72,7 @@
     justify-content: flex-start;
     margin: 0 auto;
     align-items: center;
+    margin: 0  0 50px 0;
     &__item {
         font-size: 16px;
     }

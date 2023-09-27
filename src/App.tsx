@@ -9,6 +9,7 @@ import { fetchMe } from './redux/Slice/authSlise';
 import AddPost from './components/AddPost/AddPost';
 import { Path } from './Path/Patch';
 import Post from './pages/Post/Post';
+import OnePost from './components/OnePost/OnePost';
 
 
 function App() {
@@ -16,7 +17,7 @@ function App() {
 
   useEffect(() => { 
     dispatch(fetchMe())
-  }, [dispatch])
+  }, [dispatch,fetchMe])
 
   const {_id} = useParams()
 
@@ -28,6 +29,7 @@ function App() {
         <Route path={Path.Register} element={<Register />} />
         <Route path={Path.AddPost} element={<AddPost />} />
         <Route path={Path.Post} element={<Post />} />
+        <Route path={Path.OnePost} element={<OnePost />} />
       </Routes>
     </div>
   );
