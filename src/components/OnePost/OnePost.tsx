@@ -11,7 +11,7 @@ const OnePost: FC = () => {
     const dispatch = useAppDispatch()
     const { id } = useParams<{ id: string }>()
     const { imageUrl, text, tags, title, updatedAt, viewsCount } = useSelector(onePostSelector)
-    console.log(imageUrl, text, tags, title, updatedAt, viewsCount)
+
 
     useEffect(() => {
         dispatch(getOnePost(id))
