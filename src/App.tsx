@@ -28,6 +28,7 @@ function App() {
         <Route path={Path.Auth} element={<Auth />} />
         <Route path={Path.Register} element={<Register />} />
         <Route path={Path.AddPost} element={<AddPost />} />
+        <Route path={Path.removePost} element={<AddPost />} />
         <Route path={Path.Post} element={<Post />} />
         <Route path={Path.OnePost} element={<OnePost />} />
       </Routes>

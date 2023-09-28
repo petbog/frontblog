@@ -1,13 +1,15 @@
 import s from './addPost.module.scss'
 import Header from '../Header/Header'
-import React, { ChangeEvent, FC, useEffect, useRef, useState } from 'react'
+import React, { FC, useEffect, useRef, useState } from 'react'
 import { useAppDispatch } from '../../redux/store'
 import { addPost, dataSelector } from '../../redux/Slice/postSise'
 import instanse from '../../axios'
-import { useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+
+import { useNavigate, useParams } from 'react-router-dom'
 import { Path } from '../../Path/Patch'
 import { fetchMe } from '../../redux/Slice/authSlise'
+import { getOnePost, onePostSelector } from '../../redux/Slice/onePostsSice'
+import { useSelector } from 'react-redux'
 
 const AddPost: FC = () => {
     const navigate = useNavigate()
@@ -23,13 +25,22 @@ const AddPost: FC = () => {
         text,
         imageUrl
     })
-
     const dispatch = useAppDispatch()
-    const { _id } = useSelector(dataSelector)
+    const { id } = useParams<{ id: string }>()
+    const removeTodo = Boolean(id)
+    const data = useSelector(onePostSelector)
+    console.log(data)
 
+    useEffect(() => {
+        dispatch(getOnePost(id))
+    }, [id])
 
-
-
+    useEffect(() => { 
+        data && setText(data.text)
+        data && setTitle(data.title)
+        data && setTags(data.tags.join( ))
+        data && setImageUrl(data.imageUrl)
+    }, [data])
     const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         const textareaLineHeight = 24; // Задайте высоту строки вашего текста
         const minRows = 2; // Минимальное количество строк
@@ -84,8 +95,6 @@ const AddPost: FC = () => {
     const handleAddPost = () => {
         dispatch(addPost(obj))
         navigate(Path.Home)
-        // navigate(`${Path.Post}/${_id}`)
-        // navigate(`/Post/${_id}`)
         dispatch(fetchMe())
     }
     const remuveImg = () => {
@@ -129,7 +138,11 @@ const AddPost: FC = () => {
                         placeholder='Введите текст...' />
                 </div>
                 <div className={s.submit}>
-                    <div onClick={handleAddPost} className={s.submit__button}>Сохранить статью</div>
+                    {
+                        removeTodo ? <div onClick={handleAddPost} className={s.submit__button}>Редактировать статью</div> :
+                            <div onClick={handleAddPost} className={s.submit__button}>Сохранить статью</div>
+                    }
+
                 </div>
             </div>
         </div>

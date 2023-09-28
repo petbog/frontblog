@@ -2,6 +2,9 @@ import { FC, useEffect, useState } from 'react';
 import s from './LentItem.module.scss';
 import eye from '../../img/icons8-глаза-учихи-50.png';
 import { Link } from 'react-router-dom';
+import { useAppDispatch } from '../../redux/store';
+import { DeleetePost } from '../../redux/Slice/getPostSlise';
+import { Path } from '../../Path/Patch';
 
 type propsType = {
   _id: string,
@@ -15,8 +18,12 @@ type propsType = {
 
 const LentItem: FC<propsType> = ({ _id, createdAt, imageUrl, tags, title, viewsCount, isAuner }) => {
   const [formattedViewsCount, setFormattedViewsCount] = useState<string>('');
+  const dispatch = useAppDispatch()
 
-console.log(isAuner)
+  const deletePost = () => {
+    dispatch(DeleetePost({ _id }))
+  }
+
 
   useEffect(() => {
     // Функция для форматирования даты и времени
@@ -37,13 +44,24 @@ console.log(isAuner)
   }, [viewsCount]);
 
   return (
-    <Link to={`/Post/${_id}/OnePost`} className={s.lent}>
-      <div className={s.img}>
-        <img className={s.img__items} src={`http://localhost:4444${imageUrl}`} alt="imageUrl" />
-      </div>
+    <div className={s.lent}>
+      <Link to={`/Post/${_id}/OnePost`}>
+        <div className={s.img}>
+          <img className={s.img__items} src={`http://localhost:4444${imageUrl}`} alt="imageUrl" />
+        </div>
+      </Link>
       <div className={s.data}>
         {
-          isAuner ? <div className={s.img__hover}>delete</div> : ''
+          isAuner ?
+            (
+              <>
+                <div onClick={deletePost} className={s.img__hover}>delete</div>
+                <Link to={`/addPost/${_id}`} className={s.img__hover}>редактировать </Link>
+              </>
+
+            )
+            :
+            ''
         }
         <div className={s.data__item}>{formattedViewsCount}</div>
       </div>
@@ -59,7 +77,7 @@ console.log(isAuner)
         <img className={s.viewsCount__img} src={eye} alt="eye" />
         <div className={s.viewsCount__item}>{viewsCount}</div>
       </div>
-    </Link>
+    </div>
   );
 }
 

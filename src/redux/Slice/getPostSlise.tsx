@@ -9,19 +9,29 @@ export const getPost = createAsyncThunk<dataType[]>('post/getPost', async () => 
 })
 
 
+type deleteParams = {
+    _id: string
+}
+
+export const DeleetePost = createAsyncThunk('post/DeleetePost', async ({_id}: deleteParams) => {
+    console.log(_id)
+    const { data } = await instanse.delete(`/post/${_id}`)
+    return data
+})
+
 export enum Status {
     LOADING = 'loading',
     SUCCESS = 'succes',
     ERROR = 'error'
 }
 
-type userType={
-    _id:string,
-    fullName:string,
-    email:string,
-    passwordHash:string,
-    createdAt:string,
-    updatedAt:string,
+type userType = {
+    _id: string,
+    fullName: string,
+    email: string,
+    passwordHash: string,
+    createdAt: string,
+    updatedAt: string,
 }
 
 export type dataType = {
@@ -33,8 +43,8 @@ export type dataType = {
     imageUrl: string,
     createdAt: string,
     updatedAt: string,
-    __v:number,
-    user:userType
+    __v: number,
+    user: userType
 }
 
 
@@ -67,6 +77,11 @@ const getPostSlice = createSlice({
             state.data = [];
             state.status = Status.ERROR;
         });
+         //удаление поста
+        builder.addCase(DeleetePost.pending, (state,action) => {
+            state.data =state.data.filter(obj  => obj._id !== action.meta.arg._id)
+        });
+
     },
 });
 
