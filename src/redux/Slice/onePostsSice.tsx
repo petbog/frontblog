@@ -5,11 +5,10 @@ import { RootState } from '../store'
 
 
 
-export const getOnePost = createAsyncThunk('post/getOnePost', async (_id:string | undefined) => {
+export const getOnePost = createAsyncThunk('post/getOnePost', async (_id: string | undefined) => {
     const { data } = await instanse.get<dataType>(`/posts/${_id}`)
     return data
 })
-
 
 export enum Status {
     LOADING = 'loading',
@@ -64,7 +63,7 @@ const onePostSlice = createSlice({
     extraReducers: (builder) => {
         //получение одной статьи
         builder.addCase(getOnePost.pending, (state, action) => {
-            state.data ={
+            state.data = {
                 _id: '',
                 fullName: '',
                 email: '',

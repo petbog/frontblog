@@ -4,7 +4,6 @@ import eye from '../../img/icons8-глаза-учихи-50.png';
 import { Link } from 'react-router-dom';
 import { useAppDispatch } from '../../redux/store';
 import { DeleetePost } from '../../redux/Slice/getPostSlise';
-import { Path } from '../../Path/Patch';
 
 type propsType = {
   _id: string,

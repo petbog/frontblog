@@ -2,13 +2,13 @@ import s from './addPost.module.scss'
 import Header from '../Header/Header'
 import React, { FC, useEffect, useRef, useState } from 'react'
 import { useAppDispatch } from '../../redux/store'
-import { addPost, dataSelector } from '../../redux/Slice/postSise'
+import { RemovePost, addPost } from '../../redux/Slice/postSise'
 import instanse from '../../axios'
 
 import { useNavigate, useParams } from 'react-router-dom'
 import { Path } from '../../Path/Patch'
 import { fetchMe } from '../../redux/Slice/authSlise'
-import { getOnePost, onePostSelector } from '../../redux/Slice/onePostsSice'
+import {  getOnePost, onePostSelector } from '../../redux/Slice/onePostsSice'
 import { useSelector } from 'react-redux'
 
 const AddPost: FC = () => {
@@ -29,16 +29,15 @@ const AddPost: FC = () => {
     const { id } = useParams<{ id: string }>()
     const removeTodo = Boolean(id)
     const data = useSelector(onePostSelector)
-    console.log(data)
 
     useEffect(() => {
         dispatch(getOnePost(id))
     }, [id])
 
-    useEffect(() => { 
+    useEffect(() => {
         data && setText(data.text)
         data && setTitle(data.title)
-        data && setTags(data.tags.join( ))
+        data && setTags(data.tags.join())
         data && setImageUrl(data.imageUrl)
     }, [data])
     const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -93,9 +92,19 @@ const AddPost: FC = () => {
     }, [title, tags, text, imageUrl])
 
     const handleAddPost = () => {
-        dispatch(addPost(obj))
-        navigate(Path.Home)
-        dispatch(fetchMe())
+        if (removeTodo) {
+            dispatch(RemovePost({
+                params: obj,
+                _id: id
+            }))
+            navigate(Path.Home)
+            dispatch(fetchMe())
+        } else {
+            dispatch(addPost(obj))
+            navigate(Path.Home)
+            dispatch(fetchMe())
+        }
+
     }
     const remuveImg = () => {
         setImageUrl('')

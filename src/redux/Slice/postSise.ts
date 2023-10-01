@@ -15,6 +15,23 @@ export const addPost = createAsyncThunk<dataType, params>('post/addPost', async 
     return data
 })
 
+type typeParams = {
+    title: string,
+    tags: string,
+    text: string,
+    imageUrl: string
+}
+type removeParamsType = {
+    _id: string | undefined,
+    params: typeParams
+}
+export const RemovePost = createAsyncThunk('post/RemovePost', async (removeParams: removeParamsType) => {
+    const { _id, params } = removeParams
+    console.log(removeParams)
+    const { data } = await instanse.patch(`/posts/${_id}`, params)
+    return data
+})
+
 
 export enum Status {
     LOADING = 'loading',
@@ -91,6 +108,45 @@ const postSlice = createSlice({
             state.status = Status.SUCCESS;
         });
         builder.addCase(addPost.rejected, (state, action) => {
+            state.data = {
+                _id: '',
+                fullName: '',
+                email: '',
+                createdAt: '',
+                updatedAt: '',
+                __v: 0,
+                imageUrl: '',
+                user: '',
+                viewsCount: 0,
+                tags: [],
+                text: '',
+                title: ''
+            };
+            state.status = Status.ERROR;
+        });
+        //измение поста
+        builder.addCase(RemovePost.pending, (state, action) => {
+            state.data = {
+                _id: '',
+                fullName: '',
+                email: '',
+                createdAt: '',
+                updatedAt: '',
+                __v: 0,
+                imageUrl: '',
+                user: '',
+                viewsCount: 0,
+                tags: [],
+                text: '',
+                title: ''
+            };
+            state.status = Status.LOADING;
+        });
+        builder.addCase(RemovePost.fulfilled, (state, action) => {
+            state.data = action.payload;
+            state.status = Status.SUCCESS;
+        });
+        builder.addCase(RemovePost.rejected, (state, action) => {
             state.data = {
                 _id: '',
                 fullName: '',
