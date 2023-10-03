@@ -4,6 +4,7 @@ import eye from '../../img/icons8-глаза-учихи-50.png';
 import { Link } from 'react-router-dom';
 import { useAppDispatch } from '../../redux/store';
 import { DeleetePost } from '../../redux/Slice/getPostSlise';
+import zamena from '../../img/Прикольные-заставки-на-рабочий-стол-с-надписями-1.jpg'
 
 type propsType = {
   _id: string,
@@ -46,7 +47,11 @@ const LentItem: FC<propsType> = ({ _id, createdAt, imageUrl, tags, title, viewsC
     <div className={s.lent}>
       <Link to={`/Post/${_id}/OnePost`}>
         <div className={s.img}>
-          <img className={s.img__items} src={`http://localhost:4444${imageUrl}`} alt="imageUrl" />
+          {
+            imageUrl ?
+              <img className={s.img__items} src={`http://localhost:4444${imageUrl}`} alt="imageUrl" />
+              : <img className={s.img__items} src={zamena} alt="zamena" />
+          }
         </div>
       </Link>
       <div className={s.data}>
