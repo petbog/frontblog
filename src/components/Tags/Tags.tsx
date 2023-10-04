@@ -32,7 +32,7 @@ const Tags: FC = () => {
                         <div
                             onClick={() => handleClickTag(item)}
                             key={index}
-                            className="">{item}</div>
+                            className={s.item__tags}>{item}</div>
                     ))
                 }
             </div>

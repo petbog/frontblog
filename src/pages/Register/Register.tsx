@@ -8,6 +8,7 @@ import {  useAppDispatch } from '../../redux/store';
 import { useSelector } from 'react-redux';
 import { isArray } from 'util';
 import { Navigate } from 'react-router-dom';
+import instanse from '../../axios';
 
 
 
@@ -23,12 +24,12 @@ const Register: React.FC = () => {
     const [emailError, setEmailError] = useState('Gmail не может быть пустым')
     const [passError, setPassError] = useState('Пароль не может быть пустым')
     const [nameError, setNameError] = useState('Имя не может быть пустым')
-    const [avatarUrl, setImageUrl] = useState<null | string>(null)
+    const [avatarUrl, setImageUrl] = useState<string>('')
     const imgRef = useRef<HTMLInputElement>(null)
     const dispatch = useAppDispatch()
     const { items, data } = useSelector(itemsAuth)
     const AuthUser = useSelector(selectIsAuth)
-
+console.log(avatarUrl)
 
 
     const handleToggle = () => {
@@ -97,21 +98,40 @@ const Register: React.FC = () => {
     }
 
     const onClickRemoveImage = () => {
-        setImageUrl(null)
+        setImageUrl('')
     }
 
-    const handleChangeFile: React.ChangeEventHandler<HTMLInputElement> = (event) => {
-        const inputElement = event.target as HTMLInputElement;
-        const files = inputElement.files;
-        if (files && files.length > 0) {
-            // Выбран хотя бы один файл, можно работать с ним
-            const file = files[0];
-            // Делаем что-то с файлом
-            const urlitem = URL.createObjectURL(file)
-            setImageUrl(urlitem);
-        } else {
+    // const handleChangeFile: React.ChangeEventHandler<HTMLInputElement> = (event) => {
+    //     const inputElement = event.target as HTMLInputElement;
+    //     const files = inputElement.files;
+    //     if (files && files.length > 0) {
+    //         // Выбран хотя бы один файл, можно работать с ним
+    //         const file = files[0];
+    //         // Делаем что-то с файлом
+    //         const urlitem = URL.createObjectURL(file)
+    //         setImageUrl(urlitem);
+    //     } else {
 
-            console.log("Файл не выбран");
+    //         console.log("Файл не выбран");
+    //     }
+    // };
+
+    const handleImg = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        try {
+            const formData = new FormData();
+            const file = e.target.files && e.target.files[0]; // Проверка на наличие файлов
+            console.log(file)
+            if (file) {
+                formData.append('image', file);
+                const { data } = await instanse.post('/upload', formData);
+                setImageUrl(data.url);
+                console.log(data.url)
+            } else {
+                alert('Пожалуйста, выберите файл для загрузки.');
+            }
+        } catch (error) {
+            console.warn(error);
+            alert('Ошибка при загрузке файла!');
         }
     };
 
@@ -151,8 +171,8 @@ const Register: React.FC = () => {
                 <div className={classes.Form_inner}>
                     <div className={classes.img}>
                         {/* <div onClick={() => handleClickImg()} className={classes.img__items}></div>
-                        <input ref={imgRef} type="file" onChange={handleChangeFile} hidden /> */}
-                        {/* {
+                        <input ref={imgRef} type="file" onChange={handleChangeFile} hidden />  */}
+                         {
                             avatarUrl ? (
                                 <>
                                     <div onClick={onClickRemoveImage}>
@@ -165,9 +185,9 @@ const Register: React.FC = () => {
                                 (
                                     <>
                                         <div onClick={() => handleClickImg()} className={classes.img__items}></div>
-                                        <input ref={imgRef} type="file" onChange={handleChangeFile} hidden /></>
+                                        <input ref={imgRef} type="file" onChange={handleImg} hidden /></>
                                 )
-                        } */}
+                        } 
                     </div>
                     <div className={classes.Form_container}>
                         <p className={classes.form_title}>Имя</p>

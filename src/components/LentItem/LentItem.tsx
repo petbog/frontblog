@@ -1,10 +1,12 @@
 import { FC, useEffect, useState } from 'react';
 import s from './LentItem.module.scss';
-import eye from '../../img/icons8-глаза-учихи-50.png';
+import eye from '../../img/Без названия.png';
 import { Link } from 'react-router-dom';
 import { useAppDispatch } from '../../redux/store';
 import { DeleetePost } from '../../redux/Slice/getPostSlise';
 import zamena from '../../img/Прикольные-заставки-на-рабочий-стол-с-надписями-1.jpg'
+import pencil from '../../img/4213412-compose-document-edit-pen-pencil-write_115364.svg'
+import close from '../../img/-clear_90704.svg'
 
 type propsType = {
   _id: string,
@@ -58,10 +60,10 @@ const LentItem: FC<propsType> = ({ _id, createdAt, imageUrl, tags, title, viewsC
         {
           isAuner ?
             (
-              <>
-                <div onClick={deletePost} className={s.img__hover}>delete</div>
-                <Link to={`/addPost/${_id}`} className={s.img__hover}>редактировать </Link>
-              </>
+              <div className={s.redactions}>
+                <img  onClick={deletePost} src={pencil} alt="pencil"  className={s.redactions__pencil}/> 
+                <Link to={`/addPost/${_id}`} > <img className={s.redactions__close} src={close} alt=""  /> </Link>
+              </div>
 
             )
             :
