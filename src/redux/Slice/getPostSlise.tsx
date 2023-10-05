@@ -26,12 +26,14 @@ export enum Status {
 }
 
 type userType = {
-    _id: string,
-    fullName: string,
-    email: string,
-    passwordHash: string,
+    avatarUrl: string,
     createdAt: string,
+    email: string,
+    fullName: string,
+    passwordHash: string,
     updatedAt: string,
+    __v: number,
+    _id: string,
 }
 
 export type dataType = {

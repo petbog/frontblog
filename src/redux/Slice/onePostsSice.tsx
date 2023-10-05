@@ -7,6 +7,7 @@ import { RootState } from '../store'
 
 export const getOnePost = createAsyncThunk('post/getOnePost', async (_id: string | undefined) => {
     const { data } = await instanse.get<dataType>(`/posts/${_id}`)
+    console.log(data)
     return data
 })
 
@@ -16,6 +17,16 @@ export enum Status {
     ERROR = 'error'
 }
 
+type userType={
+    avatarUrl: string,
+    createdAt: string,
+    email: string,
+    fullName: string,
+    passwordHash: string,
+    updatedAt: string,
+    __v: number,
+    _id: string,
+}
 
 type dataType = {
     _id: string,
@@ -25,7 +36,7 @@ type dataType = {
     updatedAt: string,
     __v: number,
     imageUrl: string,
-    user: string,
+    user: userType,
     viewsCount: number,
     tags: string[],
     text: string,
@@ -46,7 +57,16 @@ const initialState: initialStateType = {
         updatedAt: '',
         __v: 0,
         imageUrl: '',
-        user: '',
+        user: {
+            avatarUrl: '', 
+            createdAt: '',
+            email: '',
+            fullName: '',
+            passwordHash: '',
+            updatedAt: '',
+            __v: 0,
+            _id: ''
+        },
         viewsCount: 0,
         tags: [],
         text: '',
@@ -63,7 +83,7 @@ const onePostSlice = createSlice({
     extraReducers: (builder) => {
         //получение одной статьи
         builder.addCase(getOnePost.pending, (state, action) => {
-            state.data = {
+            state.data =  {
                 _id: '',
                 fullName: '',
                 email: '',
@@ -71,7 +91,16 @@ const onePostSlice = createSlice({
                 updatedAt: '',
                 __v: 0,
                 imageUrl: '',
-                user: '',
+                user: {
+                    avatarUrl: '', 
+                    createdAt: '',
+                    email: '',
+                    fullName: '',
+                    passwordHash: '',
+                    updatedAt: '',
+                    __v: 0,
+                    _id: ''
+                },
                 viewsCount: 0,
                 tags: [],
                 text: '',
@@ -84,7 +113,7 @@ const onePostSlice = createSlice({
             state.status = Status.SUCCESS;
         });
         builder.addCase(getOnePost.rejected, (state, action) => {
-            state.data = {
+            state.data =  {
                 _id: '',
                 fullName: '',
                 email: '',
@@ -92,7 +121,16 @@ const onePostSlice = createSlice({
                 updatedAt: '',
                 __v: 0,
                 imageUrl: '',
-                user: '',
+                user: {
+                    avatarUrl: '', 
+                    createdAt: '',
+                    email: '',
+                    fullName: '',
+                    passwordHash: '',
+                    updatedAt: '',
+                    __v: 0,
+                    _id: ''
+                },
                 viewsCount: 0,
                 tags: [],
                 text: '',

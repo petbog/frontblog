@@ -4,11 +4,12 @@ import classes from './Register.module.scss'
 import eye_off from '../../img/eye_off.svg'
 import eye from '../../img/eye.svg'
 import { addUser, fetchRegister, itemsAuth, selectIsAuth } from '../../redux/Slice/authSlise';
-import {  useAppDispatch } from '../../redux/store';
+import { useAppDispatch } from '../../redux/store';
 import { useSelector } from 'react-redux';
-import { isArray } from 'util';
 import { Navigate } from 'react-router-dom';
 import instanse from '../../axios';
+import avatarZamena from '../../img/user.png';
+import avatarDelet from '../../img/-clear_90704.svg'
 
 
 
@@ -29,7 +30,7 @@ const Register: React.FC = () => {
     const dispatch = useAppDispatch()
     const { items, data } = useSelector(itemsAuth)
     const AuthUser = useSelector(selectIsAuth)
-console.log(avatarUrl)
+    console.log(avatarUrl)
 
 
     const handleToggle = () => {
@@ -101,20 +102,6 @@ console.log(avatarUrl)
         setImageUrl('')
     }
 
-    // const handleChangeFile: React.ChangeEventHandler<HTMLInputElement> = (event) => {
-    //     const inputElement = event.target as HTMLInputElement;
-    //     const files = inputElement.files;
-    //     if (files && files.length > 0) {
-    //         // Выбран хотя бы один файл, можно работать с ним
-    //         const file = files[0];
-    //         // Делаем что-то с файлом
-    //         const urlitem = URL.createObjectURL(file)
-    //         setImageUrl(urlitem);
-    //     } else {
-
-    //         console.log("Файл не выбран");
-    //     }
-    // };
 
     const handleImg = async (e: React.ChangeEvent<HTMLInputElement>) => {
         try {
@@ -141,7 +128,7 @@ console.log(avatarUrl)
             password,
             fullName,
         }
-        if(avatarUrl !== null){
+        if (avatarUrl !== null) {
             Object.assign(newObj, { avatarUrl });
         }
 
@@ -152,7 +139,10 @@ console.log(avatarUrl)
 
 
     useEffect(() => {
-        dispatch(fetchRegister(items))
+        if (items.email.length > 1) {
+            dispatch(fetchRegister(items))
+        }
+
     }, [items])
 
     if ('token' in data) {
@@ -162,32 +152,30 @@ console.log(avatarUrl)
 
 
     if (AuthUser) {
-    return <Navigate to='/' />
-  }
+        return <Navigate to='/' />
+    }
     return (
         <>
             <Header />
             <div className={classes.container}>
                 <div className={classes.Form_inner}>
                     <div className={classes.img}>
-                        {/* <div onClick={() => handleClickImg()} className={classes.img__items}></div>
-                        <input ref={imgRef} type="file" onChange={handleChangeFile} hidden />  */}
-                         {
+                        {
                             avatarUrl ? (
                                 <>
-                                    <div onClick={onClickRemoveImage}>
-                                        Удалить
-                                    </div>
-                                    <img className={classes.activImg} src={avatarUrl} alt="Uploaded" />
+                                    <img src={avatarDelet} className={classes.img__delete} onClick={onClickRemoveImage} />
+                                    <img className={classes.activImg} src={`http://localhost:4444${avatarUrl}`} alt="Uploaded" />
                                 </>
                             )
                                 :
                                 (
                                     <>
-                                        <div onClick={() => handleClickImg()} className={classes.img__items}></div>
+                                        <div onClick={() => handleClickImg()} className={classes.img__items}>
+                                            <img className={classes.img__zamena} src={avatarZamena} alt="avatarZamena" />
+                                        </div>
                                         <input ref={imgRef} type="file" onChange={handleImg} hidden /></>
                                 )
-                        } 
+                        }
                     </div>
                     <div className={classes.Form_container}>
                         <p className={classes.form_title}>Имя</p>

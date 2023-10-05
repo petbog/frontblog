@@ -7,6 +7,18 @@ import { DeleetePost } from '../../redux/Slice/getPostSlise';
 import zamena from '../../img/Прикольные-заставки-на-рабочий-стол-с-надписями-1.jpg'
 import pencil from '../../img/4213412-compose-document-edit-pen-pencil-write_115364.svg'
 import close from '../../img/-clear_90704.svg'
+import userzamena from '../../img/user.png'
+
+type UserType = {
+  avatarUrl: string,
+  createdAt: string,
+  email: string,
+  fullName: string,
+  passwordHash: string,
+  updatedAt: string,
+  __v: number,
+  _id: string,
+}
 
 type propsType = {
   _id: string,
@@ -16,9 +28,11 @@ type propsType = {
   title: string,
   viewsCount: number,
   isAuner: boolean
+  user: UserType
 }
 
-const LentItem: FC<propsType> = ({ _id, createdAt, imageUrl, tags, title, viewsCount, isAuner }) => {
+const LentItem: FC<propsType> = ({ _id, createdAt, imageUrl, tags, title, viewsCount, isAuner, user }) => {
+  const { avatarUrl, fullName } = user
   const [formattedViewsCount, setFormattedViewsCount] = useState<string>('');
   const dispatch = useAppDispatch()
 
@@ -61,16 +75,23 @@ const LentItem: FC<propsType> = ({ _id, createdAt, imageUrl, tags, title, viewsC
           isAuner ?
             (
               <div className={s.redactions}>
-                <img  onClick={deletePost} src={pencil} alt="pencil"  className={s.redactions__pencil}/> 
-                <Link to={`/addPost/${_id}`} > <img className={s.redactions__close} src={close} alt=""  /> </Link>
+                <Link to={`/addPost/${_id}`} > <img className={s.redactions__pencil} src={pencil} alt="" /> </Link>
+                <img onClick={deletePost} src={close} alt="pencil" className={s.redactions__close} />
               </div>
 
             )
             :
             ''
         }
-        <div className={s.data__item}>{formattedViewsCount}</div>
+        <div className={s.user}>
+          {avatarUrl ? <img className={s.user__avatar} src={`http://localhost:4444${avatarUrl}`} alt="avatar" />
+            : <img className={s.user__avatar} src={userzamena} alt="user" />}
+          {fullName && <div className={s.user__name}>{fullName}</div>}
+        </div>
       </div>
+      <div className={s.count}>
+          <div className={s.count__item}>{formattedViewsCount}</div>
+        </div>
       <div className={s.title}>
         <div className={s.title__item}>{title}</div>
       </div>

@@ -8,7 +8,6 @@ import { useAppDispatch } from './redux/store';
 import { fetchMe } from './redux/Slice/authSlise';
 import AddPost from './components/AddPost/AddPost';
 import { Path } from './Path/Patch';
-import Post from './pages/Post/Post';
 import OnePost from './components/OnePost/OnePost';
 
 
@@ -19,7 +18,6 @@ function App() {
     dispatch(fetchMe())
   }, [dispatch,fetchMe])
 
-  const {_id} = useParams()
 
   return (
     <div className="App">
@@ -29,7 +27,6 @@ function App() {
         <Route path={Path.Register} element={<Register />} />
         <Route path={Path.AddPost} element={<AddPost />} />
         <Route path={Path.removePost} element={<AddPost />} />
-        <Route path={Path.Post} element={<Post />} />
         <Route path={Path.OnePost} element={<OnePost />} />
       </Routes>
     </div>
