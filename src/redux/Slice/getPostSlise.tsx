@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import instanse from '../../axios'
 import { RootState } from '../store'
 
-
+//получение постов
 export const getPost = createAsyncThunk<dataType[]>('post/getPost', async () => {
     const { data } = await instanse.get<dataType[]>('/posts')
     return data
@@ -12,10 +12,20 @@ export const getPost = createAsyncThunk<dataType[]>('post/getPost', async () => 
 type deleteParams = {
     _id: string
 }
-
-export const DeleetePost = createAsyncThunk('post/DeleetePost', async ({_id}: deleteParams) => {
-    console.log(_id)
+//удаление поста
+export const DeleetePost = createAsyncThunk('post/DeleetePost', async ({ _id }: deleteParams) => {
     const { data } = await instanse.delete(`/post/${_id}`)
+    return data
+})
+
+//посты по популярности
+export const populatePost = createAsyncThunk('post/populatePost', async () => {
+    const { data } = await instanse.get('/populate')
+    return data
+})
+//посты по новизне
+export const newSortPost = createAsyncThunk('post/newPost', async () => {
+    const { data } = await instanse.get('/new')
     return data
 })
 
@@ -79,9 +89,35 @@ const getPostSlice = createSlice({
             state.data = [];
             state.status = Status.ERROR;
         });
-         //удаление поста
-        builder.addCase(DeleetePost.pending, (state,action) => {
-            state.data =state.data.filter(obj  => obj._id !== action.meta.arg._id)
+        //получение популярных постов
+        builder.addCase(populatePost.pending, (state) => {
+            state.data = [];
+            state.status = Status.LOADING;
+        });
+        builder.addCase(populatePost.fulfilled, (state, action) => {
+            state.data = action.payload;
+            state.status = Status.SUCCESS;
+        });
+        builder.addCase(populatePost.rejected, (state) => {
+            state.data = [];
+            state.status = Status.ERROR;
+        });
+        //получение новых
+        builder.addCase(newSortPost.pending, (state) => {
+            state.data = [];
+            state.status = Status.LOADING;
+        });
+        builder.addCase(newSortPost.fulfilled, (state, action) => {
+            state.data = action.payload;
+            state.status = Status.SUCCESS;
+        });
+        builder.addCase(newSortPost.rejected, (state) => {
+            state.data = [];
+            state.status = Status.ERROR;
+        });
+        //удаление поста
+        builder.addCase(DeleetePost.pending, (state, action) => {
+            state.data = state.data.filter(obj => obj._id !== action.meta.arg._id)
         });
 
     },

@@ -27,11 +27,9 @@ type removeParamsType = {
 }
 export const RemovePost = createAsyncThunk('post/RemovePost', async (removeParams: removeParamsType) => {
     const { _id, params } = removeParams
-    console.log(removeParams)
     const { data } = await instanse.patch(`/posts/${_id}`, params)
     return data
 })
-
 
 export enum Status {
     LOADING = 'loading',
