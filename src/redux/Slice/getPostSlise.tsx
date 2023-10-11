@@ -29,6 +29,16 @@ export const newSortPost = createAsyncThunk('post/newPost', async () => {
     return data
 })
 
+type paramsTag = {
+    tag: string
+}
+
+export const articlesbytag = createAsyncThunk<dataType[], paramsTag>('post/articlesbytag', async (params) => {
+    const { tag } = params
+    const { data } = await instanse.get<dataType[]>('articlesbytag', { params: { tag } })
+    return data
+})
+
 export enum Status {
     LOADING = 'loading',
     SUCCESS = 'succes',
@@ -112,6 +122,19 @@ const getPostSlice = createSlice({
             state.status = Status.SUCCESS;
         });
         builder.addCase(newSortPost.rejected, (state) => {
+            state.data = [];
+            state.status = Status.ERROR;
+        });
+        //получение постов по тегу
+        builder.addCase(articlesbytag.pending, (state) => {
+            state.data = [];
+            state.status = Status.LOADING;
+        });
+        builder.addCase(articlesbytag.fulfilled, (state, action) => {
+            state.data = action.payload;
+            state.status = Status.SUCCESS;
+        });
+        builder.addCase(articlesbytag.rejected, (state) => {
             state.data = [];
             state.status = Status.ERROR;
         });
