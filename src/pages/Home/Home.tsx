@@ -1,19 +1,29 @@
 import Header from "../../components/Header/Header"
 import Lent from "../../components/Lent/Lent";
 import SortRating from "../../components/SortRating/SortRating";
-import { getPost } from "../../redux/Slice/getPostSlise";
+import { getPost, getPostSelectorData } from "../../redux/Slice/getPostSlise";
 import { useAppDispatch } from "../../redux/store";
 import s from "./Home.module.scss"
 import { useEffect } from 'react';
 import Tags from './../../components/Tags/Tags';
 import Comments from "../../components/Comments/Comments";
+import { useSelector } from "react-redux";
+import WelcomPage from "../../components/WelcomPage/WelcomPage";
 
 const Home = () => {
     const dispatch = useAppDispatch()
+    const { data } = useSelector(getPostSelectorData)
 
     useEffect(() => {
         dispatch(getPost())
     }, [getPost])
+    if (data.length === 0) {
+        return (
+            <> <Header />
+                <WelcomPage />
+            </>
+        )
+    }
     return (
         <>
             <Header />
