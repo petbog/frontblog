@@ -19,7 +19,8 @@ const Home = () => {
     }, [getPost])
     if (data.length === 0) {
         return (
-            <> <Header />
+            <>
+                {/* <Header /> */}
                 <WelcomPage />
             </>
         )
