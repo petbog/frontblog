@@ -9,6 +9,7 @@ import { fetchMe } from './redux/Slice/authSlise';
 import AddPost from './components/AddPost/AddPost';
 import { Path } from './Path/Patch';
 import OnePost from './components/OnePost/OnePost';
+import WelcomPage from './components/WelcomPage/WelcomPage';
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
         <Route path={Path.AddPost} element={<AddPost />} />
         <Route path={Path.removePost} element={<AddPost />} />
         <Route path={Path.OnePost} element={<OnePost />} />
+        <Route path={Path.WelcomPage} element={<WelcomPage />} />
       </Routes>
     </div>
   );

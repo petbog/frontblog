@@ -4,20 +4,29 @@ import SortRating from "../../components/SortRating/SortRating";
 import { getPost, getPostSelectorData } from "../../redux/Slice/getPostSlise";
 import { useAppDispatch } from "../../redux/store";
 import s from "./Home.module.scss"
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Tags from './../../components/Tags/Tags';
 import Comments from "../../components/Comments/Comments";
 import { useSelector } from "react-redux";
 import WelcomPage from "../../components/WelcomPage/WelcomPage";
 
-const Home = () => {
+const Home:React.FC = () => {
     const dispatch = useAppDispatch()
-    const { data } = useSelector(getPostSelectorData)
+    const [hasToken,setHasToken]=useState<boolean>(false)
+    console.log(hasToken)
 
     useEffect(() => {
         dispatch(getPost())
     }, [getPost])
-    if (data.length === 0) {
+
+useEffect(()=>{
+
+    const user = !!window.localStorage.getItem('token')
+    setHasToken(user)
+},['token'])
+
+
+    if (!hasToken) {
         return (
             <>
                 {/* <Header /> */}

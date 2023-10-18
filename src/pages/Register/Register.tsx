@@ -10,6 +10,7 @@ import { Navigate } from 'react-router-dom';
 import instanse from '../../axios';
 import avatarZamena from '../../img/user.png';
 import avatarDelet from '../../img/-clear_90704.svg'
+import bacgroundRegister from '../../img/photodraw.ru-62743.png'
 
 
 
@@ -26,11 +27,12 @@ const Register: React.FC = () => {
     const [passError, setPassError] = useState('Пароль не может быть пустым')
     const [nameError, setNameError] = useState('Имя не может быть пустым')
     const [avatarUrl, setImageUrl] = useState<string>('')
+    const [bottom, setBottom] = useState<boolean>(false)
     const imgRef = useRef<HTMLInputElement>(null)
     const dispatch = useAppDispatch()
     const { items, data } = useSelector(itemsAuth)
     const AuthUser = useSelector(selectIsAuth)
-    console.log(avatarUrl)
+    console.log(bottom)
 
 
     const handleToggle = () => {
@@ -136,7 +138,9 @@ const Register: React.FC = () => {
 
     }
 
-
+    const handleScroll = () => {
+        setBottom(!bottom)
+    }
 
     useEffect(() => {
         if (items.email.length > 1) {
@@ -156,8 +160,16 @@ const Register: React.FC = () => {
     }
     return (
         <>
-            <Header />
+            <div onClick={handleScroll} className={bottom ? `${classes.topScroll} ${classes.bottomScroll}` : classes.topScroll}>
+                <Header />
+            </div>
+
             <div className={classes.container}>
+                <div className={classes.background}>
+                    <div className={classes.background__opassity}>
+                        <img className={classes.background__img} src={bacgroundRegister} alt="bacgroundRegister" />
+                    </div>
+                </div>
                 <div className={classes.Form_inner}>
                     <div className={classes.img}>
                         {
@@ -178,7 +190,7 @@ const Register: React.FC = () => {
                         }
                     </div>
                     <div className={classes.Form_container}>
-                        <p className={classes.form_title}>Имя</p>
+                        {/* <p className={classes.form_title}>Имя</p> */}
                         <input
                             name="name"
                             onBlur={(e) => blurHandle(e)}
@@ -192,7 +204,7 @@ const Register: React.FC = () => {
                         {(nameDirty && nameError) && <div className={classes.errorPoppup}>{nameError}</div>}
                     </div>
                     <div className={classes.Form_container}>
-                        <p className={classes.form_title}>Логин</p>
+                        {/* <p className={classes.form_title}>Логин</p> */}
                         <input
                             name="email"
                             onBlur={(e) => blurHandle(e)}
@@ -206,7 +218,7 @@ const Register: React.FC = () => {
                         {(emailDirty && emailError) && <div className={classes.errorPoppup}>{emailError}</div>}
                     </div>
                     <div className={classes.Form_container_pass}>
-                        <p className={classes.form_title}>Пароль</p>
+                        {/* <p className={classes.form_title}>Пароль</p> */}
                         <input
                             name="password"
                             onBlur={(e) => blurHandle(e)}

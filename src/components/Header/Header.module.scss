@@ -1,7 +1,7 @@
 .header {
     background: rgb(54, 89, 94);
     background: linear-gradient(97deg, rgba(54, 89, 94, 1) 5%, rgba(31, 50, 59, 1) 37%, rgba(38, 54, 75, 1) 61%, rgba(13, 13, 32, 1) 92%);
-    height: 80px;
+    height: 65px;
     width: 100%;
     display: flex;
     justify-content: space-around;
@@ -9,27 +9,27 @@
     -webkit-box-shadow: 0px -25px 5px -20px rgba(250, 255, 244, 0.38) inset;
     -moz-box-shadow: 0px -25px 5px -20px rgba(250, 255, 244, 0.38) inset;
     box-shadow: 0px -25px 5px -20px rgba(250, 255, 244, 0.38) inset;
-
+    position: relative;
 
 
 
     &_logo h3 {
         font-size: 21px;
         letter-spacing: 5px;
-        padding: 7px 39px;
+        padding: 5px 30px;
         border-radius: 10px;
         cursor: pointer;
         position: relative;
         color: #fff;
-        border: 1px solid #fff;
+        border: 2px solid #fff;
         z-index: 3;
 
         &::before {
             content: '';
             position: absolute;
             width: 100%;
-            height: 43px;
-            border-radius: 10px;
+            height: 38px;
+            border-radius: 7px;
             background-color: #ffffff;
             bottom: 0;
             left: 0;
@@ -108,6 +108,7 @@
         position: relative;
         z-index: 3;
         font-weight: 600;
+        z-index: 3;
 
         &::before {
             content: '';
@@ -138,20 +139,21 @@
     &__forward {
         padding: 11px 17px;
         font-size: 16px;
-        color: #264ea2;
+        color: #8b8686;
         text-decoration: none;
         border-radius: 10px;
-        border: 1px solid #264ea2;
+        border: 1px solid #8b8686;
         cursor: pointer;
         position: relative;
+        z-index: 3;
 
         &::before {
             content: '';
             position: absolute;
             width: 100%;
             height: 43px;
-            border-radius: 10px;
-            background-color: #264ea2;
+            border-radius: 8px;
+            background-color: #e2e3e4;
             bottom: 0;
             left: 0;
             transform-origin: right;
@@ -167,7 +169,7 @@
 
         &:hover {
             border: 1px solid #fff;
-            color: #fff;
+            color: #000000;
             transition: all 0.1s ease;
         }
     }
@@ -205,4 +207,21 @@
 
 .hidden {
     visibility: hidden;
+}
+
+.language {
+    width: 100px;
+    height: 36px;
+    background-color: burlywood;
+    position: absolute;
+    top: 177%;
+    left: 50%;
+    transform: translate(-50px, -50px);
+    border-radius: 0 0 20px 20px;
+    background-color: lavender;
+
+    &__arrow {
+        width: 30px;
+        height: 30px;
+    }
 }
