@@ -7,6 +7,12 @@
 .background{
   max-height: 100vh;
   overflow: hidden;
+  
+  &__img{
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+  }
 }
 .Form_inner {
   width: 400px;
@@ -227,14 +233,14 @@
 
 .topScroll {
   position: absolute;
-  top: -66px;
+  top: -82px;
   left: 0;
   width: 100%;
-  transition: 2s;
+  transition:all ease 1s;
   cursor: pointer;
 }
 
 .bottomScroll{
   top: 0;
-  transition: 2s;
+  transition:all ease 1s;
 }

@@ -233,7 +233,7 @@ const Register: React.FC = () => {
                         <img onClick={handleToggle} className={classes.form_img} src={src} alt="" />
                     </div>
                     <div className={classes.Button_container}>
-                        <button className={classes.Form_button} onClick={handleRegister} >Отправить</button>
+                        <button className={classes.Form_button} onClick={handleRegister} >Зарегистрироваться</button>
                     </div>
                 </div>
             </div>

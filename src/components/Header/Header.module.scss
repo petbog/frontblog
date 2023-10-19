@@ -1,7 +1,7 @@
 .header {
     background: rgb(54, 89, 94);
     background: linear-gradient(97deg, rgba(54, 89, 94, 1) 5%, rgba(31, 50, 59, 1) 37%, rgba(38, 54, 75, 1) 61%, rgba(13, 13, 32, 1) 92%);
-    height: 65px;
+    height: 80px;
     width: 100%;
     display: flex;
     justify-content: space-around;
@@ -214,7 +214,7 @@
     height: 36px;
     background-color: burlywood;
     position: absolute;
-    top: 177%;
+    top: 163%;
     left: 50%;
     transform: translate(-50px, -50px);
     border-radius: 0 0 20px 20px;

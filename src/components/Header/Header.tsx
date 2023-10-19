@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { removeUser, selectIsAuth } from '../../redux/Slice/authSlise'
 import { Path } from '../../Path/Patch'
 import arrow from '../../img/1492533558-slideupdown_83272.svg'
+import path from 'path'
 
 const Header: React.FC = () => {
   const authUser = useSelector(selectIsAuth)
@@ -50,7 +51,7 @@ const Header: React.FC = () => {
             location.pathname === '/register' ? (
               <>
                 <Link className={s.innerLinkForward} to={Path.Home}>
-                  <div className={s.link__forward}>На главную</div>
+                  <div className={s.hidden}>На главную</div>
                 </Link>
                 <Link className={s.innerLinkForward} to={Path.Auth}>
                   <div className={s.link__forward}>Войти</div>
@@ -76,9 +77,9 @@ const Header: React.FC = () => {
         }
 
       </div>
-      <div className={s.language}>
-        <img className={s.language__arrow} src={arrow} alt="arrow" />
-      </div>
+      {location.pathname === Path.Register  || location.pathname ===  Path .Auth ?  <div className={s.language}>
+        <img className={s.language__arrow} src={arrow} alt="arrow"  />
+      </div> : ''}
     </div>
   )
 }

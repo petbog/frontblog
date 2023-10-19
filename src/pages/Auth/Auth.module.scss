@@ -1,18 +1,26 @@
 .container {
+  height: 100%;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  align-self: center;
-  min-height: 100%;
-  padding: 61px 0
+}
+
+.background{
+  max-height: 100vh;
+  overflow: hidden;
+  
+  &__img{
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+  }
 }
 
 .Form_inner {
+  padding:0 27px;
   width: 400px;
   height: 340px;
   display: flex;
   flex-direction: column;
-  margin: 38px auto 45px auto;
+  margin: 167px 0 45px auto;
   align-items: center;
 
 }
@@ -25,12 +33,12 @@
 }
 
 .Form_email {
-  width: 334px;
-  height: 48px;
+  width: 250px;
+  height: 41px;
   border-radius: 10px;
-  border: 1px solid #1390E5;
+  border: 1px solid orange;
   font-weight: 400;
-  font-size: 20px;
+  font-size: 19px;
   line-height: 24px;
   color: #272727;
   padding: 0 0 0 10px;
@@ -40,8 +48,8 @@
 
   &__label {
     position: absolute;
-    top: 67px;
-    left: 21px;
+    top: 7px;
+    left: 15px;
     font-size: 19px;
     outline: none;
     color: #9c9c9e;
@@ -50,35 +58,37 @@
 
 .Form_container .Form_email:focus+label,
 .Form_container .Form_email:not(:placeholder-shown)+.Form_email__label {
-  transform: translateY(-22px);
+  transform: translateY(-16px);
   font-size: 13px;
   background-color: #ffffff;
   padding: 0px 10px;
   transition: all 0.7s ease;
-  background-color: #1390E5;
+  background-color: orange;
   color: #fff;
-  border: 1px solid #0c82d1 ;
+  border: 1px solid orange;
   border-radius: 10px;
   outline: none;
 }
 
 
 .Form_pass {
-  width: 334px;
-  height: 48px;
+  width: 211px;
+  height: 41px;
   border-radius: 10px;
-  border: 1px solid #1390E5;
+  border: 1px solid orange;
   font-weight: 400;
-  font-size: 20px;
+  font-size: 19px;
   line-height: 24px;
   color: #272727;
-  padding: 0 0 0 10px;
+  padding: 0 41px 0 10px;
+  background-color: #fff;
   cursor: pointer;
   outline: none;
-  &__label{
+
+  &__label {
     position: absolute;
-    top: 67px;
-    left: 21px;
+    top: 7px;
+    left: 15px;
     font-size: 19px;
     outline: none;
     color: #9c9c9e;
@@ -87,14 +97,14 @@
 
 .Form_container_pass .Form_pass:focus+label,
 .Form_container_pass .Form_pass:not(:placeholder-shown)+.Form_pass__label {
-  transform: translateY(-22px);
+  transform: translateY(-16px);
   font-size: 13px;
   background-color: #ffffff;
   padding: 0px 10px;
   transition: all 0.7s ease;
-  background-color: #1390E5;
+  background-color: orange;
   color: #fff;
-  border: 1px solid #0c82d1 ;
+  border: 1px solid orange;
   border-radius: 10px;
   outline: none;
 }
@@ -103,8 +113,9 @@
 
 .Form_container {
   position: relative;
-  height: 125px;
+  height: 100px;
 }
+
 .Form_container_pass {
   position: relative;
   height: 125px;
@@ -116,21 +127,21 @@
   width: 25px;
   height: 25px;
   right: 15px;
-  top: 65px;
+  top: 10px;
   cursor: pointer;
 }
 
 .errorPoppup {
   color: red;
-  font-size: 16px;
+  font-size: 13px;
   padding: 3px 0 0 0;
 }
 
 .Button_container {
   display: flex;
   justify-content: center;
-  margin: 40px 0 0 0;
 }
+
 .Form_button {
   font-size: 16px;
   font-weight: 200;
@@ -148,7 +159,7 @@
 
 .Form_button::after {
   content: "";
-  background-color: #2e94cf;
+  background-color: orange;
   width: 100%;
   z-index: -1;
   position: absolute;
@@ -188,4 +199,19 @@
   .errorPoppup {
     font-size: 11px;
   }
+}
+
+
+.topScroll {
+  position: absolute;
+  top: -82px;
+  left: 0;
+  width: 100%;
+  transition: all ease 1s;
+  cursor: pointer;
+}
+
+.bottomScroll {
+  top: 0;
+  transition: all ease 1s;
 }
