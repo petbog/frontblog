@@ -166,9 +166,7 @@ const Register: React.FC = () => {
 
             <div className={classes.container}>
                 <div className={classes.background}>
-                    <div className={classes.background__opassity}>
                         <img className={classes.background__img} src={bacgroundRegister} alt="bacgroundRegister" />
-                    </div>
                 </div>
                 <div className={classes.Form_inner}>
                     <div className={classes.img}>
