@@ -8,7 +8,7 @@ import instanse from '../../axios'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Path } from '../../Path/Patch'
 import { fetchMe } from '../../redux/Slice/authSlise'
-import {  getOnePost, onePostSelector } from '../../redux/Slice/onePostsSice'
+import { getOnePost, onePostSelector } from '../../redux/Slice/onePostsSice'
 import { useSelector } from 'react-redux'
 
 const AddPost: FC = () => {
@@ -78,7 +78,13 @@ const AddPost: FC = () => {
 
     const modifiedTags = tags
         .split(' ')
-        .map((word) => `#${word}`)
+        .map((word) => {
+            if (!word.startsWith("#") && word.trim() !== '') {
+                return `#${word}`;
+            } else {
+                return word;
+            }
+        })
         .join(' ');
 
 

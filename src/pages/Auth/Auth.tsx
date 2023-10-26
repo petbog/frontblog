@@ -8,7 +8,7 @@ import { fetchLogin, itemsAuth, selectIsAuth } from "../../redux/Slice/authSlise
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import bacgroundRegister from '../../img/full-shot-woman-reading-with-smartphone-min.jpg'
-import blogSvg from '../../img/blogsvg.svg'
+
 
 
 const Auth: FC = () => {
@@ -116,11 +116,7 @@ const Auth: FC = () => {
                     </div>
                 </div>
                 <div className={classes.Form_inner}>
-                    <div className="">
-                        <img src={blogSvg} alt="blogSvg" />
-                    </div>
                     <div className={classes.Form_container}>
-                        {/* <p className={classes.form_title}>Почта</p> */}
                         <input
                             name="email"
                             onBlur={(e) => blurHandle(e)}

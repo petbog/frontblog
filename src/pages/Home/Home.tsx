@@ -6,7 +6,6 @@ import { useAppDispatch } from "../../redux/store";
 import s from "./Home.module.scss"
 import { useEffect, useState } from 'react';
 import Tags from './../../components/Tags/Tags';
-import Comments from "../../components/Comments/Comments";
 import { useSelector } from "react-redux";
 import WelcomPage from "../../components/WelcomPage/WelcomPage";
 
@@ -29,7 +28,6 @@ useEffect(()=>{
     if (!hasToken) {
         return (
             <>
-                {/* <Header /> */}
                 <WelcomPage />
             </>
         )
@@ -43,7 +41,6 @@ useEffect(()=>{
                     <Lent />
                     <div className={s.sortbar}>
                         <Tags />
-                        <Comments />
                     </div>
                 </div>
             </div>

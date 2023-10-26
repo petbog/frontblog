@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { removeUser, selectIsAuth } from '../../redux/Slice/authSlise'
 import { Path } from '../../Path/Patch'
 import arrow from '../../img/1492533558-slideupdown_83272.svg'
-import path from 'path'
+import blogSvg from '../../img/blogsvg.svg'
 
 const Header: React.FC = () => {
   const authUser = useSelector(selectIsAuth)
@@ -24,7 +24,7 @@ const Header: React.FC = () => {
     <div className={s.header}>
       <Link className={s.innerLinkForward} to={Path.Home}>
         <div className={s.header_logo}>
-          <h3> Blog </h3>
+          <img src={blogSvg} alt="blogSvg" />
         </div>
 
       </Link>
@@ -77,8 +77,8 @@ const Header: React.FC = () => {
         }
 
       </div>
-      {location.pathname === Path.Register  || location.pathname ===  Path .Auth ?  <div className={s.language}>
-        <img className={s.language__arrow} src={arrow} alt="arrow"  />
+      {location.pathname === Path.Register || location.pathname === Path.Auth ? <div className={s.language}>
+        <img className={s.language__arrow} src={arrow} alt="arrow" />
       </div> : ''}
     </div>
   )

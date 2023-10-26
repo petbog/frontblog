@@ -11,8 +11,9 @@ const Tags: FC = () => {
     const dispatch = useAppDispatch()
     const data = useSelector(tagsSelector)
     const [tag, setTag] = useState<string>('')
-    console.log(tag)
 
+    useEffect(()=>{
+    },[data])
     const tagArrays = data.map((str) => str.split(" "));
     const allTags = tagArrays.flat();
     const uniqueTags = allTags.filter((tag, index, self) => {

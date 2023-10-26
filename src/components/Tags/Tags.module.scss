@@ -2,6 +2,9 @@
     width: 370px;
     min-height: 298px;
     background-color: rgb(224, 221, 221);
+    border-radius: 10px;
+    padding: 11px 5px;
+    border: 1px solid #7f7e7e;
 }
 
 .item {
@@ -11,7 +14,7 @@
 
     &__tags {
         min-width: 100px;
-        padding: 10px 10px;
+        padding: 10px 8px;
         cursor: pointer;
         opacity: 0.7;
         transition: all ease 0.5s;
