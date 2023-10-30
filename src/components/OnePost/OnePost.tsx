@@ -6,12 +6,16 @@ import { getOnePost, onePostSelector } from '../../redux/Slice/onePostsSice'
 import { useSelector } from 'react-redux'
 import Header from '../Header/Header'
 import eye from '../../img/Без названия.png'
+import comment from '../../img/comment-line-svgrepo-com.svg'
+import close from '../../img/-clear_90704.svg'
 
 
 const OnePost: FC = () => {
     const dispatch = useAppDispatch()
+    const [openComment, setOpenComment] = useState<Boolean>(false)
+    const [textareaValue, setTextareaValue] = useState<string>("")
     const { id } = useParams<{ id: string }>()
-    const { imageUrl, text, tags, title, updatedAt, viewsCount,user:{avatarUrl,fullName} } = useSelector(onePostSelector)
+    const { imageUrl, text, tags, title, updatedAt, viewsCount, user: { avatarUrl, fullName } } = useSelector(onePostSelector)
 
 
     useEffect(() => {
@@ -26,42 +30,60 @@ const OnePost: FC = () => {
     const hours = dateObject.getHours().toString().padStart(2, '0');
     const minutes = dateObject.getMinutes().toString().padStart(2, '0');
     const seconds = dateObject.getSeconds().toString().padStart(2, '0');
-  
+
     // Форматируйте дату и время в нужный формат
     const formattedDate = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 
-    return (
-        <div  className="">
-        <Header />
-        <div  className={s.post}>
-            <div className={s.img}>
-                <img className={s.img__inner} src={`http://localhost:4444${imageUrl}`} alt="imageUrl" />
-            </div>
-            <div className={s.user}>
-                <img className={s.user__avatar} src={`http://localhost:4444${avatarUrl}`} alt="" />
-                <div className={s.user__name}>{fullName}</div>
-            </div>
-            <div className={s.create}>
-                <div className={s.create__inner}>{formattedDate}</div>
-            </div>
-            <div className={s.title}>
-                <div className={s.title__inner}>{title}</div>
-            </div>
-            {tags.map(item => (
-                <div className={s.tags}>
-                    <div className={s.tags__inner}>{item}</div>
-                </div>
-            ))}
-            <div className={s.text}>
-                <div className={s.text__inner}>{text}</div>
-            </div>
-            <div className={s.viewsCount}>
-                <img className={s.viewsCount__img} src={eye} alt="" />
-                <div className={s.viewsCount__inner}> {viewsCount}</div>
-            </div>
+    const handleText = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        setTextareaValue(e.target.value)
+    }
+    const clearText=()=>{
+        setTextareaValue('')
+    }
 
-        </div>
-    </div >
+    return (
+        <div className={s.innerPost}>
+            <Header />
+            <div className={s.post}>
+                <div className={s.img}>
+                    <img className={s.img__inner} src={`http://localhost:4444${imageUrl}`} alt="imageUrl" />
+                </div>
+                <div className={s.user}>
+                    <img className={s.user__avatar} src={`http://localhost:4444${avatarUrl}`} alt="" />
+                    <div className={s.user__name}>{fullName}</div>
+                </div>
+                <div className={s.create}>
+                    <div className={s.create__inner}>{formattedDate}</div>
+                </div>
+                <div className={s.title}>
+                    <div className={s.title__inner}>{title}</div>
+                </div>
+                {tags.map(item => (
+                    <div className={s.tags}>
+                        <div className={s.tags__inner}>{item}</div>
+                    </div>
+                ))}
+                <div className={s.text}>
+                    <div className={s.text__inner}>{text}</div>
+                </div>
+                <div className={s.viewsCount}>
+                    <img className={s.viewsCount__img} src={eye} alt="" />
+                    <div className={s.viewsCount__inner}> {viewsCount}</div>
+                    <img onClick={() => setOpenComment(!openComment)} className={s.commentImg} src={comment} alt="comment" />
+                </div>
+            </div>
+            {
+                openComment ? <div className={s.comment}>
+                    <textarea
+                        value={textareaValue}
+                        onChange={handleText}
+                        placeholder='Ваш комментарий...'
+                        className={s.comment__text} />
+                    {textareaValue.length > 1 ?
+                     <img className={s.comment__img} onClick={clearText} src={close} alt="close" /> : ''}
+                </div> : ''
+            }
+        </div >
 
     )
 }
