@@ -174,8 +174,22 @@
         top: 34px;
         right: -64px;
         cursor: pointer;
+
+        // &:hover {
+        //     &::after {
+        //         content: "закрыть";
+        //     }
+        // }
     }
-    &__img:hover::before{
-        content: "clear";
+
+    &__imgSend {
+        position: absolute;
+        bottom: 68px;
+        right: -67px;
+        cursor: pointer;
     }
 }
+// .comment__imgSend:hover::after{
+//     content: 'jnghfdbnm';
+//     color: black;
+// }

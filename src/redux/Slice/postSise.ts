@@ -31,6 +31,16 @@ export const RemovePost = createAsyncThunk('post/RemovePost', async (removeParam
     return data
 })
 
+type CommetnParams = {
+    postId:string | undefined,
+    comment: string,
+}
+
+export const createComment = createAsyncThunk('post/createComment', async (params: CommetnParams) => {
+    const { data } = await instanse.post(`/posts/:postId/comment`, params)
+    return data
+})
+
 export enum Status {
     LOADING = 'loading',
     SUCCESS = 'succes',
@@ -145,6 +155,45 @@ const postSlice = createSlice({
             state.status = Status.SUCCESS;
         });
         builder.addCase(RemovePost.rejected, (state, action) => {
+            state.data = {
+                _id: '',
+                fullName: '',
+                email: '',
+                createdAt: '',
+                updatedAt: '',
+                __v: 0,
+                imageUrl: '',
+                user: '',
+                viewsCount: 0,
+                tags: [],
+                text: '',
+                title: ''
+            };
+            state.status = Status.ERROR;
+        });
+         //Добавление комментария
+         builder.addCase(createComment.pending, (state, action) => {
+            state.data = {
+                _id: '',
+                fullName: '',
+                email: '',
+                createdAt: '',
+                updatedAt: '',
+                __v: 0,
+                imageUrl: '',
+                user: '',
+                viewsCount: 0,
+                tags: [],
+                text: '',
+                title: ''
+            };
+            state.status = Status.LOADING;
+        });
+        builder.addCase(createComment.fulfilled, (state, action) => {
+            state.data = action.payload;
+            state.status = Status.SUCCESS;
+        });
+        builder.addCase(createComment.rejected, (state, action) => {
             state.data = {
                 _id: '',
                 fullName: '',

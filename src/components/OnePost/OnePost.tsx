@@ -8,12 +8,18 @@ import Header from '../Header/Header'
 import eye from '../../img/Без названия.png'
 import comment from '../../img/comment-line-svgrepo-com.svg'
 import close from '../../img/-clear_90704.svg'
+import send from '../../img/send_121135.svg'
+import { createComment } from '../../redux/Slice/postSise'
 
 
 const OnePost: FC = () => {
     const dispatch = useAppDispatch()
     const [openComment, setOpenComment] = useState<Boolean>(false)
     const [textareaValue, setTextareaValue] = useState<string>("")
+    const [data, setData] = useState<{ postId: string | undefined, comment: string }>({
+        postId: '',
+        comment: ''
+    })
     const { id } = useParams<{ id: string }>()
     const { imageUrl, text, tags, title, updatedAt, viewsCount, user: { avatarUrl, fullName } } = useSelector(onePostSelector)
 
@@ -37,10 +43,20 @@ const OnePost: FC = () => {
     const handleText = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         setTextareaValue(e.target.value)
     }
-    const clearText=()=>{
+    const clearText = () => {
         setTextareaValue('')
     }
 
+    useEffect(() => {
+        setData({
+            postId:id,
+            comment:textareaValue
+        })
+     }, [id,textareaValue])
+
+    const sendComment = ()=>{
+dispatch(createComment(data))
+    }
     return (
         <div className={s.innerPost}>
             <Header />
@@ -80,7 +96,11 @@ const OnePost: FC = () => {
                         placeholder='Ваш комментарий...'
                         className={s.comment__text} />
                     {textareaValue.length > 1 ?
-                     <img className={s.comment__img} onClick={clearText} src={close} alt="close" /> : ''}
+                        <>
+                            <img className={s.comment__img} onClick={clearText} src={close} alt="close" />
+                            <img className={s.comment__imgSend} onClick={sendComment} src={send} alt="send" />
+                        </>
+                        : ''}
                 </div> : ''
             }
         </div >
