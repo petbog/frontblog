@@ -21,6 +21,12 @@ export const createComment = createAsyncThunk('post/createComment', async (param
     return data
 })
 
+export const deleteComment = createAsyncThunk('post/deleteComment', async (commentId: string) => {
+    console.log(commentId)
+    const { data } = await instanse.delete(`/comments/${commentId}`)
+    return data
+})
+
 export enum Status {
     LOADING = 'loading',
     SUCCESS = 'succes',
@@ -197,6 +203,16 @@ const onePostSlice = createSlice({
                 title: '',
                 comments: [],
             };
+            state.status = Status.ERROR;
+        });
+        //удаление комментария
+        builder.addCase(deleteComment.pending, (state, action) => {
+            state.status = Status.LOADING;
+        });
+        builder.addCase(deleteComment.fulfilled, (state, action) => {
+            state.status = Status.SUCCESS;
+        });
+        builder.addCase(deleteComment.rejected, (state, action) => {
             state.status = Status.ERROR;
         });
     },

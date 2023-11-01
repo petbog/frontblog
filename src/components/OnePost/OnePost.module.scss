@@ -133,7 +133,8 @@
         height: 34px;
         font-weight: 600;
     }
-    &__length{
+
+    &__length {
         font-size: 20px;
         margin: 0 0 2px 9px;
     }
@@ -201,6 +202,10 @@
 // }
 
 .lentComment {
+    &__container{
+        position: relative;
+    }
+
     &__item {
         max-width: 1000px;
         margin: 0 auto 20px auto;
@@ -211,7 +216,25 @@
         border-radius: 5px;
         border: 2px solid #d9d0d0;
         -webkit-box-shadow: 13px -17px 17px -10px rgba(0, 0, 0, 0.2) inset;
--moz-box-shadow: 13px -17px 17px -10px rgba(0, 0, 0, 0.2) inset;
-box-shadow: 13px -17px 17px -10px rgba(0, 0, 0, 0.2) inset;
+        -moz-box-shadow: 13px -17px 17px -10px rgba(0, 0, 0, 0.2) inset;
+        box-shadow: 13px -17px 17px -10px rgba(0, 0, 0, 0.2) inset;
+    }
+
+    &__delete {
+        position: absolute;
+        top: 0;
+        right: 205px;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+
+        &:hover {
+            transform: rotate(360deg) ;
+            &::after{
+                content: "delete";
+                width: 50px;
+                height: 20px;
+                color: black;
+            }
+        }
     }
 }
