@@ -8,6 +8,7 @@ import zamena from '../../img/Прикольные-заставки-на-раб�
 import pencil from '../../img/4213412-compose-document-edit-pen-pencil-write_115364.svg'
 import close from '../../img/-clear_90704.svg'
 import userzamena from '../../img/user.png'
+import commentImg from '../../img/comment-line-svgrepo-com.svg'
 
 type UserType = {
   avatarUrl: string,
@@ -28,10 +29,11 @@ type propsType = {
   title: string,
   viewsCount: number,
   isAuner: boolean
-  user: UserType
+  user: UserType,
+  comments:string[]
 }
 
-const LentItem: FC<propsType> = ({ _id, createdAt, imageUrl, tags, title, viewsCount, isAuner, user }) => {
+const LentItem: FC<propsType> = ({ _id, createdAt, imageUrl, tags, title, viewsCount, isAuner, user,comments }) => {
   const { avatarUrl, fullName } = user
   const [formattedViewsCount, setFormattedViewsCount] = useState<string>('');
   const dispatch = useAppDispatch()
@@ -103,6 +105,8 @@ const LentItem: FC<propsType> = ({ _id, createdAt, imageUrl, tags, title, viewsC
       <div className={s.viewsCount}>
         <img className={s.viewsCount__img} src={eye} alt="eye" />
         <div className={s.viewsCount__item}>{viewsCount}</div>
+        <img className={s.viewsCount__commentsImg} src={commentImg} alt="commentImg" />
+        <div className={s.viewsCount__length}>{comments.length}</div>
       </div>
     </div>
   );

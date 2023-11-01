@@ -7,7 +7,17 @@ import { RootState } from '../store'
 
 export const getOnePost = createAsyncThunk('post/getOnePost', async (_id: string | undefined) => {
     const { data } = await instanse.get<dataType>(`/posts/${_id}`)
-    console.log(data)
+    return data
+})
+
+type CommetnParams = {
+    postId: string | undefined,
+    comment: string,
+}
+
+export const createComment = createAsyncThunk('post/createComment', async (params: CommetnParams) => {
+    const { postId } = params
+    const { data } = await instanse.post(`/posts/${postId}/comment`, params)
     return data
 })
 
@@ -17,7 +27,7 @@ export enum Status {
     ERROR = 'error'
 }
 
-type userType={
+type userType = {
     avatarUrl: string,
     createdAt: string,
     email: string,
@@ -28,6 +38,14 @@ type userType={
     _id: string,
 }
 
+type commentsType = {
+    createdAt: string,
+    post: string,
+    text: string,
+    updatedAt: string,
+    __v: number,
+    _id: string,
+}
 type dataType = {
     _id: string,
     fullName: string,
@@ -40,7 +58,8 @@ type dataType = {
     viewsCount: number,
     tags: string[],
     text: string,
-    title: string
+    title: string,
+    comments: commentsType[],
 }
 
 interface initialStateType {
@@ -58,7 +77,7 @@ const initialState: initialStateType = {
         __v: 0,
         imageUrl: '',
         user: {
-            avatarUrl: '', 
+            avatarUrl: '',
             createdAt: '',
             email: '',
             fullName: '',
@@ -70,7 +89,8 @@ const initialState: initialStateType = {
         viewsCount: 0,
         tags: [],
         text: '',
-        title: ''
+        title: '',
+        comments: [],
     },
     status: Status.LOADING
 }
@@ -83,7 +103,7 @@ const onePostSlice = createSlice({
     extraReducers: (builder) => {
         //получение одной статьи
         builder.addCase(getOnePost.pending, (state, action) => {
-            state.data =  {
+            state.data = {
                 _id: '',
                 fullName: '',
                 email: '',
@@ -92,7 +112,7 @@ const onePostSlice = createSlice({
                 __v: 0,
                 imageUrl: '',
                 user: {
-                    avatarUrl: '', 
+                    avatarUrl: '',
                     createdAt: '',
                     email: '',
                     fullName: '',
@@ -104,7 +124,8 @@ const onePostSlice = createSlice({
                 viewsCount: 0,
                 tags: [],
                 text: '',
-                title: ''
+                title: '',
+                comments: [],
             };
             state.status = Status.LOADING;
         });
@@ -113,7 +134,7 @@ const onePostSlice = createSlice({
             state.status = Status.SUCCESS;
         });
         builder.addCase(getOnePost.rejected, (state, action) => {
-            state.data =  {
+            state.data = {
                 _id: '',
                 fullName: '',
                 email: '',
@@ -122,7 +143,7 @@ const onePostSlice = createSlice({
                 __v: 0,
                 imageUrl: '',
                 user: {
-                    avatarUrl: '', 
+                    avatarUrl: '',
                     createdAt: '',
                     email: '',
                     fullName: '',
@@ -134,7 +155,47 @@ const onePostSlice = createSlice({
                 viewsCount: 0,
                 tags: [],
                 text: '',
-                title: ''
+                title: '',
+                comments: [],
+            };
+            state.status = Status.ERROR;
+        });
+        //Добавление комментария
+        builder.addCase(createComment.pending, (state, action) => {
+            state.status = Status.LOADING;
+        });
+        builder.addCase(createComment.fulfilled, (state, action) => {
+
+            state.data = {
+                ...state.data, // Копируем существующие свойства объекта data
+                comments: [...state.data.comments, action.payload], // Добавляем новый комментарий в конец массива
+            };
+            state.status = Status.SUCCESS;
+        });
+        builder.addCase(createComment.rejected, (state, action) => {
+            state.data = {
+                _id: '',
+                fullName: '',
+                email: '',
+                createdAt: '',
+                updatedAt: '',
+                __v: 0,
+                imageUrl: '',
+                user: {
+                    avatarUrl: '',
+                    createdAt: '',
+                    email: '',
+                    fullName: '',
+                    passwordHash: '',
+                    updatedAt: '',
+                    __v: 0,
+                    _id: ''
+                },
+                viewsCount: 0,
+                tags: [],
+                text: '',
+                title: '',
+                comments: [],
             };
             state.status = Status.ERROR;
         });

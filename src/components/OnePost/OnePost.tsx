@@ -2,14 +2,13 @@ import { FC, useEffect, useState } from 'react'
 import s from './OnePost.module.scss'
 import { useParams } from 'react-router-dom'
 import { useAppDispatch } from '../../redux/store'
-import { getOnePost, onePostSelector } from '../../redux/Slice/onePostsSice'
+import { createComment, getOnePost, onePostSelector } from '../../redux/Slice/onePostsSice'
 import { useSelector } from 'react-redux'
 import Header from '../Header/Header'
 import eye from '../../img/Без названия.png'
 import comment from '../../img/comment-line-svgrepo-com.svg'
 import close from '../../img/-clear_90704.svg'
 import send from '../../img/send_121135.svg'
-import { createComment } from '../../redux/Slice/postSise'
 
 
 const OnePost: FC = () => {
@@ -21,8 +20,8 @@ const OnePost: FC = () => {
         comment: ''
     })
     const { id } = useParams<{ id: string }>()
-    const { imageUrl, text, tags, title, updatedAt, viewsCount, user: { avatarUrl, fullName } } = useSelector(onePostSelector)
-
+    const { imageUrl, text, tags, title, updatedAt, viewsCount, user: { avatarUrl, fullName }, comments } = useSelector(onePostSelector)
+console.log(comments.length)
 
     useEffect(() => {
         dispatch(getOnePost(id))
@@ -49,13 +48,14 @@ const OnePost: FC = () => {
 
     useEffect(() => {
         setData({
-            postId:id,
-            comment:textareaValue
+            postId: id,
+            comment: textareaValue
         })
-     }, [id,textareaValue])
+    }, [id, textareaValue])
 
-    const sendComment = ()=>{
-dispatch(createComment(data))
+    const sendComment = () => {
+        dispatch(createComment(data))
+        clearText()
     }
     return (
         <div className={s.innerPost}>
@@ -86,8 +86,10 @@ dispatch(createComment(data))
                     <img className={s.viewsCount__img} src={eye} alt="" />
                     <div className={s.viewsCount__inner}> {viewsCount}</div>
                     <img onClick={() => setOpenComment(!openComment)} className={s.commentImg} src={comment} alt="comment" />
+                    <div className={s.viewsCount__length}>{comments.length}</div>
                 </div>
             </div>
+
             {
                 openComment ? <div className={s.comment}>
                     <textarea
@@ -103,6 +105,13 @@ dispatch(createComment(data))
                         : ''}
                 </div> : ''
             }
+            <div className={s.lentComment}>
+                {
+                    [...comments].reverse().map((item, _id) => (
+                        <div key={_id} className={s.lentComment__item}>{item.text}</div>
+                    ))
+                }
+            </div>
         </div >
 
     )
