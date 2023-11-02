@@ -1,8 +1,8 @@
 import classes from "./Auth.module.scss"
 import Header from "../../components/Header/Header"
 import { FC, useEffect, useState } from 'react';
-import eye_off from '../../img/eye_off.svg'
-import eye from '../../img/eye.svg'
+import eye_off from '../../img/eye_off copy.svg'
+import eye from '../../img/eye copy.svg'
 import { useAppDispatch } from "../../redux/store";
 import { fetchLogin, itemsAuth, selectIsAuth } from "../../redux/Slice/authSlise";
 import { useSelector } from "react-redux";
@@ -130,7 +130,6 @@ const Auth: FC = () => {
                         {(emailDirty && emailError) && <div className={classes.errorPoppup}>{emailError}</div>}
                     </div>
                     <div className={classes.Form_container_pass}>
-                        {/* <p className={classes.form_title}>Пароль</p> */}
                         <input
                             name="password"
                             onBlur={(e) => blurHandle(e)}
@@ -139,14 +138,15 @@ const Auth: FC = () => {
                             value={password}
                             onChange={(e) => passwordHandler(e)}
                             placeholder=''
-                           
+
                         />
                         <label className={classes.Form_pass__label}>Введите password</label>
                         {(passDirty && passError) && <div className={classes.errorPoppup}>{passError}</div>}
                         <img onClick={handleToggle} className={classes.form_img} src={src} alt="" />
                     </div>
                     <div className={classes.Button_container}>
-                        <button onClick={handleLogin} className={classes.Form_button} >Войти</button>
+                        <button onClick={handleLogin}
+                         className={email.length && password.length ? `${classes.Form_button}` : `${classes.Form_button} ${classes.disabled}`} >Войти</button>
                     </div>
                 </div>
             </div>

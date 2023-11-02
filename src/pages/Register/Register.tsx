@@ -109,7 +109,6 @@ const Register: React.FC = () => {
         try {
             const formData = new FormData();
             const file = e.target.files && e.target.files[0]; // Проверка на наличие файлов
-            console.log(file)
             if (file) {
                 formData.append('image', file);
                 const { data } = await instanse.post('/upload', formData);
@@ -155,6 +154,7 @@ const Register: React.FC = () => {
     }
 
 
+
     if (AuthUser) {
         return <Navigate to='/' />
     }
@@ -166,7 +166,7 @@ const Register: React.FC = () => {
 
             <div className={classes.container}>
                 <div className={classes.background}>
-                        <img className={classes.background__img} src={bacgroundRegister} alt="bacgroundRegister" />
+                    <img className={classes.background__img} src={bacgroundRegister} alt="bacgroundRegister" />
                 </div>
                 <div className={classes.Form_inner}>
                     <div className={classes.img}>
@@ -188,7 +188,6 @@ const Register: React.FC = () => {
                         }
                     </div>
                     <div className={classes.Form_container}>
-                        {/* <p className={classes.form_title}>Имя</p> */}
                         <input
                             name="name"
                             onBlur={(e) => blurHandle(e)}
@@ -202,7 +201,6 @@ const Register: React.FC = () => {
                         {(nameDirty && nameError) && <div className={classes.errorPoppup}>{nameError}</div>}
                     </div>
                     <div className={classes.Form_container}>
-                        {/* <p className={classes.form_title}>Логин</p> */}
                         <input
                             name="email"
                             onBlur={(e) => blurHandle(e)}
@@ -216,7 +214,6 @@ const Register: React.FC = () => {
                         {(emailDirty && emailError) && <div className={classes.errorPoppup}>{emailError}</div>}
                     </div>
                     <div className={classes.Form_container_pass}>
-                        {/* <p className={classes.form_title}>Пароль</p> */}
                         <input
                             name="password"
                             onBlur={(e) => blurHandle(e)}
@@ -231,7 +228,8 @@ const Register: React.FC = () => {
                         <img onClick={handleToggle} className={classes.form_img} src={src} alt="" />
                     </div>
                     <div className={classes.Button_container}>
-                        <button className={classes.Form_button} onClick={handleRegister} >Зарегистрироваться</button>
+                        <button className={ email.length && password.length && fullName.length ? `${classes.Form_button}` : `${classes.Form_button} ${classes.disabled}`} 
+                        onClick={handleRegister} >Зарегистрироваться</button>
                     </div>
                 </div>
             </div>

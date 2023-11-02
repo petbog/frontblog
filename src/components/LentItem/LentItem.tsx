@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from 'react';
 import s from './LentItem.module.scss';
-import eye from '../../img/Без названия.png';
+import eye from '../../img/eye-svgrepo-com.svg';
 import { Link } from 'react-router-dom';
 import { useAppDispatch } from '../../redux/store';
 import { DeleetePost } from '../../redux/Slice/getPostSlise';

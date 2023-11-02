@@ -4,16 +4,18 @@
   height: 100vh;
 }
 
-.background{
+.background {
   height: 100vh;
   overflow: hidden;
-  &__img{
+
+  &__img {
     height: 100%;
     width: 100%;
     object-fit: cover;
     height: 100vh;
   }
 }
+
 .Form_inner {
   width: 400px;
   display: flex;
@@ -236,11 +238,20 @@
   top: -82px;
   left: 0;
   width: 100%;
-  transition:all ease 1s;
+  transition: all ease 1s;
   cursor: pointer;
 }
 
-.bottomScroll{
+.bottomScroll {
   top: 0;
-  transition:all ease 1s;
+  transition: all ease 1s;
+}
+
+.disabled {
+  pointer-events: none;
+  /* Запрещаем взаимодействие с элементом */
+  opacity: 0.5;
+  /* Устанавливаем непрозрачность элемента, чтобы он выглядел отключенным */
+  cursor: not-allowed;
+  /* Устанавливаем курсор "не разрешено" */
 }

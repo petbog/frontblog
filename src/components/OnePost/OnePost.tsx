@@ -5,7 +5,7 @@ import { useAppDispatch } from '../../redux/store'
 import { createComment, deleteComment, filterComment, getOnePost, onePostSelector } from '../../redux/Slice/onePostsSice'
 import { useSelector } from 'react-redux'
 import Header from '../Header/Header'
-import eye from '../../img/Без названия.png'
+import eye from '../../img/eye-svgrepo-com.svg'
 import comment from '../../img/comment-line-svgrepo-com.svg'
 import close from '../../img/-clear_90704.svg'
 import send from '../../img/send_121135.svg'
@@ -119,7 +119,7 @@ const OnePost: FC = () => {
                 {
                     [...comments].reverse().map((item, _id) => (
                         <div className={s.lentComment__container}>
-                            <textarea key={item._id} className={s.lentComment__item}>{item.text}</textarea>
+                            <div key={item._id} className={s.lentComment__item}>{item.text}</div>
                             <img onClick={() => { deleteComm(item._id) }} src={close} alt="delete" className={s.lentComment__delete} />
                         </div>
 

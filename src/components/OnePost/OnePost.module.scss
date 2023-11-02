@@ -202,7 +202,7 @@
 // }
 
 .lentComment {
-    &__container{
+    &__container {
         position: relative;
     }
 
@@ -211,7 +211,7 @@
         margin: 0 auto 20px auto;
         text-align: start;
         padding: 11px 15px;
-        min-height: 60px;
+        height: auto;
         background-color: rgb(255, 255, 255);
         border-radius: 5px;
         border: 2px solid #d9d0d0;
@@ -219,8 +219,9 @@
         -moz-box-shadow: 13px -17px 17px -10px rgba(0, 0, 0, 0.2) inset;
         box-shadow: 13px -17px 17px -10px rgba(0, 0, 0, 0.2) inset;
         font-size: 20px;
-        outline: none;
-        resize: none;
+        // outline: none;
+        // resize: none;
+        word-wrap: break-word
     }
 
     &__delete {
@@ -231,8 +232,9 @@
         transition: transform 0.3s ease;
 
         &:hover {
-            transform: rotate(360deg) ;
-            &::after{
+            transform: rotate(360deg);
+
+            &::after {
                 content: "delete";
                 width: 50px;
                 height: 20px;
