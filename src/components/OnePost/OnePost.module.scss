@@ -207,7 +207,7 @@
     }
 
     &__item {
-        max-width: 1000px;
+        width: 1000px;
         margin: 0 auto 20px auto;
         text-align: start;
         padding: 11px 15px;
@@ -218,6 +218,9 @@
         -webkit-box-shadow: 13px -17px 17px -10px rgba(0, 0, 0, 0.2) inset;
         -moz-box-shadow: 13px -17px 17px -10px rgba(0, 0, 0, 0.2) inset;
         box-shadow: 13px -17px 17px -10px rgba(0, 0, 0, 0.2) inset;
+        font-size: 20px;
+        outline: none;
+        resize: none;
     }
 
     &__delete {

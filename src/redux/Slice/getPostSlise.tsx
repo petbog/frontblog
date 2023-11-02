@@ -148,6 +148,7 @@ const getPostSlice = createSlice({
 });
 
 export const getPostSelector = (state: RootState) => state.getPost.data
+export const getStatusSelector = (state: RootState) => state.getPost.status
 export const getPostSelectorData = (state: RootState) => state.getPost
 export const { } = getPostSlice.actions
 export const getPostReduser = getPostSlice.reducer

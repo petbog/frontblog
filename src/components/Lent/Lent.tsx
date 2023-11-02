@@ -1,26 +1,29 @@
 import { useSelector } from 'react-redux';
 import LentItem from '../LentItem/LentItem';
-import s from './Lent.module.scss'
 import { FC } from 'react';
-import { getPostSelector } from '../../redux/Slice/getPostSlise';
+import { getPostSelector, getStatusSelector } from '../../redux/Slice/getPostSlise';
 import { selectIdUser } from '../../redux/Slice/authSlise';
-import { Status } from '../../redux/Slice/postSise';
 import { useEffect } from 'react'
+import Skeleton from '../../skeleton/Skeleton';
 
 
 
 const Lent: FC = () => {
   const data = useSelector(getPostSelector)
+  const status = useSelector(getStatusSelector)
+  console.log(status)
   const user = useSelector(selectIdUser)
 
   useEffect(() => { }, [data])
 
+  const skeleton = [...new Array(3)].map((_, i) => <Skeleton key={i} />)
+
   return (
     <div className="">
       {
-        Status.SUCCESS ? data.map((item) => (
+        status === 'loading' ? skeleton : data.map((item) => (
           <LentItem key={item._id} isAuner={item.user._id === user} {...item} />
-        )) : ''
+        ))
       }
 
     </div>

@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from 'react'
 import s from './OnePost.module.scss'
 import { useParams } from 'react-router-dom'
 import { useAppDispatch } from '../../redux/store'
-import { createComment, deleteComment, getOnePost, onePostSelector } from '../../redux/Slice/onePostsSice'
+import { createComment, deleteComment, filterComment, getOnePost, onePostSelector } from '../../redux/Slice/onePostsSice'
 import { useSelector } from 'react-redux'
 import Header from '../Header/Header'
 import eye from '../../img/Без названия.png'
@@ -65,6 +65,7 @@ const OnePost: FC = () => {
         dispatch(deleteComment(
             _id
         ))
+        dispatch(filterComment(_id))
     }
     return (
         <div className={s.innerPost}>
@@ -118,7 +119,7 @@ const OnePost: FC = () => {
                 {
                     [...comments].reverse().map((item, _id) => (
                         <div className={s.lentComment__container}>
-                            <div key={item._id} className={s.lentComment__item}>{item.text}</div>
+                            <textarea key={item._id} className={s.lentComment__item}>{item.text}</textarea>
                             <img onClick={() => { deleteComm(item._id) }} src={close} alt="delete" className={s.lentComment__delete} />
                         </div>
 

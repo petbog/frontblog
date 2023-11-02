@@ -1,19 +1,21 @@
 import { useSelector, useStore } from 'react-redux';
-import { fetchTags, tagsSelector } from '../../redux/Slice/getTags';
+import { fetchTags, tagsSelector, tagsStatusSelector } from '../../redux/Slice/getTags';
 import { useAppDispatch } from '../../redux/store';
 import s from './Tags.module.scss'
 import { FC, useEffect, useState } from 'react';
 import { articlesbytag } from '../../redux/Slice/getPostSlise';
+import TagsSkeleton from '../../skeleton/TagsSkeleton';
 
 
 
 const Tags: FC = () => {
     const dispatch = useAppDispatch()
     const data = useSelector(tagsSelector)
+    const status = useSelector(tagsStatusSelector)
     const [tag, setTag] = useState<string>('')
 
-    useEffect(()=>{
-    },[data])
+    useEffect(() => {
+    }, [data])
     const tagArrays = data.map((str) => str.split(" "));
     const allTags = tagArrays.flat();
     const uniqueTags = allTags.filter((tag, index, self) => {
@@ -25,7 +27,7 @@ const Tags: FC = () => {
     }, [fetchTags])
     useEffect(() => {
         if (tag.length > 2) {
-            dispatch(articlesbytag({tag}))
+            dispatch(articlesbytag({ tag }))
         }
 
     }, [tag])
@@ -33,12 +35,13 @@ const Tags: FC = () => {
     const handleClickTag = (tagName: string) => {
         setTag(tagName)
     }
+    const skeleton = [...new Array(3)].map((_, i) => <TagsSkeleton key={i} />)
 
     return (
         <div className={s.box}>
             <div className={s.item}>
                 {
-                    uniqueTags.map((item, index) => (
+                    status === 'loading' ? skeleton : uniqueTags.map((item, index) => (
                         <div
                             onClick={() => handleClickTag(item)}
                             key={index}

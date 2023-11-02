@@ -139,6 +139,7 @@ const Auth: FC = () => {
                             value={password}
                             onChange={(e) => passwordHandler(e)}
                             placeholder=''
+                           
                         />
                         <label className={classes.Form_pass__label}>Введите password</label>
                         {(passDirty && passError) && <div className={classes.errorPoppup}>{passError}</div>}

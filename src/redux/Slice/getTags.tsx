@@ -53,5 +53,6 @@ const tagsSlice = createSlice({
 });
 
 export const tagsSelector = (state: RootState) => state.tags.data
+export const tagsStatusSelector = (state: RootState) => state.tags.status
 export const { } = tagsSlice.actions
 export const tagsReduser = tagsSlice.reducer

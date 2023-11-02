@@ -22,7 +22,6 @@ export const createComment = createAsyncThunk('post/createComment', async (param
 })
 
 export const deleteComment = createAsyncThunk('post/deleteComment', async (commentId: string) => {
-    console.log(commentId)
     const { data } = await instanse.delete(`/comments/${commentId}`)
     return data
 })
@@ -105,7 +104,11 @@ const initialState: initialStateType = {
 const onePostSlice = createSlice({
     name: 'onePost',
     initialState,
-    reducers: {},
+    reducers: {
+        filterComment: (state, action) => {
+            state.data.comments = state.data.comments.filter((comments)=> comments._id !== action.payload)
+        }
+    },
     extraReducers: (builder) => {
         //получение одной статьи
         builder.addCase(getOnePost.pending, (state, action) => {
@@ -219,5 +222,5 @@ const onePostSlice = createSlice({
 });
 
 export const onePostSelector = (state: RootState) => state.onePost.data
-export const { } = onePostSlice.actions
+export const {filterComment } = onePostSlice.actions
 export const onePostReduser = onePostSlice.reducer
