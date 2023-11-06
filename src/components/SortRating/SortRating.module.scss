@@ -21,3 +21,11 @@
     border-bottom: 2px solid #154ce1;
     color:#154ce1 ;
 }
+
+@media (max-width:560px) {
+    .button {
+        margin: 0 4px;
+        font-size: 15px;
+    }
+    
+}

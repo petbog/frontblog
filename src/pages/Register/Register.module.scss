@@ -122,7 +122,29 @@
   height: 125px;
 }
 
+.img {
+  position: relative;
+  margin: 91px 0 35px 0;
 
+  &__zamena {
+    width: 130px;
+    height: 130px;
+    cursor: pointer;
+  }
+
+  &__delete {
+    position: absolute;
+    top: -11px;
+    right: -15px;
+    opacity: 0.4;
+    transition: all ease 1s;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
 .form_img {
   position: absolute;
   width: 25px;
@@ -186,6 +208,31 @@
   .Form_button {
     padding: 13px 50px 13px;
   }
+
+}
+
+@media(max-width:1000px) {
+  .background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -2;
+    filter: brightness(0.3);
+  }
+
+  .container {
+    justify-content: center;
+  }
+
+  .img {
+    margin: 141px 0 35px 0;
+
+    &__zamena {
+      width: 100px;
+      height: 100px;
+      cursor: pointer;
+    }
+  }
 }
 
 
@@ -209,29 +256,7 @@
   }
 }
 
-.img {
-  position: relative;
-  margin: 91px 0 35px 0;
 
-  &__zamena {
-    width: 130px;
-    height: 130px;
-    cursor: pointer;
-  }
-
-  &__delete {
-    position: absolute;
-    top: -11px;
-    right: -15px;
-    opacity: 0.4;
-    transition: all ease 1s;
-    cursor: pointer;
-
-    &:hover {
-      opacity: 1;
-    }
-  }
-}
 
 .topScroll {
   position: absolute;

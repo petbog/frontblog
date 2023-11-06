@@ -3,24 +3,24 @@
   display: flex;
 }
 
-.background{
-  max-height: 100vh;
+.background {
+  height: 100vh;
   overflow: hidden;
-  
-  &__img{
+
+  &__img {
     height: 100%;
     width: 100%;
-    object-fit: contain;
+    object-fit: cover;
   }
 }
 
 .Form_inner {
-  padding:0 27px;
+  padding: 0 27px;
   width: 400px;
   height: 340px;
   display: flex;
   flex-direction: column;
-  margin: 227px 0 45px auto;
+  margin: 227px auto 45px auto;
   align-items: center;
 
 }
@@ -182,6 +182,22 @@
   cursor: not-allowed;
   /* Устанавливаем курсор "не разрешено" */
 }
+
+@media(max-width:800px) {
+  .background {
+    top: 0;
+    right: 0;
+    position: absolute;
+    z-index: -2;
+    filter: brightness(0.2);
+  }
+
+  .Form_inner {
+    margin: 227px auto 45px auto;
+  }
+
+}
+
 @media (min-width: 768px) {
   .Form_button {
     padding: 13px 50px 13px;
@@ -195,12 +211,10 @@
   }
 
   .Form_email {
-    width: 229px;
     font-size: 16px;
   }
 
   .Form_pass {
-    width: 229px;
     font-size: 16px;
   }
 
@@ -223,4 +237,3 @@
   top: 0;
   transition: all ease 1s;
 }
-
