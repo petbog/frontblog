@@ -40,7 +40,7 @@ useEffect(()=>{
                 <div className={s.itembox}>
                     <Lent />
                     <div className={s.sortbar}>
-                        {/* <Tags /> */}
+                        <Tags />
                     </div>
                 </div>
             </div>

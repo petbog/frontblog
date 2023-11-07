@@ -16,10 +16,33 @@
     }
 }
 
-.activ{
+.hachtag {
+    width: 25px;
+    height: 25px;
+    margin: 10px 0 0 0;
+
+    &__img {
+        width: 21px;
+        margin: 4px 0 0 0;
+        height: 21px;
+        padding: 0 3px 4px 3px;
+    }
+}
+
+.disabel {
+    display: none;
+}
+
+.activ {
     transition: all ease 0.1s;
     border-bottom: 2px solid #154ce1;
-    color:#154ce1 ;
+    color: #154ce1;
+}
+
+@media (max-width:960px) {
+    .disabel {
+        display: contents;
+    }
 }
 
 @media (max-width:560px) {
@@ -27,5 +50,10 @@
         margin: 0 4px;
         font-size: 15px;
     }
-    
+    .hachtag {
+        &__img {
+            margin: 8px 0 0 13px;
+        }
+    }
+
 }

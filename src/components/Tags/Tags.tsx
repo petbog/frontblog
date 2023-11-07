@@ -3,14 +3,14 @@ import { fetchTags, tagsSelector, tagsStatusSelector } from '../../redux/Slice/g
 import { useAppDispatch } from '../../redux/store';
 import s from './Tags.module.scss'
 import { FC, useEffect, useState } from 'react';
-import { articlesbytag } from '../../redux/Slice/getPostSlise';
+import { articlesbytag, eyePoppup, getPostSelectorPoppup } from '../../redux/Slice/getPostSlise';
 import TagsSkeleton from '../../skeleton/TagsSkeleton';
-
 
 
 const Tags: FC = () => {
     const dispatch = useAppDispatch()
     const data = useSelector(tagsSelector)
+    const poppup = useSelector(getPostSelectorPoppup)
     const status = useSelector(tagsStatusSelector)
     const [tag, setTag] = useState<string>('')
 
@@ -37,21 +37,30 @@ const Tags: FC = () => {
     }
     const skeleton = [...new Array(3)].map((_, i) => <TagsSkeleton key={i} />)
 
+
+
+    const closePoppup = () => {
+        dispatch(eyePoppup(false))
+
+    }
+
     return (
-        <div className={s.box}>
-            <div className={s.item}>
-                {
-                    status === 'loading' ? skeleton : uniqueTags.map((item, index) => (
-                        <div
-                            onClick={() => handleClickTag(item)}
-                            key={index}
-                            className={s.item__tags}>{item}</div>
-                    ))
-                }
+        <div onClick={closePoppup} className={poppup ? `${s.modalWrapper}` : ''}>
+            <div className={poppup ? `${s.box}` : `${s.box} ${s.disabled}`} >
+                <div className={s.item}>
+                    {
+                        status === 'loading' ? skeleton : uniqueTags.map((item, index) => (
+                            <div
+                                onClick={() => handleClickTag(item)}
+                                key={index}
+                                className={s.item__tags}>{item}</div>
+                        ))
+                    }
+                </div>
             </div>
         </div>
+
     )
 }
-
 
 export default Tags

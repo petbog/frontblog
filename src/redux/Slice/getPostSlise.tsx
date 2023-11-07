@@ -67,25 +67,31 @@ export type dataType = {
     updatedAt: string,
     __v: number,
     user: userType,
-    comments:string[]
+    comments: string[]
 }
 
 
 interface initialStateType {
     status: Status,
-    data: dataType[]
+    data: dataType[],
+    poppup: boolean
 }
 
 const initialState: initialStateType = {
     data: [],
-    status: Status.LOADING
+    status: Status.LOADING,
+    poppup: false
 }
 
 
 const getPostSlice = createSlice({
     name: 'getPost',
     initialState,
-    reducers: {},
+    reducers: {
+        eyePoppup: (state, action) => {
+            state.poppup =action.payload
+        }
+    },
     extraReducers: (builder) => {
         //получение постов
         builder.addCase(getPost.pending, (state) => {
@@ -150,5 +156,6 @@ const getPostSlice = createSlice({
 export const getPostSelector = (state: RootState) => state.getPost.data
 export const getStatusSelector = (state: RootState) => state.getPost.status
 export const getPostSelectorData = (state: RootState) => state.getPost
-export const { } = getPostSlice.actions
+export const getPostSelectorPoppup = (state: RootState) => state.getPost.poppup
+export const { eyePoppup} = getPostSlice.actions
 export const getPostReduser = getPostSlice.reducer

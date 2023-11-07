@@ -30,10 +30,10 @@ type propsType = {
   viewsCount: number,
   isAuner: boolean
   user: UserType,
-  comments:string[]
+  comments: string[]
 }
 
-const LentItem: FC<propsType> = ({ _id, createdAt, imageUrl, tags, title, viewsCount, isAuner, user,comments }) => {
+const LentItem: FC<propsType> = ({ _id, createdAt, imageUrl, tags, title, viewsCount, isAuner, user, comments }) => {
   const { avatarUrl, fullName } = user
   const [formattedViewsCount, setFormattedViewsCount] = useState<string>('');
   const dispatch = useAppDispatch()
@@ -92,8 +92,8 @@ const LentItem: FC<propsType> = ({ _id, createdAt, imageUrl, tags, title, viewsC
         </div>
       </div>
       <div className={s.count}>
-          <div className={s.count__item}>{formattedViewsCount}</div>
-        </div>
+        <div className={s.count__item}>{formattedViewsCount}</div>
+      </div>
       <div className={s.title}>
         <div className={s.title__item}>{title}</div>
       </div>
