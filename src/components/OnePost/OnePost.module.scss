@@ -6,6 +6,7 @@
     max-width: 1100px;
     box-sizing: border-box;
     margin: 50px auto 0 auto;
+    padding: 0 15px;
 
 }
 
@@ -29,14 +30,17 @@
 }
 
 .user {
+    max-width: 1000px;
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    margin: 0 auto;
 
     &__avatar {
         width: 50px;
         height: 50px;
         border-radius: 10px;
+        padding: 0 0 0 15px;
     }
 
     &__name {
@@ -44,11 +48,13 @@
         font-size: 17px;
         font-weight: 500;
         letter-spacing: 1px;
+        padding: 0 0 0 15px;
     }
 }
 
 .title {
-    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
     min-height: 70px;
     display: flex;
     justify-content: center;
@@ -59,37 +65,44 @@
         box-shadow: 7px 5px 11px 17px rgba(144, 157, 167, 0.27);
         border-radius: 5px;
         font-size: 30px;
-        padding: 0 20px;
+        padding: 22px 20px;
         font-weight: 600;
         margin: 0 0 36px 0;
+        width: 100%;
+        min-height: 50px;
     }
 }
 
 .tags {
-    width: 100%;
+    max-width: 1000px;
     min-height: 92px;
-    margin: 7px 0 0 0;
+    margin: 7px auto 0 auto;
     display: flex;
     justify-content: flex-start;
     border-radius: 0 0 10px 0;
 
     &__inner {
+        text-align: start;
+        width: 100%;
         padding: 30px 0 0 0px;
         font-size: 24px;
-        padding: 30px 0 0 0px;
+        padding: 30px 0 0 15px;
         font-size: 18px;
         font-weight: 500;
     }
 }
 
 .text {
-    width: 100%;
+    max-width: 1000px;
     min-height: 150px;
     display: flex;
     justify-content: flex-start;
     border-radius: 0 0 0 10px;
+    margin: 0 auto;
 
     &__inner {
+        text-align: start;
+        width: 100%;
         border-radius: 5px;
         font-size: 20px;
         padding: 30px 20px 30px 20px;
@@ -101,13 +114,14 @@
 }
 
 .create {
-    width: 100%;
+    max-width: 1000px;
     min-height: 70px;
-    margin: 5px 0 0 0;
+    margin: 5px auto 0 auto;
     display: flex;
     justify-content: flex-start;
 
     &__inner {
+        padding: 0 0 0 15px;
         font-size: 16px;
         letter-spacing: 1px;
 
@@ -115,13 +129,14 @@
 }
 
 .viewsCount {
-    width: 100%;
+    max-width: 1000px;
     min-height: 70px;
-    margin: 17px 0 0 0;
+    margin: 17px auto 0 auto;
     display: flex;
     justify-content: flex-start;
     align-items: center;
     position: relative;
+    padding: 0 0 0 20px;
 
     &__inner {
         font-size: 22px;
@@ -157,7 +172,7 @@
 }
 
 .comment {
-    margin: 0 auto;
+    margin: 0 auto 0 auto;
     max-width: 900px;
     height: 70px;
     padding: 40px 0 100px 0;
@@ -204,10 +219,13 @@
 .lentComment {
     &__container {
         position: relative;
+        max-width: 1000px;
+        margin:  0 auto;
+        padding: 15px 0;
     }
 
     &__item {
-        width: 1000px;
+        width: 90%;
         margin: 0 auto 20px auto;
         text-align: start;
         padding: 11px 15px;
@@ -226,8 +244,8 @@
 
     &__delete {
         position: absolute;
-        top: 0;
-        right: 205px;
+        top: -5px;
+        right: 8px;
         cursor: pointer;
         transition: transform 0.3s ease;
 

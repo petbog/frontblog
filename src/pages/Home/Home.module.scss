@@ -13,3 +13,9 @@
     flex-direction: column;
     
 }
+@media (max-width:960px) {
+    .itembox{
+        display: flex;
+        justify-content: center;
+    }
+    }

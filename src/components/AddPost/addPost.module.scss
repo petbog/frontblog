@@ -11,6 +11,7 @@
     height: 50px;
     display: flex;
     justify-content: flex-start;
+    margin: 0 0 50px 0;
 
     &__inner {
         padding: 11px 17px;
@@ -50,6 +51,7 @@
     }
 
 }
+
 .remove {
     width: 100%;
     height: 50px;
@@ -96,35 +98,47 @@
 }
 
 .title {
+    max-width: 1100px;
     width: 100%;
     min-height: 70px;
-    margin: 17px 0 0 0;
+    margin: 17px 0 40px 0;
+    padding: 0 9px 1px 0;
 
     &__inner {
-        width: 1160px;
+        width: 95%;
         min-height: 70px;
         border: none;
         font-size: 41px;
         outline: none;
         resize: none;
-        overflow: hidden
+        overflow: hidden;
+        padding: 0 10px;
+        border-radius: 10px;
+        -webkit-box-shadow: 1px 8px 15px 6px rgba(34, 60, 80, 0.44);
+        -moz-box-shadow: 1px 8px 15px 6px rgba(34, 60, 80, 0.44);
+        box-shadow: 1px 8px 15px 6px rgba(34, 60, 80, 0.44);
     }
 }
 
 .tags {
-    width: 100%;
+    max-width: 1100px;
     height: auto;
     margin: 17px 0 0 0;
 
     &__inner {
-        width: 1160px;
+        width: 95%;
         height: auto;
         word-wrap: break-word;
         border: none;
         font-size: 22px;
         outline: 0;
         overflow-wrap: break-word;
-        border-bottom: 2px solid black
+        border-bottom: 2px solid black;
+        -webkit-box-shadow: 1px 8px 15px 6px rgba(34, 60, 80, 0.44);
+        -moz-box-shadow: 1px 8px 15px 6px rgba(34, 60, 80, 0.44);
+        box-shadow: 1px 8px 15px 6px rgba(34, 60, 80, 0.44);
+        padding: 5px 10px;
+        border-radius: 10px;
     }
 
     &__inner:focus {
@@ -134,18 +148,23 @@
 
 
 .text {
-    width: 100%;
+    max-width: 1100px;
     min-height: 70px;
-    margin: 40px 0 0 0;
+    margin: 40px 0 40px 0;
 
     &__inner {
-        width: 1160px;
+        width: 95%;
         min-height: 180px;
         border: none;
         font-size: 20px;
         outline: none;
         resize: none;
         overflow-y: hidden;
+        -webkit-box-shadow: 1px 8px 15px 6px rgba(34, 60, 80, 0.44);
+        -moz-box-shadow: 1px 8px 15px 6px rgba(34, 60, 80, 0.44);
+        box-shadow: 1px 8px 15px 6px rgba(34, 60, 80, 0.44);
+        padding: 5px 10px;
+        border-radius: 10px;
     }
 }
 
@@ -198,5 +217,88 @@
         object-fit: contain;
         width: 100%;
         height: 100%;
+    }
+}
+
+@media (max-width:845px) {
+
+    .title {
+        max-width: 1100px;
+        width: 100%;
+        min-height: 70px;
+        margin: 17px 0 0 0;
+        padding: 0 9px 1px 0;
+
+        &__inner {
+            min-height: 51px;
+            font-size: 28px;
+        }
+    }
+
+    .tags {
+        max-width: 1100px;
+        height: auto;
+        margin: 17px 0 0 0;
+
+        &__inner {
+            font-size: 17px;
+        }
+    }
+
+
+    .text {
+        max-width: 1100px;
+        min-height: 70px;
+        margin: 33px 0 36px 0;
+
+        &__inner {
+            min-height: 126px;
+            font-size: 17px;
+        }
+    }
+    .img {
+        margin: 13px 0 0 0;
+
+    }
+}
+@media (max-width:450px) {
+
+    .title {
+        max-width: 1100px;
+        width: 100%;
+        min-height: 51px;
+        margin: 17px 0 0 0;
+        padding: 0 9px 1px 0;
+
+        &__inner {
+            min-height: 40px;
+            font-size: 15px;
+        }
+    }
+
+    .tags {
+        max-width: 1100px;
+        height: auto;
+        margin: 17px 0 0 0;
+
+        &__inner {
+            font-size: 17px;
+        }
+    }
+
+
+    .text {
+        max-width: 1100px;
+        min-height: 70px;
+        margin: 33px 0 36px 0;
+
+        &__inner {
+            min-height: 119px;
+            font-size: 16px;
+        }
+    }
+    .img {
+        margin: 0 0 0 0;
+
     }
 }

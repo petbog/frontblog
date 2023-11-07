@@ -39,7 +39,7 @@ const Header: React.FC = () => {
                 <Link to={Path.AddPost} className={`${s.link__article} ${s.disabel}`}>Написать статью</Link>
                 <Link to={Path.AddPost} className={`${s.link__article} ${s.unsisabel}`}>
                   <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
-                 viewBox="0 0 512 512" >
+                    viewBox="0 0 512 512" >
                     <g>
                       <path d="M448,64H64C28.656,64,0,92.656,0,128v256c0,35.344,28.656,64,64,64h384c35.344,0,64-28.656,64-64V128
 		C512,92.656,483.344,64,448,64z M342.656,234.781l135.469-116.094c0.938,3,1.875,6,1.875,9.313v256
@@ -74,7 +74,7 @@ const Header: React.FC = () => {
             location.pathname === '/register' ? (
               <>
                 <Link className={s.innerLinkForward} to={Path.Home}>
-                  <div className={s.hidden}>На главную</div>
+                  <div className={`${s.hidden} ${s.homePage}`}>На главную</div>
                 </Link>
                 <Link className={s.innerLinkForward} to={Path.Auth}>
                   <div className={s.link__forward}>Войти</div>
