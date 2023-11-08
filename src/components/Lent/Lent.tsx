@@ -11,7 +11,6 @@ import Skeleton from '../../skeleton/Skeleton';
 const Lent: FC = () => {
   const data = useSelector(getPostSelector)
   const status = useSelector(getStatusSelector)
-  console.log(status)
   const user = useSelector(selectIdUser)
 
   useEffect(() => { }, [data])

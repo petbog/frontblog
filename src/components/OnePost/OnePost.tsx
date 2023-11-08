@@ -9,6 +9,7 @@ import eye from '../../img/eye-svgrepo-com.svg'
 import comment from '../../img/comment-line-svgrepo-com.svg'
 import close from '../../img/-clear_90704.svg'
 import send from '../../img/send_121135.svg'
+import preloader from '../../img/preloader.gif'
 
 
 const OnePost: FC = () => {
@@ -72,10 +73,16 @@ const OnePost: FC = () => {
             <Header />
             <div className={s.post}>
                 <div className={s.img}>
-                    <img className={s.img__inner} src={`http://localhost:4444${imageUrl}`} alt="imageUrl" />
+                    {
+                        !imageUrl ? <img src={preloader} alt="preloader" className={s.preloader} /> : <img className={s.img__inner} src={`http://localhost:4444${imageUrl}`} alt="imageUrl" />
+                    }
+
                 </div>
                 <div className={s.user}>
-                    <img className={s.user__avatar} src={`http://localhost:4444${avatarUrl}`} alt="" />
+                    {
+                        !imageUrl ? <img src={preloader} alt="preloader" className={s.preloader} /> : <img className={s.user__avatar} src={`http://localhost:4444${avatarUrl}`} alt="" />
+                    }
+
                     <div className={s.user__name}>{fullName}</div>
                 </div>
                 <div className={s.create}>

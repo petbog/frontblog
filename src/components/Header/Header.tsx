@@ -65,9 +65,9 @@ const Header: React.FC = () => {
                 <Link className={s.innerLinkForward} to={Path.Auth}>
                   <div className={s.link__forward}>Войти</div>
                 </Link>
-                <Link className={s.innerLinkForward} to={Path.Register}>
+                {/* <Link className={s.innerLinkForward} to={Path.Register}>
                   <button className={s.link__create}>Создать аккаунт</button>
-                </Link>
+                </Link> */}
               </>
             )
           ) : (
@@ -84,9 +84,9 @@ const Header: React.FC = () => {
               location.pathname === '/addPost' ? (
                 <>
                   <>
-                    <Link className={s.hidden} to={Path.Register}>
+                    {/* <Link className={s.hidden} to={Path.Register}>
                       <button className={s.link__create}>Создать аккаунт</button>
-                    </Link>
+                    </Link> */}
                     <Link className={s.innerLinkForward} to={Path.Home}>
                       <div className={s.link__forward}>На главную</div>
                     </Link>

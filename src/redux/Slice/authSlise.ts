@@ -10,7 +10,6 @@ export type userParams = {
 }
 
 export const fetchRegister = createAsyncThunk('auth/fetchRegister', async (params: userParams) => {
-    console.log(params)
     const { data } = await instanse.post(`/auth/register`, params);
 
     return data;

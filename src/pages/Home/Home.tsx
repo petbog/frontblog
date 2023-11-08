@@ -12,7 +12,6 @@ import WelcomPage from "../../components/WelcomPage/WelcomPage";
 const Home:React.FC = () => {
     const dispatch = useAppDispatch()
     const [hasToken,setHasToken]=useState<boolean>(false)
-    console.log(hasToken)
 
     useEffect(() => {
         dispatch(getPost())

@@ -41,7 +41,6 @@ const Tags: FC = () => {
 
     const closePoppup = () => {
         dispatch(eyePoppup(false))
-
     }
 
     return (

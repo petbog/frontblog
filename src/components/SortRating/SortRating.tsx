@@ -1,9 +1,9 @@
 import { eyePoppup, newSortPost, populatePost } from '../../redux/Slice/getPostSlise';
 import { useAppDispatch } from '../../redux/store';
 import s from './SortRating.module.scss'
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import hachtag from '../../img/hashtag_icon_199096.svg'
-import Tags from '../Tags/Tags';
+
 
 const SortRating = () => {
     const dispatch = useAppDispatch()
@@ -32,11 +32,9 @@ const SortRating = () => {
         setNewPost(false)
         setPopulate(false)
         setPoppup(!poppup)
-        dispatch(eyePoppup(poppup))
+        dispatch(eyePoppup(true))
     }
-    useEffect(() => {
-        dispatch(eyePoppup(poppup))
-    }, [dispatch, poppup])
+
     return (
         <div className={s.rating}>
             <div className={s.button}>

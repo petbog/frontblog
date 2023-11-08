@@ -25,6 +25,12 @@
         width: 100%;
     }
 
+    &__bck {
+        height: 100%;
+        width: 100%;
+        display: none;
+    }
+
     &__video {
         position: absolute;
         top: 0;
@@ -143,6 +149,22 @@
     }
 }
 
+@media (max-width :450px) {
+
+    .welcom {
+
+        &__bck {
+            height: 100vh;
+            width: 132%;
+            display: block;
+            filter: brightness(0.4);
+        }
+
+        &__img {
+            display: none;
+        }
+    }
+}
 
 @media (max-width :398px) {
     .title {

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Path } from '../../Path/Patch';
 import videoBacground from '../../video/DSCF8167_23.mp4'
 import backgroundImg from '../../img/1640764795_8-abrakadabra-fun-p-chelovek-so-smartfonom-v-ruke-8.jpg'
+import bck from '../../img/bck.jpg'
 
 
 const WelcomPage: FC = () => {
@@ -12,6 +13,7 @@ const WelcomPage: FC = () => {
         <div className={s.intro}>
             <div className={s.welcom}>
                 <img className={s.welcom__img} src={backgroundImg} alt="backgroundImg" />
+                <img className={s.welcom__bck} src={bck} alt="backgroundImg" />
                 <video
                     className={s.welcom__video}
                     src={videoBacground}
