@@ -10,14 +10,15 @@ import AddPost from './components/AddPost/AddPost';
 import { Path } from './Path/Patch';
 import OnePost from './components/OnePost/OnePost';
 import WelcomPage from './components/WelcomPage/WelcomPage';
+import ErrorPage from './pages/ErrorPage/ErrorPage';
 
 
 function App() {
   const dispatch = useAppDispatch()
 
-  useEffect(() => { 
+  useEffect(() => {
     dispatch(fetchMe())
-  }, [dispatch,fetchMe])
+  }, [dispatch, fetchMe])
 
 
   return (
@@ -30,6 +31,7 @@ function App() {
         <Route path={Path.removePost} element={<AddPost />} />
         <Route path={Path.OnePost} element={<OnePost />} />
         <Route path={Path.WelcomPage} element={<WelcomPage />} />
+        <Route path={Path.Error} element={<ErrorPage />} />
       </Routes>
     </div>
   );
