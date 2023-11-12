@@ -1,6 +1,7 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
 import instanse from '../../axios'
 import { RootState } from '../store'
+import { AxiosError } from 'axios'
 
 export type userParams = {
     email: string,
@@ -9,10 +10,17 @@ export type userParams = {
     avatarUrl: null | string
 }
 
-export const fetchRegister = createAsyncThunk('auth/fetchRegister', async (params: userParams) => {
-    const { data } = await instanse.post(`/auth/register`, params);
-
-    return data;
+export const fetchRegister = createAsyncThunk('auth/fetchRegister', async (params: userParams, { rejectWithValue }) => {
+    try {
+        const { data } = await instanse.post(`/auth/register`, params);
+        return data;
+    } catch (error) {
+        if (error instanceof AxiosError) {
+            return rejectWithValue(error.response?.data || 'Request failed');
+        } else {
+            throw error;
+        }
+    }
 });
 
 export const fetchMe = createAsyncThunk('me/fetchMe', async () => {
@@ -55,10 +63,19 @@ type dataType = {
     _id: string,
 }
 
+type errorType={
+    type: string;
+    value: string;
+    msg: string;
+    path: string;
+    location: string;
+}
+
 interface authType {
     data: dataType;
     status: Status;
-    items: itemRegister
+    items: itemRegister;
+    error: errorType[]
 }
 
 const initialState: authType = {
@@ -77,7 +94,8 @@ const initialState: authType = {
         password: '',
         fullName: '',
         avatarUrl: null
-    }
+    },
+    error: []
 }
 
 const authSlice = createSlice({
@@ -117,7 +135,7 @@ const authSlice = createSlice({
             state.data = action.payload;
             state.status = Status.SUCCESS;
         });
-        builder.addCase(fetchRegister.rejected, (state, action) => {
+        builder.addCase(fetchRegister.rejected, (state, action:PayloadAction<any>) => {
             state.data = {
                 createdAt: '',
                 email: '',
@@ -126,7 +144,8 @@ const authSlice = createSlice({
                 updatedAt: '',
                 __v: 0,
                 _id: '',
-            };
+            }; 
+            state.error = action.payload
             state.status = Status.ERROR
         });
         //обо мне
@@ -139,7 +158,7 @@ const authSlice = createSlice({
                 updatedAt: '',
                 __v: 0,
                 _id: '',
-            };;
+            };
             state.status = Status.LOADING;
         });
         builder.addCase(fetchMe.fulfilled, (state, action) => {
@@ -192,6 +211,7 @@ const authSlice = createSlice({
 
 export const selectIsAuth = (state: RootState) => Boolean(state.auth.data.email)
 export const selectIdUser = (state: RootState) => state.auth.data._id
+export const selectIdError = (state: RootState) => state.auth.error
 export const itemsAuth = (state: RootState) => state.auth
 export const { addUser, removeUser } = authSlice.actions
 export const authReduser = authSlice.reducer

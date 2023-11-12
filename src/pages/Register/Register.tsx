@@ -3,7 +3,7 @@ import Header from '../../components/Header/Header'
 import classes from './Register.module.scss'
 import eye_off from '../../img/eye_off.svg'
 import eye from '../../img/eye.svg'
-import { addUser, fetchRegister, itemsAuth, selectIsAuth } from '../../redux/Slice/authSlise';
+import { addUser, fetchRegister, itemsAuth, selectIdError, selectIsAuth } from '../../redux/Slice/authSlise';
 import { useAppDispatch } from '../../redux/store';
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
@@ -32,7 +32,14 @@ const Register: React.FC = () => {
     const dispatch = useAppDispatch()
     const { items, data } = useSelector(itemsAuth)
     const AuthUser = useSelector(selectIsAuth)
-    console.log(bottom)
+    const errorRegisater = useSelector(selectIdError)
+    console.log(errorRegisater)
+
+    if (errorRegisater.length) {
+        const msgValue = errorRegisater[0].msg;
+        alert(msgValue)
+    }
+
 
 
     const handleToggle = () => {
@@ -228,8 +235,8 @@ const Register: React.FC = () => {
                         <img onClick={handleToggle} className={classes.form_img} src={src} alt="" />
                     </div>
                     <div className={classes.Button_container}>
-                        <button className={ email.length && password.length && fullName.length ? `${classes.Form_button}` : `${classes.Form_button} ${classes.disabled}`} 
-                        onClick={handleRegister} >Зарегистрироваться</button>
+                        <button className={email.length && password.length >= 6 && fullName.length ? `${classes.Form_button}` : `${classes.Form_button} ${classes.disabled}`}
+                            onClick={handleRegister} >Зарегистрироваться</button>
                     </div>
                 </div>
             </div>
