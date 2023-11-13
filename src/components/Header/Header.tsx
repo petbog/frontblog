@@ -17,8 +17,8 @@ const Header: React.FC = () => {
     if (window.confirm('Вы действительно хотите выйти?')) {
       dispatch(removeUser())
       window.localStorage.removeItem('token')
+      navigate(Path.WelcomPage)
     }
-    navigate(Path.WelcomPage)
   }
 
   return (
@@ -65,9 +65,6 @@ const Header: React.FC = () => {
                 <Link className={s.innerLinkForward} to={Path.Auth}>
                   <div className={s.link__forward}>Войти</div>
                 </Link>
-                {/* <Link className={s.innerLinkForward} to={Path.Register}>
-                  <button className={s.link__create}>Создать аккаунт</button>
-                </Link> */}
               </>
             )
           ) : (
@@ -84,9 +81,6 @@ const Header: React.FC = () => {
               location.pathname === '/addPost' ? (
                 <>
                   <>
-                    {/* <Link className={s.hidden} to={Path.Register}>
-                      <button className={s.link__create}>Создать аккаунт</button>
-                    </Link> */}
                     <Link className={s.innerLinkForward} to={Path.Home}>
                       <div className={s.link__forward}>На главную</div>
                     </Link>

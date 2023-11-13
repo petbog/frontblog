@@ -33,9 +33,8 @@ const Register: React.FC = () => {
     const { items, data } = useSelector(itemsAuth)
     const AuthUser = useSelector(selectIsAuth)
     const errorRegisater = useSelector(selectIdError)
-    console.log(errorRegisater)
 
-    if (errorRegisater.length) {
+    if (errorRegisater.length ) {
         const msgValue = errorRegisater[0].msg;
         alert(msgValue)
     }

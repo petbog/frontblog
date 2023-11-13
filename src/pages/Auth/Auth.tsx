@@ -4,7 +4,7 @@ import { FC, useEffect, useState } from 'react';
 import eye_off from '../../img/eye_off copy.svg'
 import eye from '../../img/eye copy.svg'
 import { useAppDispatch } from "../../redux/store";
-import { fetchLogin, itemsAuth, selectIsAuth } from "../../redux/Slice/authSlise";
+import { fetchLogin, itemsAuth, selectIdError, selectIdErrorMessage, selectIsAuth } from "../../redux/Slice/authSlise";
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import bacgroundRegister from '../../img/full-shot-woman-reading-with-smartphone-min.jpg'
@@ -29,6 +29,18 @@ const Auth: FC = () => {
     const dispatch = useAppDispatch()
     const authUser = useSelector(selectIsAuth)
     const { data } = useSelector(itemsAuth)
+    const errorRegisater = useSelector(selectIdError)
+    const errorLogin = useSelector(selectIdErrorMessage)
+
+
+    if (errorRegisater.length ) {
+        const msgValue = errorRegisater[0].msg;
+        alert(msgValue)
+    }
+    if(errorLogin.length){
+        alert(errorLogin)
+    }
+
 
     const handleToggle = () => {
         if (type === "password") {
@@ -111,7 +123,7 @@ const Auth: FC = () => {
             </div>
             <div className={classes.container}>
                 <div className={classes.background}>
-                        <img className={classes.background__img} src={bacgroundRegister} alt="bacgroundRegister" />
+                    <img className={classes.background__img} src={bacgroundRegister} alt="bacgroundRegister" />
                 </div>
                 <div className={classes.Form_inner}>
                     <div className={classes.Form_container}>
@@ -144,7 +156,7 @@ const Auth: FC = () => {
                     </div>
                     <div className={classes.Button_container}>
                         <button onClick={handleLogin}
-                         className={email.length && password.length ? `${classes.Form_button}` : `${classes.Form_button} ${classes.disabled}`} >Войти</button>
+                            className={email.length && password.length ? `${classes.Form_button}` : `${classes.Form_button} ${classes.disabled}`} >Войти</button>
                     </div>
                 </div>
             </div>

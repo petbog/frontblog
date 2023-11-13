@@ -33,9 +33,18 @@ export type loginParams = {
     password: string;
 }
 
-export const fetchLogin = createAsyncThunk('login/fetchLogin', async (params: loginParams) => {
-    const { data } = await instanse.post('/auth/login', params)
-    return data
+export const fetchLogin = createAsyncThunk('login/fetchLogin', async (params: loginParams, { rejectWithValue }) => {
+    try {
+        const { data } = await instanse.post('/auth/login', params)
+        return data
+    } catch (error) {
+        if (error instanceof AxiosError) {
+            return rejectWithValue(error.response?.data || 'Request failed');
+        } else {
+            throw error;
+        }
+    }
+
 })
 
 
@@ -63,7 +72,7 @@ type dataType = {
     _id: string,
 }
 
-type errorType={
+type errorType = {
     type: string;
     value: string;
     msg: string;
@@ -71,11 +80,13 @@ type errorType={
     location: string;
 }
 
+
 interface authType {
     data: dataType;
     status: Status;
     items: itemRegister;
-    error: errorType[]
+    error: errorType[] ;
+    message:''
 }
 
 const initialState: authType = {
@@ -95,7 +106,8 @@ const initialState: authType = {
         fullName: '',
         avatarUrl: null
     },
-    error: []
+    error: [],
+    message:''
 }
 
 const authSlice = createSlice({
@@ -135,7 +147,7 @@ const authSlice = createSlice({
             state.data = action.payload;
             state.status = Status.SUCCESS;
         });
-        builder.addCase(fetchRegister.rejected, (state, action:PayloadAction<any>) => {
+        builder.addCase(fetchRegister.rejected, (state, action: PayloadAction<any>) => {
             state.data = {
                 createdAt: '',
                 email: '',
@@ -144,7 +156,7 @@ const authSlice = createSlice({
                 updatedAt: '',
                 __v: 0,
                 _id: '',
-            }; 
+            };
             state.error = action.payload
             state.status = Status.ERROR
         });
@@ -194,7 +206,7 @@ const authSlice = createSlice({
             state.data = action.payload;
             state.status = Status.SUCCESS;
         });
-        builder.addCase(fetchLogin.rejected, (state, action) => {
+        builder.addCase(fetchLogin.rejected, (state, action: PayloadAction<any>) => {
             state.data = {
                 createdAt: '',
                 email: '',
@@ -204,6 +216,11 @@ const authSlice = createSlice({
                 __v: 0,
                 _id: '',
             };
+            if (action.payload && action.payload.message) {
+                state.message = action.payload.message; 
+            } else {
+                state.error = action.payload; 
+            }
             state.status = Status.ERROR
         });
     }
@@ -212,6 +229,7 @@ const authSlice = createSlice({
 export const selectIsAuth = (state: RootState) => Boolean(state.auth.data.email)
 export const selectIdUser = (state: RootState) => state.auth.data._id
 export const selectIdError = (state: RootState) => state.auth.error
+export const selectIdErrorMessage = (state: RootState) => state.auth.message
 export const itemsAuth = (state: RootState) => state.auth
 export const { addUser, removeUser } = authSlice.actions
 export const authReduser = authSlice.reducer
