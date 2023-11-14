@@ -43,7 +43,7 @@ type userType = {
     _id: string,
 }
 
-type commentsType = {
+export type commentsType = {
     createdAt: string,
     post: string,
     text: string,

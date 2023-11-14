@@ -1,0 +1,147 @@
+
+.lentComment {
+    &__container {
+        position: relative;
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 15px 0;
+    }
+
+    &__item {
+        width: 90%;
+        margin: 0 auto 20px auto;
+        text-align: start;
+        padding: 11px 15px;
+        height: auto;
+        background-color: rgb(255, 255, 255);
+        border-radius: 5px;
+        border: 2px solid #d9d0d0;
+        -webkit-box-shadow: 13px -17px 17px -10px rgba(0, 0, 0, 0.2) inset;
+        -moz-box-shadow: 13px -17px 17px -10px rgba(0, 0, 0, 0.2) inset;
+        box-shadow: 13px -17px 17px -10px rgba(0, 0, 0, 0.2) inset;
+        font-size: 20px;
+        word-wrap: break-word
+    }
+
+    &__delete {
+        position: absolute;
+        top: -5px;
+        right: 8px;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+
+        &:hover {
+            transform: rotate(360deg);
+
+            &::after {
+                content: "delete";
+                width: 50px;
+                height: 20px;
+                color: black;
+            }
+        }
+    }
+}
+
+
+@media (max-width:815px) {
+    .lentComment {
+        &__container {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 15px 0;
+        }
+
+        &__item {
+            width: 90%;
+            margin: 0 auto 20px auto;
+            text-align: start;
+            padding: 11px 15px;
+            height: auto;
+            background-color: rgb(255, 255, 255);
+            border-radius: 5px;
+            border: 2px solid #d9d0d0;
+            -webkit-box-shadow: 13px -17px 17px -10px rgba(0, 0, 0, 0.2) inset;
+            -moz-box-shadow: 13px -17px 17px -10px rgba(0, 0, 0, 0.2) inset;
+            box-shadow: 13px -17px 17px -10px rgba(0, 0, 0, 0.2) inset;
+            font-size: 20px;
+            word-wrap: break-word
+        }
+
+        &__delete {
+            position: absolute;
+            top: -10px;
+            right: 8px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+
+            &:hover {
+                transform: rotate(360deg);
+
+                &::after {
+                    content: "delete";
+                    width: 50px;
+                    height: 20px;
+                    color: black;
+                }
+            }
+        }
+    }
+
+}
+
+@media (max-width:444px){
+    .lentComment {
+        &__container {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 15px 0;
+        }
+
+        &__item {
+            width: 77%;
+            margin: 0 auto 20px auto;
+            text-align: start;
+            padding: 11px 15px;
+            height: auto;
+            background-color: rgb(255, 255, 255);
+            border-radius: 5px;
+            border: 2px solid #d9d0d0;
+            -webkit-box-shadow: 13px -17px 17px -10px rgba(0, 0, 0, 0.2) inset;
+            -moz-box-shadow: 13px -17px 17px -10px rgba(0, 0, 0, 0.2) inset;
+            box-shadow: 13px -17px 17px -10px rgba(0, 0, 0, 0.2) inset;
+            font-size: 20px;
+            word-wrap: break-word
+        }
+
+        &__delete {
+            position: absolute;
+            top: -10px;
+            right: 35px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+
+            &:hover {
+                transform: rotate(360deg);
+
+                &::after {
+                    content: "delete";
+                    width: 50px;
+                    height: 20px;
+                    color: black;
+                }
+            }
+        }
+    }
+
+}
+@media (max-width:367px){
+    .lentComment {
+        &__delete {
+            top: -10px;
+            right: 24px;
+        }
+    }
+}

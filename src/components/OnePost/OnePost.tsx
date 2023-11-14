@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from 'react'
 import s from './OnePost.module.scss'
 import { useParams } from 'react-router-dom'
 import { useAppDispatch } from '../../redux/store'
-import { createComment, deleteComment, filterComment, getOnePost, onePostSelector } from '../../redux/Slice/onePostsSice'
+import { createComment, getOnePost, onePostSelector } from '../../redux/Slice/onePostsSice'
 import { useSelector } from 'react-redux'
 import Header from '../Header/Header'
 import eye from '../../img/eye-svgrepo-com.svg'
@@ -10,9 +10,12 @@ import comment from '../../img/comment-line-svgrepo-com.svg'
 import close from '../../img/-clear_90704.svg'
 import send from '../../img/send_121135.svg'
 import preloader from '../../img/preloader.gif'
+import Comment from '../Comment/Comment'
+
 
 
 const OnePost: FC = () => {
+
     const dispatch = useAppDispatch()
     const [openComment, setOpenComment] = useState<Boolean>(false)
     const [textareaValue, setTextareaValue] = useState<string>("")
@@ -22,6 +25,7 @@ const OnePost: FC = () => {
     })
     const { id } = useParams<{ id: string }>()
     const { imageUrl, text, tags, title, updatedAt, viewsCount, user: { avatarUrl, fullName }, comments } = useSelector(onePostSelector)
+
 
     useEffect(() => {
         dispatch(getOnePost(id))
@@ -62,12 +66,12 @@ const OnePost: FC = () => {
         setOpenComment(!openComment)
         window.scrollTo(0, document.body.scrollHeight)
     }
-    const deleteComm = (_id: string) => {
-        dispatch(deleteComment(
-            _id
-        ))
-        dispatch(filterComment(_id))
-    }
+    // const deleteComm = (_id: string) => {
+    //     dispatch(deleteComment(
+    //         _id
+    //     ))
+    //     dispatch(filterComment(_id))
+    // }
     return (
         <div className={s.innerPost}>
             <Header />
@@ -124,13 +128,7 @@ const OnePost: FC = () => {
             }
             <div className={s.lentComment}>
                 {
-                    [...comments].reverse().map((item, _id) => (
-                        <div className={s.lentComment__container}>
-                            <div key={item._id} className={s.lentComment__item}>{item.text}</div>
-                            <img onClick={() => { deleteComm(item._id) }} src={close} alt="delete" className={s.lentComment__delete} />
-                        </div>
-
-                    ))
+                    [...comments].reverse().map((item) => <Comment key={item._id} {...item} />)
                 }
             </div>
         </div >
