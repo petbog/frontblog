@@ -32,7 +32,7 @@ export enum Status {
     ERROR = 'error'
 }
 
-type userType = {
+export  type userType = {
     avatarUrl: string,
     createdAt: string,
     email: string,
@@ -51,7 +51,7 @@ export type commentsType = {
     __v: number,
     _id: string,
 }
-type dataType = {
+export type dataType = {
     _id: string,
     fullName: string,
     email: string,

@@ -1,17 +1,17 @@
-
 .lentComment {
     &__container {
         position: relative;
         max-width: 1000px;
         margin: 0 auto;
         padding: 15px 0;
+        display: flex;
     }
 
     &__item {
-        width: 90%;
+        width: 85%;
         margin: 0 auto 20px auto;
         text-align: start;
-        padding: 11px 15px;
+        padding: 68px 15px 11px 93px;
         height: auto;
         background-color: rgb(255, 255, 255);
         border-radius: 5px;
@@ -41,6 +41,25 @@
             }
         }
     }
+
+    &__user {
+        display: flex;
+        position: absolute;
+        top: 27px;
+        left: 25px;
+    }
+
+    &__img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+    }
+
+    &__name {
+        margin: 0 0 0 10px;
+        font-size: 18px;
+    }
+
 }
 
 
@@ -57,7 +76,7 @@
             width: 90%;
             margin: 0 auto 20px auto;
             text-align: start;
-            padding: 11px 15px;
+            padding: 64px 15px 11px 15px;
             height: auto;
             background-color: rgb(255, 255, 255);
             border-radius: 5px;
@@ -87,11 +106,25 @@
                 }
             }
         }
+        &__user {
+            display: flex;
+            position: absolute;
+            top: 27px;
+            left: 40px;
+        }
     }
 
 }
 
-@media (max-width:444px){
+
+@media (max-width:744px){
+    .lentComment__user{
+        top: 27px;
+        left: 5%;
+    }
+}
+
+@media (max-width:444px) {
     .lentComment {
         &__container {
             position: relative;
@@ -104,7 +137,7 @@
             width: 77%;
             margin: 0 auto 20px auto;
             text-align: start;
-            padding: 11px 15px;
+            padding: 64px 15px 11px 15px;
             height: auto;
             background-color: rgb(255, 255, 255);
             border-radius: 5px;
@@ -134,10 +167,15 @@
                 }
             }
         }
+        &__user {
+            top: 27px;
+            left: 11%;
+        }
     }
 
 }
-@media (max-width:367px){
+
+@media (max-width:367px) {
     .lentComment {
         &__delete {
             top: -10px;
