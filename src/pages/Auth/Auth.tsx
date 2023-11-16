@@ -25,6 +25,8 @@ const Auth: FC = () => {
     const [bottom, setBottom] = useState<boolean>(false)
     const [emailError, setEmailError] = useState('Email не может быть пустым')
     const [passError, setPassError] = useState('Пароль не может быть пустым')
+    const [errorMailClient, setErrorMailClient] = useState<string | undefined>('')
+    const [errorPassClient, setErrorPassClient] = useState<string | undefined>('')
 
     const dispatch = useAppDispatch()
     const authUser = useSelector(selectIsAuth)
@@ -33,13 +35,18 @@ const Auth: FC = () => {
     const errorLogin = useSelector(selectIdErrorMessage)
 
 
-    if (errorRegisater.length ) {
-        const msgValue = errorRegisater[0].msg;
-        alert(msgValue)
-    }
-    if(errorLogin.length){
-        alert(errorLogin)
-    }
+    useEffect(() => {
+        if (errorRegisater.length) {
+            const msgValue = errorRegisater[0].msg;
+            setErrorMailClient(msgValue)
+        }
+        if (errorLogin.length) {
+            setErrorPassClient(errorLogin)
+        }
+    }, [errorRegisater,errorLogin])
+
+
+
 
 
     const handleToggle = () => {
@@ -126,6 +133,11 @@ const Auth: FC = () => {
                     <img className={classes.background__img} src={bacgroundRegister} alt="bacgroundRegister" />
                 </div>
                 <div className={classes.Form_inner}>
+                    <div className={classes.error}>
+                        <div className={classes.error__box}>
+                            <span className={classes.error__text}>{errorMailClient}<br/>{errorPassClient}</span>
+                        </div>
+                    </div>
                     <div className={classes.Form_container}>
                         <input
                             name="email"

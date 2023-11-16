@@ -183,6 +183,16 @@
   /* Устанавливаем курсор "не разрешено" */
 }
 
+.error {
+  margin: -47px 0 23px 0;
+
+  &__text {
+    font-size: 18px;
+    font-weight: 400;
+    color: red;
+  }
+}
+
 @media(max-width:800px) {
   .background {
     top: 0;
@@ -196,6 +206,9 @@
     margin: 227px auto 45px auto;
   }
 
+  .error {
+    margin: -65px 0 33px 0;
+  }
 }
 
 @media (min-width: 768px) {

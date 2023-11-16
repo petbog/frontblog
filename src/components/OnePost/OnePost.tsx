@@ -11,17 +11,20 @@ import close from '../../img/-clear_90704.svg'
 import send from '../../img/send_121135.svg'
 import preloader from '../../img/preloader.gif'
 import Comment from '../Comment/Comment'
+import { selectIdUser } from '../../redux/Slice/authSlise'
 
 
 
 const OnePost: FC = () => {
 
     const dispatch = useAppDispatch()
+    const userId = useSelector(selectIdUser)
     const [openComment, setOpenComment] = useState<Boolean>(false)
     const [textareaValue, setTextareaValue] = useState<string>("")
-    const [data, setData] = useState<{ postId: string | undefined, comment: string }>({
+    const [data, setData] = useState<{ postId: string | undefined, comment: string, userId: string }>({
         postId: '',
-        comment: ''
+        comment: '',
+        userId
     })
     const { id } = useParams<{ id: string }>()
     const { imageUrl, text, tags, title, updatedAt, viewsCount, user: { avatarUrl, fullName }, comments } = useSelector(onePostSelector)
@@ -53,9 +56,10 @@ const OnePost: FC = () => {
     useEffect(() => {
         setData({
             postId: id,
-            comment: textareaValue
+            comment: textareaValue,
+            userId: userId
         })
-    }, [id, textareaValue])
+    }, [id, textareaValue,userId])
 
     const sendComment = () => {
         dispatch(createComment(data))

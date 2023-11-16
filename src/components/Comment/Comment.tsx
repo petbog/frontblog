@@ -1,9 +1,9 @@
 import s from './Comment.module.scss'
-import close from '../../img/-clear_90704.svg'
 import { useAppDispatch } from '../../redux/store'
-import { commentsType, deleteComment, filterComment, userType } from '../../redux/Slice/onePostsSice'
+import { commentsType, deleteComment, filterComment } from '../../redux/Slice/onePostsSice'
 import { FC, useEffect, useState } from 'react'
 import instanse from '../../axios'
+import userZamena from '../../img/user.png'
 
 type dataUserType = {
     _id: string,
@@ -14,10 +14,10 @@ type dataUserType = {
     __v: number,
     imageUrl: string,
     user: {
-        avatarUrl: string,
+        avatarUrl: string | undefined,
         createdAt: string,
         email: string,
-        fullName: string,
+        fullName: string | undefined,
         passwordHash: string,
         updatedAt: string,
         __v: number,
@@ -32,31 +32,30 @@ type dataUserType = {
 
 const Comment: FC<commentsType> = ({ text, _id, post }) => {
     const dispatch = useAppDispatch()
-    // const [dataUser, setDataUser] = useState<dataUserType>({
-    //     _id: '',
-    //     fullName: '',
-    //     email: '',
-    //     createdAt: '',
-    //     updatedAt: '',
-    //     __v: 0,
-    //     imageUrl: '',
-    //     user: {
-    //         avatarUrl: '',
-    //         createdAt: '',
-    //         email: '',
-    //         fullName: '',
-    //         passwordHash: '',
-    //         updatedAt: '',
-    //         __v: 0,
-    //         _id: ''
-    //     },
-    //     viewsCount: 0,
-    //     tags: [],
-    //     text: '',
-    //     title: '',
-    //     comments: [],
-    // })
-    // const { user: { avatarUrl, fullName }, } = dataUser
+    const [dataUser, setDataUser] = useState<dataUserType[]>([{
+        _id: '',
+        fullName: '',
+        email: '',
+        createdAt: '',
+        updatedAt: '',
+        __v: 0,
+        imageUrl: '',
+        user: {
+            avatarUrl: '',
+            createdAt: '',
+            email: '',
+            fullName: '',
+            passwordHash: '',
+            updatedAt: '',
+            __v: 0,
+            _id: ''
+        },
+        viewsCount: 0,
+        tags: [],
+        text: '',
+        title: '',
+        comments: [],
+    }])
     const deleteComm = (_id: string) => {
         dispatch(deleteComment(
             _id
@@ -67,23 +66,31 @@ const Comment: FC<commentsType> = ({ text, _id, post }) => {
 
     useEffect(() => {
         const getOnePost = async (post: string) => {
-            // const { data } = await instanse.get(`/posts/${post}`)
             const { data } = await instanse.get(`/posts/${post}/comments`)
-            // setDataUser(data)
             console.log(data)
+            setDataUser(data)
         }
         getOnePost(post)
     }, [_id])
 
+    const foundObject = dataUser.find(item => item.text === text)
+    const avatarUrl = foundObject ? foundObject.user.avatarUrl : '';
+    const fullName = foundObject ? foundObject.user.fullName : '';
+
     return (
         <div className={s.lentComment}>
             <div className={s.lentComment__container}>
-                {/* <div className={s.lentComment__user}>
-                    <img className={s.lentComment__img} src={`http://localhost:4444${avatarUrl}`} alt="user_avatar" />
+                <div className={s.lentComment__user}>
+                    {
+                        avatarUrl === '' ? <img className={s.lentComment__img} src={userZamena} alt="userZamena" /> : <img className={s.lentComment__img} src={`http://localhost:4444${avatarUrl}`} alt="user_avatar" />}
                     <div className={s.lentComment__name}>{fullName}</div>
-                </div> */}
+                </div>
                 <div key={_id} className={s.lentComment__item}>{text}</div>
-                <img onClick={() => { deleteComm(_id) }} src={close} alt="delete" className={s.lentComment__delete} />
+                <div onClick={() => { deleteComm(_id) }} className={s.lentComment__delete} >
+                    {
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" /></svg>
+                    }
+                </div>
             </div>
         </div>
     )
