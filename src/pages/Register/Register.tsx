@@ -27,6 +27,7 @@ const Register: React.FC = () => {
     const [passError, setPassError] = useState('Пароль не может быть пустым')
     const [nameError, setNameError] = useState('Имя не может быть пустым')
     const [avatarUrl, setImageUrl] = useState<string>('')
+    const [registerError, setRegisterError] = useState<string>('')
     const [bottom, setBottom] = useState<boolean>(false)
     const imgRef = useRef<HTMLInputElement>(null)
     const dispatch = useAppDispatch()
@@ -34,10 +35,13 @@ const Register: React.FC = () => {
     const AuthUser = useSelector(selectIsAuth)
     const errorRegisater = useSelector(selectIdError)
 
-    if (errorRegisater.length ) {
-        const msgValue = errorRegisater[0].msg;
-        alert(msgValue)
-    }
+
+    useEffect(() => {
+        if (errorRegisater.length) {
+            const msgValue = errorRegisater[0].msg;
+            setRegisterError(msgValue)
+        }
+    }, [errorRegisater])
 
 
 
@@ -119,7 +123,6 @@ const Register: React.FC = () => {
                 formData.append('image', file);
                 const { data } = await instanse.post('/upload', formData);
                 setImageUrl(data.url);
-                console.log(data.url)
             } else {
                 alert('Пожалуйста, выберите файл для загрузки.');
             }
@@ -192,6 +195,9 @@ const Register: React.FC = () => {
                                         <input ref={imgRef} type="file" onChange={handleImg} hidden /></>
                                 )
                         }
+                    </div>
+                    <div className={classes.error}>
+                        <span className={classes.error__text}>{registerError}</span>
                     </div>
                     <div className={classes.Form_container}>
                         <input

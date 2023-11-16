@@ -27,8 +27,7 @@ const OnePost: FC = () => {
         userId
     })
     const { id } = useParams<{ id: string }>()
-    const { imageUrl, text, tags, title, updatedAt, viewsCount, user: { avatarUrl, fullName }, comments } = useSelector(onePostSelector)
-
+    const { imageUrl, text, tags, title, updatedAt, viewsCount, user: { avatarUrl, fullName,_id }, comments } = useSelector(onePostSelector)
 
     useEffect(() => {
         dispatch(getOnePost(id))
@@ -59,7 +58,7 @@ const OnePost: FC = () => {
             comment: textareaValue,
             userId: userId
         })
-    }, [id, textareaValue,userId])
+    }, [id, textareaValue, userId])
 
     const sendComment = () => {
         dispatch(createComment(data))
@@ -70,12 +69,6 @@ const OnePost: FC = () => {
         setOpenComment(!openComment)
         window.scrollTo(0, document.body.scrollHeight)
     }
-    // const deleteComm = (_id: string) => {
-    //     dispatch(deleteComment(
-    //         _id
-    //     ))
-    //     dispatch(filterComment(_id))
-    // }
     return (
         <div className={s.innerPost}>
             <Header />
@@ -99,8 +92,8 @@ const OnePost: FC = () => {
                 <div className={s.title}>
                     <div className={s.title__inner}>{title}</div>
                 </div>
-                {tags.map(item => (
-                    <div className={s.tags}>
+                {tags.map((item,i) => (
+                    <div key={i} className={s.tags}>
                         <div className={s.tags__inner}>{item}</div>
                     </div>
                 ))}
@@ -132,7 +125,7 @@ const OnePost: FC = () => {
             }
             <div className={s.lentComment}>
                 {
-                    [...comments].reverse().map((item) => <Comment key={item._id} {...item} />)
+                    [...comments].reverse().map((item) => <Comment key={item._id} {...item}  />)
                 }
             </div>
         </div >
