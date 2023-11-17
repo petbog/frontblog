@@ -13,7 +13,7 @@ import preloader from '../../img/preloader.gif'
 import Comment from '../Comment/Comment'
 import { selectIdUser } from '../../redux/Slice/authSlise'
 
-import { TransitionGroup,CSSTransition } from 'react-transition-group';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 
 
@@ -29,7 +29,7 @@ const OnePost: FC = () => {
         userId
     })
     const { id } = useParams<{ id: string }>()
-    const { imageUrl, text, tags, title, updatedAt, viewsCount, user: { avatarUrl, fullName,_id }, comments } = useSelector(onePostSelector)
+    const { imageUrl, text, tags, title, updatedAt, viewsCount, user: { avatarUrl, fullName, _id }, comments } = useSelector(onePostSelector)
 
     useEffect(() => {
         dispatch(getOnePost(id))
@@ -94,7 +94,7 @@ const OnePost: FC = () => {
                 <div className={s.title}>
                     <div className={s.title__inner}>{title}</div>
                 </div>
-                {tags.map((item,i) => (
+                {tags.map((item, i) => (
                     <div key={i} className={s.tags}>
                         <div className={s.tags__inner}>{item}</div>
                     </div>
@@ -126,16 +126,16 @@ const OnePost: FC = () => {
                 </div> : ''
             }
             <div className={s.lentComment}>
-            <TransitionGroup>
-                {
-                    [...comments].reverse().map((item) =>
-                    <CSSTransition  classNames="item" timeout={500} key={item._id}>
-                        <Comment  {...item}  />
-                    </CSSTransition> )
-                }
-            </TransitionGroup>
+                <TransitionGroup>
+                    {
+                        [...comments].reverse().map((item) =>
+                            <CSSTransition classNames="item" timeout={500} key={item._id}>
+                                <Comment  {...item} />
+                            </CSSTransition>)
+                    }
+                </TransitionGroup>
             </div>
-           
+
         </div >
 
     )

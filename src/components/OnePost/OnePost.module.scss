@@ -165,9 +165,18 @@
     height: 30px;
     margin: 0 0 0 35px;
     cursor: pointer;
+    animation: rotate 2s ease infinite;
 
-    &:hover {
-        transform: translateY(-2px);
+    @keyframes rotate {
+        10%{
+            transform: rotate(-5deg)        
+        }
+        50%{
+            transform: rotate(5deg) 
+        }
+        100%{
+            transform: rotate(-5deg) 
+        }
     }
 }
 
@@ -206,53 +215,6 @@
 }
 
 
-.lentComment {
-    &__container {
-        position: relative;
-        max-width: 1000px;
-        margin: 0 auto;
-        padding: 15px 0;
-    }
-
-    &__item {
-        width: 90%;
-        margin: 0 auto 20px auto;
-        text-align: start;
-        padding: 11px 15px;
-        height: auto;
-        background-color: rgb(255, 255, 255);
-        border-radius: 5px;
-        border: 2px solid #d9d0d0;
-        -webkit-box-shadow: 13px -17px 17px -10px rgba(0, 0, 0, 0.2) inset;
-        -moz-box-shadow: 13px -17px 17px -10px rgba(0, 0, 0, 0.2) inset;
-        box-shadow: 13px -17px 17px -10px rgba(0, 0, 0, 0.2) inset;
-        font-size: 20px;
-        // outline: none;
-        // resize: none;
-        word-wrap: break-word
-    }
-
-    &__delete {
-        position: absolute;
-        top: -5px;
-        right: 8px;
-        cursor: pointer;
-        transition: transform 0.3s ease;
-
-        &:hover {
-            transform: rotate(360deg);
-
-            &::after {
-                content: "delete";
-                width: 50px;
-                height: 20px;
-                color: black;
-            }
-        }
-    }
-}
-
-
 @media (max-width:815px) {
     .title {
         &__inner {
@@ -267,6 +229,7 @@
     .tags {
         min-height: 54px;
         margin: 7px auto 19px auto;
+
         &__inner {
             padding: 30px 0 0 0px;
             padding: 9px 0 0 15px;
@@ -283,88 +246,45 @@
         }
     }
 
-    .lentComment {
-        &__container {
-            position: relative;
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 15px 0;
-        }
+}
 
-        &__item {
-            width: 90%;
-            margin: 0 auto 20px auto;
-            text-align: start;
-            padding: 11px 15px;
-            height: auto;
-            background-color: rgb(255, 255, 255);
-            border-radius: 5px;
-            border: 2px solid #d9d0d0;
-            -webkit-box-shadow: 13px -17px 17px -10px rgba(0, 0, 0, 0.2) inset;
-            -moz-box-shadow: 13px -17px 17px -10px rgba(0, 0, 0, 0.2) inset;
-            box-shadow: 13px -17px 17px -10px rgba(0, 0, 0, 0.2) inset;
-            font-size: 20px;
-            word-wrap: break-word
-        }
+.comment {
+    margin: 0 auto 0 auto;
+    max-width: 900px;
+    height: 70px;
+    padding: 40px 0 100px 0;
+    position: relative;
 
-        &__delete {
-            position: absolute;
-            top: -10px;
-            right: 8px;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-
-            &:hover {
-                transform: rotate(360deg);
-
-                &::after {
-                    content: "delete";
-                    width: 50px;
-                    height: 20px;
-                    color: black;
-                }
-            }
-        }
+    &__text {
+        border-radius: 5px;
+        padding: 15px 15px;
+        width: 66%;
+        height: 100%;
+        border: none;
+        font-size: 20px;
+        outline: none;
+        resize: none;
+        overflow-y: hidden;
     }
+
+    &__img {
+        top: 34px;
+        right: 85px;
+    }
+
+    &__imgSend {
+        bottom: 68px;
+        right: 85px;
+    }
+}
+
+@media (max-width:740px) {
     .comment {
-        margin: 0 auto 0 auto;
-        max-width: 900px;
-        height: 70px;
-        padding: 40px 0 100px 0;
-        position: relative;
-    
-        &__text {
-            border-radius: 5px;
-            padding: 15px 15px;
-            width: 66%;
-            height: 100%;
-            border: none;
-            font-size: 20px;
-            outline: none;
-            resize: none;
-            overflow-y: hidden;
-        }
-    
-        &__img {
-            top: 34px;
-            right: 85px;
-        }
-    
-        &__imgSend {
-            bottom: 68px;
-            right: 85px;
-        }
-    }
-
-}
-
-@media (max-width:740px){
-    .comment {   
         &__img {
             top: 14px;
             right: 85px;
         }
-    
+
         &__imgSend {
             bottom: 43px;
             right: 85px;
@@ -372,13 +292,14 @@
     }
 
 }
-@media (max-width:572px){
-    .comment {   
+
+@media (max-width:572px) {
+    .comment {
         &__img {
             top: 14px;
             right: 62px;
         }
-    
+
         &__imgSend {
             bottom: 43px;
             right: 62px;
@@ -386,7 +307,8 @@
     }
 
 }
-@media (max-width:444px){
+
+@media (max-width:444px) {
     .title {
         &__inner {
             font-size: 23px;
@@ -399,6 +321,7 @@
 
     .tags {
         min-height: 54px;
+
         &__inner {
             padding: 30px 0 0 0px;
             padding: 9px 0 0 15px;
@@ -415,72 +338,23 @@
         }
     }
 
-    .lentComment {
-        &__container {
-            position: relative;
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 15px 0;
-        }
-
-        &__item {
-            width: 77%;
-            margin: 0 auto 20px auto;
-            text-align: start;
-            padding: 11px 15px;
-            height: auto;
-            background-color: rgb(255, 255, 255);
-            border-radius: 5px;
-            border: 2px solid #d9d0d0;
-            -webkit-box-shadow: 13px -17px 17px -10px rgba(0, 0, 0, 0.2) inset;
-            -moz-box-shadow: 13px -17px 17px -10px rgba(0, 0, 0, 0.2) inset;
-            box-shadow: 13px -17px 17px -10px rgba(0, 0, 0, 0.2) inset;
-            font-size: 20px;
-            word-wrap: break-word
-        }
-
-        &__delete {
-            position: absolute;
-            top: -10px;
-            right: 35px;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-
-            &:hover {
-                transform: rotate(360deg);
-
-                &::after {
-                    content: "delete";
-                    width: 50px;
-                    height: 20px;
-                    color: black;
-                }
-            }
-        }
-    }
 
 }
-@media (max-width:425px){
-    .comment {   
+
+@media (max-width:425px) {
+    .comment {
         &__img {
             top: 14px;
             right: 33px;
         }
-    
+
         &__imgSend {
             bottom: 43px;
             right: 33px;
         }
     }
+
     .post {
-        margin: 0 auto 0 auto;  
-    }
-}
-@media (max-width:367px){
-    .lentComment {
-        &__delete {
-            top: -10px;
-            right: 24px;
-        }
+        margin: 0 auto 0 auto;
     }
 }
