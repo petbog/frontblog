@@ -3,3 +3,18 @@ body {
   font-family: 'Playpen Sans', Arial, cursive;
   background-color: #ddddde;
 }
+
+.item-enter {
+  opacity: 0;
+}
+.item-enter-active {
+  opacity: 1;
+  transition: opacity 200ms;
+}
+.item-exit {
+  opacity: 1;
+}
+.item-exit-active {
+  opacity: 0;
+  transition: opacity 200ms;
+}

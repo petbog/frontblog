@@ -1,3 +1,19 @@
 .App {
   text-align: center;
 }
+.item-enter {
+  transform: translate(-650px);
+  opacity: 0.5;
+}
+.item-enter-active {
+  transform: translate(0px);
+  transition: all 500ms ease-in;
+}
+.item-exit {
+  opacity: 1;
+}
+.item-exit-active {
+  transform: translate(-650px);
+  transition: all 500ms ease-in;
+  opacity: 0.5;
+}

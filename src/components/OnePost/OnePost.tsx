@@ -13,6 +13,8 @@ import preloader from '../../img/preloader.gif'
 import Comment from '../Comment/Comment'
 import { selectIdUser } from '../../redux/Slice/authSlise'
 
+import { TransitionGroup,CSSTransition } from 'react-transition-group';
+
 
 
 const OnePost: FC = () => {
@@ -124,10 +126,16 @@ const OnePost: FC = () => {
                 </div> : ''
             }
             <div className={s.lentComment}>
+            <TransitionGroup>
                 {
-                    [...comments].reverse().map((item) => <Comment key={item._id} {...item}  />)
+                    [...comments].reverse().map((item) =>
+                    <CSSTransition  classNames="item" timeout={500} key={item._id}>
+                        <Comment  {...item}  />
+                    </CSSTransition> )
                 }
+            </TransitionGroup>
             </div>
+           
         </div >
 
     )
