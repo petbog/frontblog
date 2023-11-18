@@ -133,7 +133,7 @@ const AddPost: FC = () => {
                                 <div onClick={remuveImg} className={s.remove__inner}>Удалить превью</div>
                             </div>
                             <div className={s.img}>
-                                <img className={s.img__inner} src={`http://localhost:4444${imageUrl}`} alt="imageUrl" />
+                                <img className={s.img__inner} src={`REACT_APP_API_URL${imageUrl}`} alt="imageUrl" />
                             </div>
                         </>
 
