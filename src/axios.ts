@@ -4,7 +4,7 @@ import axios from "axios"
 
 
 const instanse = axios.create({
-    baseURL: 'http://localhost:4444'
+    baseURL: 'REACT_APP_API_URL'
 })
 
 //вшивается в заголовок аксиоса закрос на авторизацию по токену пользователя при каждом закросе и дальше проверяется в app
