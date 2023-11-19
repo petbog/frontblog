@@ -110,10 +110,10 @@ const Auth: FC = () => {
         setBottom(!bottom)
     }
 
-    // if ( data && 'token' in data) {
-    //     const token = data.token
-    //     window.localStorage.setItem('token', token)
-    // }
+    if ( data && 'token' in data) {
+        const token = data.token
+        window.localStorage.setItem('token', token)
+    }
 
 
 
