@@ -4,7 +4,7 @@ import axios from "axios"
 
 
 const instanse = axios.create({
-    baseURL: 'react-api-url'
+    baseURL: 'MONGODB_URL'
 })
 
 //вшивается в заголовок аксиоса закрос на авторизацию по токену пользователя при каждом закросе и дальше проверяется в app
