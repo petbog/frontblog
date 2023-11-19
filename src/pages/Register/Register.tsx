@@ -182,7 +182,7 @@ const Register: React.FC = () => {
                             avatarUrl ? (
                                 <>
                                     <img src={avatarDelet} className={classes.img__delete} onClick={onClickRemoveImage} />
-                                    <img className={classes.activImg} src={`reactapi${avatarUrl}`} alt="Uploaded" />
+                                    <img className={classes.activImg} src={`react-api-url${avatarUrl}`} alt="Uploaded" />
                                 </>
                             )
                                 :

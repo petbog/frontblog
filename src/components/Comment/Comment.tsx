@@ -88,7 +88,7 @@ const Comment: FC<commentsType> = ({ text, _id, post }) => {
             <div className={s.lentComment__container}>
                 <div className={s.lentComment__user}>
                     {
-                        avatarUrl === '' ? <img className={s.lentComment__img} src={userZamena} alt="userZamena" /> : <img className={s.lentComment__img} src={`reactapi${avatarUrl}`} alt="user_avatar" />}
+                        avatarUrl === '' ? <img className={s.lentComment__img} src={userZamena} alt="userZamena" /> : <img className={s.lentComment__img} src={`react-api-url${avatarUrl}`} alt="user_avatar" />}
                     <div className={s.lentComment__name}>{fullName}</div>
                 </div>
                 <div key={_id} className={s.lentComment__item}>{text}</div>
