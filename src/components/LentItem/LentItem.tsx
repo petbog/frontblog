@@ -9,6 +9,7 @@ import pencil from '../../img/4213412-compose-document-edit-pen-pencil-write_115
 import close from '../../img/-clear_90704.svg'
 import userzamena from '../../img/user.png'
 import commentImg from '../../img/comment-line-svgrepo-com.svg'
+import { REACT_APP_API_URL } from '../../axios';
 
 type UserType = {
   avatarUrl: string,
@@ -67,7 +68,7 @@ const LentItem: FC<propsType> = ({ _id, createdAt, imageUrl, tags, title, viewsC
         <div className={s.img}>
           {
             imageUrl ?
-              <img className={s.img__items} src={`${process.env.REACT_APP_API_URL}${imageUrl}`} alt="imageUrl" />
+              <img className={s.img__items} src={`${REACT_APP_API_URL}${imageUrl}`} alt="imageUrl" />
               : <img className={s.img__items} src={zamena} alt="zamena" />
           }
         </div>
@@ -86,7 +87,7 @@ const LentItem: FC<propsType> = ({ _id, createdAt, imageUrl, tags, title, viewsC
             ''
         }
         <div className={s.user}>
-          {avatarUrl ? <img className={s.user__avatar} src={`${process.env.REACT_APP_API_URL}${avatarUrl}`} alt="avatar" />
+          {avatarUrl ? <img className={s.user__avatar} src={`${REACT_APP_API_URL}${avatarUrl}`} alt="avatar" />
             : <img className={s.user__avatar} src={userzamena} alt="user" />}
           {fullName && <div className={s.user__name}>{fullName}</div>}
         </div>

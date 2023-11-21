@@ -2,7 +2,7 @@ import s from './Comment.module.scss'
 import { useAppDispatch } from '../../redux/store'
 import { commentsType, deleteComment, filterComment, onePostSelector } from '../../redux/Slice/onePostsSice'
 import { FC, useEffect, useState } from 'react'
-import instanse from '../../axios'
+import instanse, { REACT_APP_API_URL } from '../../axios'
 import userZamena from '../../img/user.png'
 import { useSelector } from 'react-redux'
 import { selectIdUser } from '../../redux/Slice/authSlise'
@@ -88,7 +88,7 @@ const Comment: FC<commentsType> = ({ text, _id, post }) => {
             <div className={s.lentComment__container}>
                 <div className={s.lentComment__user}>
                     {
-                        avatarUrl === '' ? <img className={s.lentComment__img} src={userZamena} alt="userZamena" /> : <img className={s.lentComment__img} src={`${process.env.REACT_APP_API_URL}${avatarUrl}`} alt="user_avatar" />}
+                        avatarUrl === '' ? <img className={s.lentComment__img} src={userZamena} alt="userZamena" /> : <img className={s.lentComment__img} src={`${REACT_APP_API_URL}${avatarUrl}`} alt="user_avatar" />}
                     <div className={s.lentComment__name}>{fullName}</div>
                 </div>
                 <div key={_id} className={s.lentComment__item}>{text}</div>

@@ -3,7 +3,7 @@ import Header from '../Header/Header'
 import React, { FC, useEffect, useRef, useState } from 'react'
 import { useAppDispatch } from '../../redux/store'
 import { RemovePost, addPost } from '../../redux/Slice/postSise'
-import instanse from '../../axios'
+import instanse, { REACT_APP_API_URL } from '../../axios'
 
 import { useNavigate, useParams } from 'react-router-dom'
 import { Path } from '../../Path/Patch'
@@ -133,7 +133,7 @@ const AddPost: FC = () => {
                                 <div onClick={remuveImg} className={s.remove__inner}>Удалить превью</div>
                             </div>
                             <div className={s.img}>
-                                <img className={s.img__inner} src={`${process.env.REACT_APP_API_URL}${imageUrl}`} alt="imageUrl" />
+                                <img className={s.img__inner} src={`${REACT_APP_API_URL}${imageUrl}`} alt="imageUrl" />
                             </div>
                         </>
 

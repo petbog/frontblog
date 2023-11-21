@@ -1,10 +1,11 @@
 import axios from "axios"
 
+export const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
 
 
 const instanse = axios.create({
-    baseURL: process.env.REACT_APP_API_URL
+    baseURL: REACT_APP_API_URL
 })
 
 //вшивается в заголовок аксиоса закрос на авторизацию по токену пользователя при каждом закросе и дальше проверяется в app

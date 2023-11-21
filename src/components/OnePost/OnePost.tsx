@@ -14,6 +14,7 @@ import Comment from '../Comment/Comment'
 import { selectIdUser } from '../../redux/Slice/authSlise'
 
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import { REACT_APP_API_URL } from '../../axios'
 
 
 
@@ -77,13 +78,13 @@ const OnePost: FC = () => {
             <div className={s.post}>
                 <div className={s.img}>
                     {
-                        !imageUrl ? <img src={preloader} alt="preloader" className={s.preloader} /> : <img className={s.img__inner} src={`${process.env.REACT_APP_API_URL}${imageUrl}`} alt="imageUrl" />
+                        !imageUrl ? <img src={preloader} alt="preloader" className={s.preloader} /> : <img className={s.img__inner} src={`${REACT_APP_API_URL}${imageUrl}`} alt="imageUrl" />
                     }
 
                 </div>
                 <div className={s.user}>
                     {
-                        !imageUrl ? <img src={preloader} alt="preloader" className={s.preloader} /> : <img className={s.user__avatar} src={`${process.env.REACT_APP_API_URL}${avatarUrl}`} alt="" />
+                        !imageUrl ? <img src={preloader} alt="preloader" className={s.preloader} /> : <img className={s.user__avatar} src={`${REACT_APP_API_URL}${avatarUrl}`} alt="" />
                     }
 
                     <div className={s.user__name}>{fullName}</div>

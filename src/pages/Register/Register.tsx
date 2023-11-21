@@ -7,7 +7,7 @@ import { addUser, fetchRegister, itemsAuth, selectIdError, selectIsAuth } from '
 import { useAppDispatch } from '../../redux/store';
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
-import instanse from '../../axios';
+import instanse, { REACT_APP_API_URL } from '../../axios';
 import avatarZamena from '../../img/user.png';
 import avatarDelet from '../../img/-clear_90704.svg'
 import bacgroundRegister from '../../img/photodraw.ru-62743.png'
@@ -204,7 +204,7 @@ const Register: React.FC = () => {
                             avatarUrl ? (
                                 <>
                                     <img src={avatarDelet} className={classes.img__delete} onClick={onClickRemoveImage} />
-                                    <img className={classes.activImg} src={`${process.env.REACT_APP_API_URL}${avatarUrl}`} alt="Uploaded" />
+                                    <img className={classes.activImg} src={`${REACT_APP_API_URL}${avatarUrl}`} alt="Uploaded" />
                                 </>
                             )
                                 :
