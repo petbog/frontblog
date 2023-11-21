@@ -115,36 +115,13 @@ const Register: React.FC = () => {
     }
 
 
-    // const handleImg = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    //     try {
-    //         const formData = new FormData();
-    //         const file = e.target.files && e.target.files[0]; // Проверка на наличие файлов
-    //         if (file) {
-    //             formData.append('image', file);
-    //             const { data } = await instanse.post('/upload', formData);
-    //             setImageUrl(data.url);
-    //         } else {
-    //             alert('Пожалуйста, выберите файл для загрузки.');
-    //         }
-    //     } catch (error) {
-    //         console.warn(error);
-    //         alert('Ошибка при загрузке файла!');
-    //     }
-    // };
     const handleImg = async (e: React.ChangeEvent<HTMLInputElement>) => {
         try {
             const formData = new FormData();
             const file = e.target.files && e.target.files[0]; // Проверка на наличие файлов
             if (file) {
                 formData.append('image', file);
-                const response = await fetch('https://blog-back-one.vercel.app/upload', {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'Access-Control-Allow-Origin': 'https://frontblog-phi.vercel.app' // Добавьте заголовок Access-Control-Allow-Origin
-                    }
-                });
-                const { data } = await response.json();
+                const { data } = await instanse.post('/upload', formData);
                 setImageUrl(data.url);
             } else {
                 alert('Пожалуйста, выберите файл для загрузки.');
@@ -154,6 +131,29 @@ const Register: React.FC = () => {
             alert('Ошибка при загрузке файла!');
         }
     };
+    // const handleImg = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    //     try {
+    //         const formData = new FormData();
+    //         const file = e.target.files && e.target.files[0]; 
+    //         if (file) {
+    //             formData.append('image', file);
+    //             const response = await fetch('https://blog-back-one.vercel.app/upload', {
+    //                 method: 'POST',
+    //                 body: formData,
+    //                 headers: {
+    //                     'Access-Control-Allow-Origin': 'https://frontblog-phi.vercel.app' 
+    //                 }
+    //             });
+    //             const { data } = await response.json();
+    //             setImageUrl(data.url);
+    //         } else {
+    //             alert('Пожалуйста, выберите файл для загрузки.');
+    //         }
+    //     } catch (error) {
+    //         console.warn(error);
+    //         alert('Ошибка при загрузке файла!');
+    //     }
+    // };
     const handleRegister = () => {
         const newObj = {
             email,
