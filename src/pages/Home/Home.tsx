@@ -1,12 +1,11 @@
 import Header from "../../components/Header/Header"
 import Lent from "../../components/Lent/Lent";
 import SortRating from "../../components/SortRating/SortRating";
-import { getPost, getPostSelectorData } from "../../redux/Slice/getPostSlise";
+import { getPost} from "../../redux/Slice/getPostSlise";
 import { useAppDispatch } from "../../redux/store";
 import s from "./Home.module.scss"
 import { useEffect, useState } from 'react';
 import Tags from './../../components/Tags/Tags';
-import { useSelector } from "react-redux";
 import WelcomPage from "../../components/WelcomPage/WelcomPage";
 
 const Home:React.FC = () => {

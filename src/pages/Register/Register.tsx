@@ -36,6 +36,37 @@ const Register: React.FC = () => {
     const errorRegisater = useSelector(selectIdError)
 
 
+
+    const nameClick = useRef<HTMLInputElement>(null)
+    const emailClick = useRef<HTMLInputElement>(null)
+    const passClick = useRef<HTMLInputElement>(null)
+    const inputRef = [nameClick, emailClick, passClick]
+
+    useEffect(() => {
+        inputRef.forEach((ref) => {
+            if (ref.current) {
+                ref.current.focus()
+            }
+        }
+        )
+    }, [])
+
+    const handleClickNameTitle = () => {
+        if (nameClick.current) {
+            nameClick.current.focus()
+        }
+    }
+    const handleClickEmailTitle = () => {
+        if (emailClick.current) {
+            emailClick.current.focus()
+        }
+    }
+    const handleClickPasssTitle = () => {
+        if (passClick.current) {
+            passClick.current.focus()
+        }
+    }
+
     useEffect(() => {
         if (errorRegisater.length) {
             const msgValue = errorRegisater[0].msg;
@@ -131,29 +162,7 @@ const Register: React.FC = () => {
             alert('Ошибка при загрузке файла!');
         }
     };
-    // const handleImg = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    //     try {
-    //         const formData = new FormData();
-    //         const file = e.target.files && e.target.files[0]; 
-    //         if (file) {
-    //             formData.append('image', file);
-    //             const response = await fetch('https://blog-back-one.vercel.app/upload', {
-    //                 method: 'POST',
-    //                 body: formData,
-    //                 headers: {
-    //                     'Access-Control-Allow-Origin': 'https://frontblog-phi.vercel.app' 
-    //                 }
-    //             });
-    //             const { data } = await response.json();
-    //             setImageUrl(data.url);
-    //         } else {
-    //             alert('Пожалуйста, выберите файл для загрузки.');
-    //         }
-    //     } catch (error) {
-    //         console.warn(error);
-    //         alert('Ошибка при загрузке файла!');
-    //     }
-    // };
+
     const handleRegister = () => {
         const newObj = {
             email,
@@ -188,6 +197,8 @@ const Register: React.FC = () => {
     if (AuthUser) {
         return <Navigate to='/' />
     }
+
+
     return (
         <>
             <div onClick={handleScroll} className={bottom ? `${classes.topScroll} ${classes.bottomScroll}` : classes.topScroll}>
@@ -222,6 +233,7 @@ const Register: React.FC = () => {
                     </div>
                     <div className={classes.Form_container}>
                         <input
+                            ref={nameClick}
                             name="name"
                             onBlur={(e) => blurHandle(e)}
                             className={classes.Form_email}
@@ -230,11 +242,12 @@ const Register: React.FC = () => {
                             onChange={(e) => nameHandler(e)}
                             placeholder=''
                         />
-                        <label className={classes.Form_email__label}>Ваше имя</label>
+                        <label onClick={handleClickNameTitle} className={classes.Form_email__label}>Ваше имя</label>
                         {(nameDirty && nameError) && <div className={classes.errorPoppup}>{nameError}</div>}
                     </div>
                     <div className={classes.Form_container}>
                         <input
+                            ref={emailClick}
                             name="email"
                             onBlur={(e) => blurHandle(e)}
                             className={classes.Form_email}
@@ -243,11 +256,12 @@ const Register: React.FC = () => {
                             onChange={(e) => emailHandler(e)}
                             placeholder=''
                         />
-                        <label className={classes.Form_email__label}>Введите email</label>
+                        <label onClick={handleClickEmailTitle} className={classes.Form_email__label}>Введите email</label>
                         {(emailDirty && emailError) && <div className={classes.errorPoppup}>{emailError}</div>}
                     </div>
                     <div className={classes.Form_container_pass}>
                         <input
+                            ref={passClick}
                             name="password"
                             onBlur={(e) => blurHandle(e)}
                             className={classes.Form_pass}
@@ -256,7 +270,7 @@ const Register: React.FC = () => {
                             onChange={(e) => passwordHandler(e)}
                             placeholder=''
                         />
-                        <label className={classes.Form_pass__label}>Введите password</label>
+                        <label onClick={handleClickPasssTitle} className={classes.Form_pass__label}>Введите password</label>
                         {(passDirty && passError) && <div className={classes.errorPoppup}>{passError}</div>}
                         <img onClick={handleToggle} className={classes.form_img} src={src} alt="" />
                     </div>

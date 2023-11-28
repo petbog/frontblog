@@ -2,7 +2,6 @@ import s from './addPost.module.scss'
 import Header from '../Header/Header'
 import React, { FC, useEffect, useRef, useState } from 'react'
 import { useAppDispatch } from '../../redux/store'
-import { RemovePost, addPost } from '../../redux/Slice/postSise'
 import instanse, { REACT_APP_API_URL } from '../../axios'
 
 import { useNavigate, useParams } from 'react-router-dom'
@@ -10,6 +9,7 @@ import { Path } from '../../Path/Patch'
 import { fetchMe } from '../../redux/Slice/authSlise'
 import { getOnePost, onePostSelector } from '../../redux/Slice/onePostsSice'
 import { useSelector } from 'react-redux'
+import { RemovePost, addPost } from '../../redux/Slice/getPostSlise'
 
 const AddPost: FC = () => {
     const navigate = useNavigate()

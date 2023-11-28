@@ -3,7 +3,7 @@ import s from './LentItem.module.scss';
 import eye from '../../img/eye-svgrepo-com.svg';
 import { Link } from 'react-router-dom';
 import { useAppDispatch } from '../../redux/store';
-import { DeleetePost } from '../../redux/Slice/getPostSlise';
+import { DeleetePost, commentsType } from '../../redux/Slice/getPostSlise';
 import zamena from '../../img/Прикольные-заставки-на-рабочий-стол-с-надписями-1.jpg'
 import pencil from '../../img/4213412-compose-document-edit-pen-pencil-write_115364.svg'
 import close from '../../img/-clear_90704.svg'
@@ -31,7 +31,7 @@ type propsType = {
   viewsCount: number,
   isAuner: boolean
   user: UserType,
-  comments: string[]
+  comments: commentsType[]
 }
 
 const LentItem: FC<propsType> = ({ _id, createdAt, imageUrl, tags, title, viewsCount, isAuner, user, comments }) => {

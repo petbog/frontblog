@@ -39,6 +39,34 @@ export const articlesbytag = createAsyncThunk<dataType[], paramsTag>('post/artic
     return data
 })
 
+type params = {
+    title: string,
+    tags: string,
+    text: string,
+    imageUrl: string
+}
+
+export const addPost = createAsyncThunk<postType[], params>('getPost/addPost', async (params: params) => {
+    const { data } = await instanse.post('/posts', params)
+    return data
+})
+
+type typeParams = {
+    title: string,
+    tags: string,
+    text: string,
+    imageUrl: string
+}
+type removeParamsType = {
+    _id: string | undefined,
+    params: typeParams
+}
+export const RemovePost = createAsyncThunk('getPost/RemovePost', async (removeParams: removeParamsType) => {
+    const { _id, params } = removeParams
+    const { data } = await instanse.patch(`/posts/${_id}`, params)
+    return data
+})
+
 export enum Status {
     LOADING = 'loading',
     SUCCESS = 'succes',
@@ -67,18 +95,60 @@ export type dataType = {
     updatedAt: string,
     __v: number,
     user: userType,
-    comments: string[]
+    comments: commentsType[],
+    fullName: string,
+    email: string,
+}
+export type commentsType = {
+    createdAt: string,
+    post: string,
+    text: string,
+    updatedAt: string,
+    __v: number,
+    _id: string,
 }
 
+type postType = {
+    _id: string,
+    fullName: string,
+    email: string,
+    createdAt: string,
+    updatedAt: string,
+    __v: number,
+    imageUrl: string,
+    user: userType,
+    viewsCount: number,
+    tags: string[],
+    text: string,
+    title: string
+    comments: commentsType[],
+}
 
 interface initialStateType {
     status: Status,
     data: dataType[],
+    post: postType[],
     poppup: boolean
 }
 
 const initialState: initialStateType = {
     data: [],
+    // post: {
+    //     _id: '',
+    //     fullName: '',
+    //     email: '',
+    //     createdAt: '',
+    //     updatedAt: '',
+    //     __v: 0,
+    //     imageUrl: '',
+    //     user: '',
+    //     viewsCount: 0,
+    //     tags: [],
+    //     text: '',
+    //     title: '',
+    //     comments: []
+    // },
+    post:[],
     status: Status.LOADING,
     poppup: false
 }
@@ -89,7 +159,7 @@ const getPostSlice = createSlice({
     initialState,
     reducers: {
         eyePoppup: (state, action) => {
-            state.poppup =action.payload
+            state.poppup = action.payload
         }
     },
     extraReducers: (builder) => {
@@ -149,7 +219,34 @@ const getPostSlice = createSlice({
         builder.addCase(DeleetePost.pending, (state, action) => {
             state.data = state.data.filter(obj => obj._id !== action.meta.arg._id)
         });
-
+        //создание поста
+        builder.addCase(addPost.pending, (state, action) => {
+            state.post = [];
+            state.status = Status.LOADING;
+        });
+        builder.addCase(addPost.fulfilled, (state, action) => {
+            const newData = action.payload.filter((item:postType) => {
+                return !state.data.some((existingItem) => existingItem._id === item._id);
+              });
+              state.data = [...state.data, ...newData];
+            state.status = Status.SUCCESS;
+        });
+        builder.addCase(addPost.rejected, (state, action) => {
+            state.status = Status.ERROR;
+        });
+        //измение поста
+        builder.addCase(RemovePost.pending, (state, action) => {
+            state.post =[];
+            state.status = Status.LOADING;
+        });
+        builder.addCase(RemovePost.fulfilled, (state, action) => {
+            state.data = action.payload;
+            state.status = Status.SUCCESS;
+        });
+        builder.addCase(RemovePost.rejected, (state, action) => {
+            state.post = []
+            state.status = Status.ERROR;
+        });
     },
 });
 
@@ -157,5 +254,6 @@ export const getPostSelector = (state: RootState) => state.getPost.data
 export const getStatusSelector = (state: RootState) => state.getPost.status
 export const getPostSelectorData = (state: RootState) => state.getPost
 export const getPostSelectorPoppup = (state: RootState) => state.getPost.poppup
-export const { eyePoppup} = getPostSlice.actions
+export const dataSelector = (state: RootState) => state.getPost.data
+export const { eyePoppup } = getPostSlice.actions
 export const getPostReduser = getPostSlice.reducer

@@ -1,6 +1,6 @@
 import classes from "./Auth.module.scss"
 import Header from "../../components/Header/Header"
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 import eye_off from '../../img/eye_off copy.svg'
 import eye from '../../img/eye copy.svg'
 import { useAppDispatch } from "../../redux/store";
@@ -33,17 +33,9 @@ const Auth: FC = () => {
     const { data } = useSelector(itemsAuth)
     const errorRegisater = useSelector(selectIdError)
     const errorLogin = useSelector(selectIdErrorMessage)
-
-
-    useEffect(() => {
-        if (errorRegisater.length) {
-            const msgValue = errorRegisater[0].msg;
-            setErrorMailClient(msgValue)
-        }
-        if (errorLogin.length) {
-            setErrorPassClient(errorLogin)
-        }
-    }, [errorRegisater,errorLogin])
+    const loginRef = useRef<HTMLInputElement>(null)
+    const passRef = useRef<HTMLInputElement>(null)
+    const arrRef = [loginRef, passRef]
 
 
 
@@ -69,6 +61,36 @@ const Auth: FC = () => {
                 break
         }
     }
+
+    useEffect(() => {
+        arrRef.forEach((ref) => {
+            if (ref.current) {
+                ref.current.focus()
+            }
+        })
+    }, [arrRef])
+
+    const handleLoginRef = () => {
+        if (loginRef.current) {
+            loginRef.current.focus()
+        }
+    }
+    const handlePassRef = () => {
+        if (passRef.current) {
+            passRef.current.focus()
+        }
+    }
+
+    useEffect(() => {
+        if (errorRegisater.length) {
+            const msgValue = errorRegisater[0].msg;
+            setErrorMailClient(msgValue)
+        }
+        if (errorLogin.length) {
+            setErrorPassClient(errorLogin)
+        }
+    }, [errorRegisater, errorLogin])
+
 
     const emailHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         setEmail(e.target.value)
@@ -110,7 +132,7 @@ const Auth: FC = () => {
         setBottom(!bottom)
     }
 
-    if ( data && 'token' in data) {
+    if (data && 'token' in data) {
         const token = data.token
         window.localStorage.setItem('token', token)
     }
@@ -135,11 +157,12 @@ const Auth: FC = () => {
                 <div className={classes.Form_inner}>
                     <div className={classes.error}>
                         <div className={classes.error__box}>
-                            <span className={classes.error__text}>{errorMailClient}<br/>{errorPassClient}</span>
+                            <span className={classes.error__text}>{errorMailClient}<br />{errorPassClient}</span>
                         </div>
                     </div>
                     <div className={classes.Form_container}>
                         <input
+                            ref={loginRef}
                             name="email"
                             onBlur={(e) => blurHandle(e)}
                             className={classes.Form_email}
@@ -148,11 +171,12 @@ const Auth: FC = () => {
                             onChange={(e) => emailHandler(e)}
                             placeholder=''
                         />
-                        <label className={classes.Form_email__label}>Введите email</label>
+                        <label onClick={handleLoginRef} className={classes.Form_email__label}>Введите email</label>
                         {(emailDirty && emailError) && <div className={classes.errorPoppup}>{emailError}</div>}
                     </div>
                     <div className={classes.Form_container_pass}>
                         <input
+                            ref={passRef}
                             name="password"
                             onBlur={(e) => blurHandle(e)}
                             className={classes.Form_pass}
@@ -162,7 +186,7 @@ const Auth: FC = () => {
                             placeholder=''
 
                         />
-                        <label className={classes.Form_pass__label}>Введите password</label>
+                        <label onClick={handlePassRef} className={classes.Form_pass__label}>Введите password</label>
                         {(passDirty && passError) && <div className={classes.errorPoppup}>{passError}</div>}
                         <img onClick={handleToggle} className={classes.form_img} src={src} alt="" />
                     </div>
