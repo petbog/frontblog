@@ -4,6 +4,7 @@
     align-items: center;
     margin: 20px 0 30px 0;
     height: 60px;
+    color: var(#{--sort-rating-dark});
 }
 
 .button {
@@ -25,9 +26,11 @@
         width: 21px;
         margin: 4px 0 0 0;
         height: 21px;
-        padding: 0 3px 4px 3px;
+        padding: 5px 3px 4px 3px;
+        fill:var(#{--sort-rating-color-hech-default})
     }
 }
+
 
 .disabel {
     display: none;
@@ -35,8 +38,8 @@
 
 .activ {
     transition: all ease 0.1s;
-    border-bottom: 2px solid #154ce1;
-    color: #154ce1;
+    border-bottom: 2px solid var(#{--sort-rating-border-activ-default});
+    color: var(#{--sort-rating-color-activ-default});
 }
 
 @media (max-width:960px) {

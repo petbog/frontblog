@@ -1,0 +1,175 @@
+body {
+  margin: 0;
+  font-family: 'Playpen Sans', Arial, cursive;
+  background-color: var(#{--body-background-default});
+ // background:  linear-gradient(167deg, rgba(2,0,36,1) 0%, rgba(0,0,0,1) 0%, rgba(46,45,45,1) 69%, rgba(116,111,111,1) 100%);
+}
+
+*a {
+  text-decoration: none;
+}
+
+//body-background
+$body-background-dark: #141416;
+$body-background-ligth: #ddddde;
+
+//cart-border
+$cart-border-dark: 1px solid #7f7e7e;
+$cart-border-ligth: 1px solid #fffefe;
+
+//cart-text-color
+$cart-text-color-dark: #010101;
+$cart-text-color-ligth: #fff;
+
+//cart-background
+$cart-background-dark: #1d1c1c;
+$cart-background-ligth: rgb(236, 230, 230);
+
+//sort-rating
+$sort-rating-dark: #fff;
+$sort-rating-ligth: #000;
+
+//sort-rating-border-activ
+$sort-rating-border-activ-dark: #fff;
+$sort-rating-border-activ-ligth: #000;
+
+//sort-rating-color-activ
+$sort-rating-color-activ-dark: #fff;
+$sort-rating-color-activ-ligth: #154ce1;
+
+//sort-rating-color-hech
+$sort-rating-color-hech-dark: #fff;
+$sort-rating-color-hech-ligth: #000;
+
+//eye-lent
+$eye-lent-dark: #fff;
+$eye-lent-ligth: #000;
+
+//commentImg-lent
+$commentImg-lent-dark: #fff;
+$commentImg-lent-ligth: #000;
+
+//header-gradient
+$header-gradient-dark: linear-gradient(180deg, rgba(2, 0, 36, 1) 0%, rgba(154, 153, 175, 1) 0%, rgba(0, 0, 0, 1) 85%, rgba(147, 147, 147, 1) 100%);
+$header-gradient-ligth: linear-gradient(97deg, rgba(54, 89, 94, 1) 5%, rgba(31, 50, 59, 1) 37%, rgba(38, 54, 75, 1) 61%, rgba(13, 13, 32, 1) 92%);
+
+//header-background
+$header-background-dark: rgb(2, 0, 36);
+$header-background-ligth: rgb(54, 89, 94);
+
+//add-post-button-border
+$add-post-button-border-dark: #fff;
+$add-post-button-border-ligth: rgb(0, 0, 0);
+
+//add-post-button-background
+$add-post-button-background-dark: #fff;
+$add-post-button-background-ligth: #2e6ccf;
+
+//add-post-button-background
+$post-text-collor-dark: #fff;
+$post-text-collor-ligth: #000;
+
+//post-webkit-box-shadow
+$post-webkit-box-shadow-dark: 2px 2px 11px 3px rgba(246, 250, 252, 0.14);
+$post-webkit-box-shadow-ligth: 7px 5px 11px 17px rgba(144, 157, 167, 0.27);
+
+//post-moz-box-shadow
+$post-moz-box-shadow-dark: 2px 2px 11px 3px rgba(246, 250, 252, 0.14);
+$post-moz-box-shadow-ligth: 7px 5px 11px 17px rgba(144, 157, 167, 0.27);
+
+//post-box-shadow
+$post-box-shadow-dark:  2px 2px 11px 3px rgba(246, 250, 252, 0.14);
+$post-box-shadow-ligth: 7px 5px 11px 17px rgba(144, 157, 167, 0.27);
+
+:root {
+  //body-background
+  --body-background-dark: #{$body-background-dark};
+  --body-background-ligth: #{$body-background-ligth};
+  --body-background-default: var(#{--body-background-dark});
+
+  //cart-border
+  --cart-border-dark: #{$cart-border-dark};
+  --cart-border-ligth: #{$cart-border-ligth};
+  --cart-border-default: var(#{--cart-border-ligth});
+
+  //cart-text-color
+  --cart-text-color-dark: #{$cart-text-color-dark};
+  --cart-text-color-ligth: #{$cart-text-color-ligth};
+  --cart-text-color-default: var(#{--cart-text-color-ligth});
+
+  //cart-background
+  --cart-background-dark: #{$cart-background-dark};
+  --cart-background-ligth: #{$cart-background-ligth};
+  --cart-background-default: var(#{--cart-background-dark});
+
+  //sort-rating
+  --sort-rating-dark: #{$sort-rating-dark};
+  --sort-rating-ligth: #{$sort-rating-ligth};
+  --sort-rating-default: var(#{--sort-rating-dark});
+
+  //sort-rating-border-activ
+  --sort-rating-border-activ-dark: #{$sort-rating-border-activ-dark};
+  --sort-rating-border-activ-ligth: #{$sort-rating-border-activ-ligth};
+  --sort-rating-border-activ-default: var(#{--sort-rating-border-activ-dark});
+
+  //sort-rating-color-activ
+  --sort-rating-color-activ-dark: #{$sort-rating-color-activ-dark};
+  --sort-rating-color-activ-ligth: #{$sort-rating-color-activ-ligth};
+  --sort-rating-color-activ-default: var(#{--sort-rating-color-activ-dark});
+
+  //sort-rating-color-hech
+  --sort-rating-color-hech-dark: #{$sort-rating-color-hech-dark};
+  --sort-rating-color-hech-ligth: #{$sort-rating-color-hech-ligth};
+  --sort-rating-color-hech-default: var(#{--sort-rating-color-hech-dark});
+
+  //eye-lent
+  --eye-lent-dark: #{$eye-lent-dark};
+  --eye-lent-ligth: #{$eye-lent-ligth};
+  --eye-lent-default: var(#{--eye-lent-dark});
+
+  //commentImg-lent
+  --commentImg-lent-dark: #{$commentImg-lent-dark};
+  --commentImg-lent-ligth: #{$commentImg-lent-ligth};
+  --commentImg-lent-default: var(#{--commentImg-lent-dark});
+
+  //header-gradient
+  --header-gradient-dark: #{$header-gradient-dark};
+  --header-gradient-ligth: #{$header-gradient-ligth};
+  --header-gradient-default: var(#{--header-gradient-dark});
+
+  //header-background
+  --header-background-dark: #{$header-background-dark};
+  --header-background-ligth: #{$header-background-ligth};
+  --header-background-default: var(#{--header-background-dark});
+
+  //add-post-button-border
+  --add-post-button-border-dark: #{$add-post-button-border-dark};
+  --add-post-button-border-ligth: #{$add-post-button-border-ligth};
+  --add-post-button-border-default: var(#{--add-post-button-border-dark});
+
+  //add-post-button-background
+  --add-post-button-background-dark: #{$add-post-button-background-dark};
+  --add-post-button-background-ligth: #{$add-post-button-background-ligth};
+  --add-post-button-background-default: var(#{--add-post-button-background-dark});
+
+  //post-text-collor
+  --post-text-collor-dark: #{$post-text-collor-dark};
+  --post-text-collor-ligth: #{$post-text-collor-ligth};
+  --post-text-collor-default: var(#{--post-text-collor-dark});
+
+  //post-webkit-box-shadow
+  --post-webkit-box-shadow-dark: #{$post-webkit-box-shadow-dark};
+  --post-webkit-box-shadow-ligth: #{$post-webkit-box-shadow-ligth};
+  --post-webkit-box-shadow-default: var(#{--post-webkit-box-shadow-dark});
+
+  //post-moz-box-shadow
+  --post-moz-box-shadow-dark: #{$post-moz-box-shadow-dark};
+  --post-moz-box-shadow-ligth: #{$post-moz-box-shadow-ligth};
+  --post-moz-box-shadow-default: var(#{--post-moz-box-shadow-dark});
+
+  //post-box-shadow
+  --post-box-shadow-dark: #{$post-box-shadow-dark};
+  --post-box-shadow-ligth: #{$post-box-shadow-ligth};
+  --post-box-shadow-default: var(#{--post-box-shadow-dark});
+
+}

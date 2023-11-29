@@ -5,10 +5,11 @@
     text-decoration: none;
     margin-bottom: 50px;
     border-radius: 11px;
-    background-color: rgb(236, 230, 230);
+    background-color: var(#{--cart-background-default});
     position: relative;
     border-radius: 10px;
-    border: 1px solid #7f7e7e;
+    border:var(#{--cart-border-default});
+    color:var(#{--cart-text-color-default}) ;
 }
 
 .img {
@@ -119,11 +120,13 @@
         width: 23px;
         height: 24px;
         margin: 0 10px 0 0;
+        fill: var(#{--eye-lent-default});
     }
 
     &__commentsImg {
         width: 22px;
         margin-left: 25px;
+        fill: var(#{--commentImg-lent-default});
     }
 
     &__length {
@@ -135,7 +138,7 @@
 .redactions {
     width: 73px;
     height: 33px;
-    border: 2px solid black;
+    border: 2px solid var(#{--add-post-button-border-default});
     border-radius: 10px;
     display: flex;
     justify-content: space-around;
@@ -153,10 +156,11 @@
 
     &__pencil {
         opacity: 0.2;
-        width: 20px;
+        width: 18px;
         height: 20px;
-        padding: 0px 0 2px 4px;
+        padding: 5px 0 2px 4px;
         transition: all ease 0.3s;
+        fill: var(#{--eye-lent-default});
     }
 
     &__pencil:hover {
@@ -169,6 +173,7 @@
         width: 25px;
         height: 25px;
         transition: all ease 0.3s;
+        fill: var(#{--eye-lent-default});
     }
 
     &__close:hover {

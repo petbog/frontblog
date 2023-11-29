@@ -1,34 +1,31 @@
 import Header from "../../components/Header/Header"
 import Lent from "../../components/Lent/Lent";
 import SortRating from "../../components/SortRating/SortRating";
-import { getPost} from "../../redux/Slice/getPostSlise";
+import { getPost } from "../../redux/Slice/getPostSlise";
 import { useAppDispatch } from "../../redux/store";
 import s from "./Home.module.scss"
 import { useEffect, useState } from 'react';
 import Tags from './../../components/Tags/Tags';
-import WelcomPage from "../../components/WelcomPage/WelcomPage";
+import { useNavigate } from "react-router-dom";
+import { Path } from "../../Path/Patch";
 
-const Home:React.FC = () => {
+const Home: React.FC = () => {
     const dispatch = useAppDispatch()
-    const [hasToken,setHasToken]=useState<boolean>(false)
+    const navigate = useNavigate()
+    const [hasToken, setHasToken] = useState<boolean>(false)
 
     useEffect(() => {
         dispatch(getPost())
-    }, [getPost])
+    }, [dispatch,getPost])
 
-useEffect(()=>{
-
-    const user = !!window.localStorage.getItem('token')
-    setHasToken(user)
-},['token'])
+    useEffect(() => {
+        const user = !!window.localStorage.getItem('token')
+        setHasToken(user)
+    }, [])
 
 
     if (!hasToken) {
-        return (
-            <>
-                <WelcomPage />
-            </>
-        )
+        navigate(Path.WelcomPage)
     }
     return (
         <>

@@ -1,13 +1,18 @@
-.innerPost {
-    background-color: rgb(241, 241, 241);
-}
-
 .post {
     max-width: 1100px;
     box-sizing: border-box;
     margin: 50px auto 0 auto;
     padding: 0 15px;
+    color: var(#{--post-text-collor-default});
 
+}
+
+.preloader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px;
 }
 
 .img {
@@ -60,9 +65,9 @@
     justify-content: center;
 
     &__inner {
-        -webkit-box-shadow: 7px 5px 11px 17px rgba(144, 157, 167, 0.27);
-        -moz-box-shadow: 7px 5px 11px 17px rgba(144, 157, 167, 0.27);
-        box-shadow: 7px 5px 11px 17px rgba(144, 157, 167, 0.27);
+        -webkit-box-shadow: var(#{--post-webkit-box-shadow-default});
+        -moz-box-shadow: var(#{--post-moz-box-shadow-default});
+        box-shadow: var(#{--post-box-shadow-default});
         border-radius: 5px;
         font-size: 30px;
         padding: 22px 20px;
@@ -106,9 +111,9 @@
         border-radius: 5px;
         font-size: 20px;
         padding: 30px 20px 30px 20px;
-        -webkit-box-shadow: -7px 6px 11px 17px rgba(146, 148, 150, 0.27);
-        -moz-box-shadow: -7px 6px 11px 17px rgba(146, 148, 150, 0.27);
-        box-shadow: -7px 6px 11px 17px rgba(146, 148, 150, 0.27);
+        -webkit-box-shadow: var(#{--post-webkit-box-shadow-default});
+        -moz-box-shadow: var(#{--post-moz-box-shadow-default});
+        box-shadow: var(#{--post-box-shadow-default});
         font-weight: 300;
     }
 }
@@ -147,6 +152,7 @@
         width: 34px;
         height: 34px;
         font-weight: 600;
+        fill: var(#{--eye-lent-default});
     }
 
     &__length {
@@ -166,16 +172,19 @@
     margin: 0 0 0 35px;
     cursor: pointer;
     animation: rotate 2s ease infinite;
+    fill: var(#{--eye-lent-default});
 
     @keyframes rotate {
-        10%{
-            transform: rotate(-5deg)        
+        10% {
+            transform: rotate(-5deg)
         }
-        50%{
-            transform: rotate(5deg) 
+
+        50% {
+            transform: rotate(5deg)
         }
-        100%{
-            transform: rotate(-5deg) 
+
+        100% {
+            transform: rotate(-5deg)
         }
     }
 }
@@ -200,17 +209,23 @@
     }
 
     &__img {
+        width: 24px;
+        height: 24px;
         position: absolute;
         top: 34px;
         right: 3px;
         cursor: pointer;
+        fill: var(#{--add-post-button-background-default})
     }
 
     &__imgSend {
+        width: 24px;
+        height: 24px;
         position: absolute;
         bottom: 68px;
         right: 3px;
         cursor: pointer;
+        fill: var(#{--add-post-button-background-default})
     }
 }
 

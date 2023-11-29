@@ -1,6 +1,6 @@
 .header {
-    background: rgb(54, 89, 94);
-    background: linear-gradient(97deg, rgba(54, 89, 94, 1) 5%, rgba(31, 50, 59, 1) 37%, rgba(38, 54, 75, 1) 61%, rgba(13, 13, 32, 1) 92%);
+    background: var(#{ --header-background-default});
+    background:var(#{  --header-gradient-default});
     height: 80px;
     width: 100%;
     display: flex;
@@ -294,21 +294,22 @@
         }
     }
 
-    .link__forward{
+    .link__forward {
         padding: 11px 9px;
         font-size: 16px;
         margin: 4px 0 0 0;
         width: 89px;
     }
+
     .header {
-   
+
         &_logo {
             width: 106px;
             height: 44px;
             border-radius: 13px;
             position: relative;
         }
-    
+
         &__email {
             width: 20px;
             height: 20px;
@@ -318,32 +319,32 @@
             padding: 1px 0 1px 60px;
             z-index: 2;
             opacity: 0;
-    
+
             &:hover {
                 animation: rotate 3s ease infinite;
-    
+
                 @keyframes rotate {
                     0% {
                         transform: translateX(30px);
                     }
-    
+
                     25% {
                         opacity: 1;
                     }
-    
+
                     50% {
                         transform: translateX(50px);
                     }
-    
+
                     100% {
                         transform: translateX(20px);
                         opacity: 0;
                     }
-    
-    
+
+
                 }
             }
         }
-        
+
     }
 }
