@@ -1,6 +1,6 @@
 import axios from "axios"
 // http://localhost:4444
-export const REACT_APP_API_URL = 'https://react-blog-x0l9.onrender.com'
+export const REACT_APP_API_URL = 'http://localhost:4444'
 // 'https://react-blog-x0l9.onrender.com'
 
 

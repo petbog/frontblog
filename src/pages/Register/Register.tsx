@@ -40,28 +40,50 @@ const Register: React.FC = () => {
     const nameClick = useRef<HTMLInputElement>(null)
     const emailClick = useRef<HTMLInputElement>(null)
     const passClick = useRef<HTMLInputElement>(null)
-    const inputRef = [nameClick, emailClick, passClick]
+    const [isClickedName, setIsClickedName] = useState(false);
+    const [isClickedPass, setIsClickedPass] = useState(false);
+    const [isClickedEmail, setIsClickedEmail] = useState(false);
 
     useEffect(() => {
-        inputRef.forEach((ref) => {
-            if (ref.current) {
-                ref.current.focus()
+        if (isClickedName) {
+            if (nameClick.current) {
+                nameClick.current.focus()
             }
         }
-        )
-    }, [])
+
+        if (isClickedPass) {
+            if (passClick.current) {
+                passClick.current.focus()
+            }
+        }
+        if (isClickedEmail) {
+            if (emailClick.current) {
+                emailClick.current.focus()
+            }
+        }
+
+    }, [isClickedName, isClickedPass, isClickedEmail])
 
     const handleClickNameTitle = () => {
+        if (isClickedName) {
+            setIsClickedName(true)
+        }
         if (nameClick.current) {
             nameClick.current.focus()
         }
     }
     const handleClickEmailTitle = () => {
+        if (isClickedEmail) {
+            setIsClickedEmail(true)
+        }
         if (emailClick.current) {
             emailClick.current.focus()
         }
     }
     const handleClickPasssTitle = () => {
+        if (isClickedPass) {
+            setIsClickedPass(true)
+        }
         if (passClick.current) {
             passClick.current.focus()
         }
@@ -239,7 +261,7 @@ const Register: React.FC = () => {
                             className={classes.Form_email}
                             type='email'
                             value={fullName}
-                            onChange={(e) => nameHandler(e)}
+                            onChange={nameHandler}
                             placeholder=''
                         />
                         <label onClick={handleClickNameTitle} className={classes.Form_email__label}>Ваше имя</label>
@@ -253,7 +275,7 @@ const Register: React.FC = () => {
                             className={classes.Form_email}
                             type='email'
                             value={email}
-                            onChange={(e) => emailHandler(e)}
+                            onChange={emailHandler}
                             placeholder=''
                         />
                         <label onClick={handleClickEmailTitle} className={classes.Form_email__label}>Введите email</label>
@@ -267,7 +289,7 @@ const Register: React.FC = () => {
                             className={classes.Form_pass}
                             type={type}
                             value={password}
-                            onChange={(e) => passwordHandler(e)}
+                            onChange={passwordHandler}
                             placeholder=''
                         />
                         <label onClick={handleClickPasssTitle} className={classes.Form_pass__label}>Введите password</label>

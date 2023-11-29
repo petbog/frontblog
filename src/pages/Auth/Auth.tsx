@@ -35,7 +35,8 @@ const Auth: FC = () => {
     const errorLogin = useSelector(selectIdErrorMessage)
     const loginRef = useRef<HTMLInputElement>(null)
     const passRef = useRef<HTMLInputElement>(null)
-    const arrRef = [loginRef, passRef]
+    const [isClickedLogin, setIsClickedLogin] = useState(false);
+    const [isClickedPass, setIsClickedPass] = useState(false);
 
 
 
@@ -63,23 +64,37 @@ const Auth: FC = () => {
     }
 
     useEffect(() => {
-        arrRef.forEach((ref) => {
-            if (ref.current) {
-                ref.current.focus()
+        if (isClickedLogin) {
+            if (loginRef.current) {
+                loginRef.current.focus()
             }
-        })
-    }, [arrRef])
+        }
+        if (isClickedPass) {
+            if (passRef.current) {
+                passRef.current.focus()
+            }
+        }
+
+    }, [isClickedLogin, isClickedPass])
+
 
     const handleLoginRef = () => {
+        if (isClickedLogin) {
+            setIsClickedLogin(true)
+        }
         if (loginRef.current) {
             loginRef.current.focus()
         }
     }
     const handlePassRef = () => {
+        if (isClickedPass) {
+            setIsClickedPass(true)
+        }
         if (passRef.current) {
             passRef.current.focus()
         }
     }
+
 
     useEffect(() => {
         if (errorRegisater.length) {
