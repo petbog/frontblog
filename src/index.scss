@@ -11,23 +11,23 @@ body {
 
 //body-background
 $body-background-dark: #141416;
-$body-background-ligth: #ddddde;
+$body-background-ligth: #e7e6e6;
 
 //cart-border
-$cart-border-dark: 1px solid #7f7e7e;
-$cart-border-ligth: 1px solid #fffefe;
+$cart-border-ligth: 1px solid #7f7e7e;
+$cart-border-dark: 1px solid #fffefe;
 
 //cart-text-color
-$cart-text-color-dark: #010101;
-$cart-text-color-ligth: #fff;
+$cart-text-color-ligth: #010101;
+$cart-text-color-dark: #fff;
 
 //cart-background
 $cart-background-dark: #1d1c1c;
 $cart-background-ligth: rgb(236, 230, 230);
 
 //sort-rating
-$sort-rating-dark: #fff;
-$sort-rating-ligth: #000;
+$sort-rating-dark: #838080;
+$sort-rating-ligth: #696969;
 
 //sort-rating-border-activ
 $sort-rating-border-activ-dark: #fff;
@@ -35,7 +35,7 @@ $sort-rating-border-activ-ligth: #000;
 
 //sort-rating-color-activ
 $sort-rating-color-activ-dark: #fff;
-$sort-rating-color-activ-ligth: #154ce1;
+$sort-rating-color-activ-ligth: #08090a;
 
 //sort-rating-color-hech
 $sort-rating-color-hech-dark: #fff;
@@ -63,7 +63,7 @@ $add-post-button-border-ligth: rgb(0, 0, 0);
 
 //add-post-button-background
 $add-post-button-background-dark: #fff;
-$add-post-button-background-ligth: #2e6ccf;
+$add-post-button-background-ligth: #000000;
 
 //add-post-button-background
 $post-text-collor-dark: #fff;
@@ -85,13 +85,13 @@ $post-box-shadow-ligth: 7px 5px 11px 17px rgba(144, 157, 167, 0.27);
   //body-background
   --body-background-dark: #{$body-background-dark};
   --body-background-ligth: #{$body-background-ligth};
-  --body-background-default: var(#{--body-background-dark});
+  --body-background-default: var(#{--body-background-ligth});
 
   //cart-border
   --cart-border-dark: #{$cart-border-dark};
   --cart-border-ligth: #{$cart-border-ligth};
   --cart-border-default: var(#{--cart-border-ligth});
-
+ 
   //cart-text-color
   --cart-text-color-dark: #{$cart-text-color-dark};
   --cart-text-color-ligth: #{$cart-text-color-ligth};
@@ -100,22 +100,22 @@ $post-box-shadow-ligth: 7px 5px 11px 17px rgba(144, 157, 167, 0.27);
   //cart-background
   --cart-background-dark: #{$cart-background-dark};
   --cart-background-ligth: #{$cart-background-ligth};
-  --cart-background-default: var(#{--cart-background-dark});
-
+  --cart-background-default: var(#{--cart-background-ligth});
+ 
   //sort-rating
   --sort-rating-dark: #{$sort-rating-dark};
   --sort-rating-ligth: #{$sort-rating-ligth};
-  --sort-rating-default: var(#{--sort-rating-dark});
+  --sort-rating-default: var(#{--sort-rating-ligth});
 
   //sort-rating-border-activ
   --sort-rating-border-activ-dark: #{$sort-rating-border-activ-dark};
   --sort-rating-border-activ-ligth: #{$sort-rating-border-activ-ligth};
-  --sort-rating-border-activ-default: var(#{--sort-rating-border-activ-dark});
+  --sort-rating-border-activ-default: var(#{--sort-rating-border-activ-ligth});
 
   //sort-rating-color-activ
   --sort-rating-color-activ-dark: #{$sort-rating-color-activ-dark};
   --sort-rating-color-activ-ligth: #{$sort-rating-color-activ-ligth};
-  --sort-rating-color-activ-default: var(#{--sort-rating-color-activ-dark});
+  --sort-rating-color-activ-default: var(#{--sort-rating-color-activ-ligth});
 
   //sort-rating-color-hech
   --sort-rating-color-hech-dark: #{$sort-rating-color-hech-dark};
@@ -125,51 +125,51 @@ $post-box-shadow-ligth: 7px 5px 11px 17px rgba(144, 157, 167, 0.27);
   //eye-lent
   --eye-lent-dark: #{$eye-lent-dark};
   --eye-lent-ligth: #{$eye-lent-ligth};
-  --eye-lent-default: var(#{--eye-lent-dark});
+  --eye-lent-default: var(#{--eye-lent-ligth});
 
   //commentImg-lent
   --commentImg-lent-dark: #{$commentImg-lent-dark};
   --commentImg-lent-ligth: #{$commentImg-lent-ligth};
-  --commentImg-lent-default: var(#{--commentImg-lent-dark});
+  --commentImg-lent-default: var(#{--commentImg-lent-ligth});
 
   //header-gradient
   --header-gradient-dark: #{$header-gradient-dark};
   --header-gradient-ligth: #{$header-gradient-ligth};
-  --header-gradient-default: var(#{--header-gradient-dark});
+  --header-gradient-default: var(#{--header-gradient-ligth});
 
   //header-background
   --header-background-dark: #{$header-background-dark};
   --header-background-ligth: #{$header-background-ligth};
-  --header-background-default: var(#{--header-background-dark});
+  --header-background-default: var(#{--header-background-ligth});
 
   //add-post-button-border
   --add-post-button-border-dark: #{$add-post-button-border-dark};
   --add-post-button-border-ligth: #{$add-post-button-border-ligth};
-  --add-post-button-border-default: var(#{--add-post-button-border-dark});
+  --add-post-button-border-default: var(#{--add-post-button-border-ligth});
 
   //add-post-button-background
   --add-post-button-background-dark: #{$add-post-button-background-dark};
   --add-post-button-background-ligth: #{$add-post-button-background-ligth};
-  --add-post-button-background-default: var(#{--add-post-button-background-dark});
+  --add-post-button-background-default: var(#{--add-post-button-background-ligth});
 
   //post-text-collor
   --post-text-collor-dark: #{$post-text-collor-dark};
   --post-text-collor-ligth: #{$post-text-collor-ligth};
-  --post-text-collor-default: var(#{--post-text-collor-dark});
+  --post-text-collor-default: var(#{--post-text-collor-ligth});
 
   //post-webkit-box-shadow
   --post-webkit-box-shadow-dark: #{$post-webkit-box-shadow-dark};
   --post-webkit-box-shadow-ligth: #{$post-webkit-box-shadow-ligth};
-  --post-webkit-box-shadow-default: var(#{--post-webkit-box-shadow-dark});
+  --post-webkit-box-shadow-default: var(#{--post-webkit-box-shadow-ligth});
 
   //post-moz-box-shadow
   --post-moz-box-shadow-dark: #{$post-moz-box-shadow-dark};
   --post-moz-box-shadow-ligth: #{$post-moz-box-shadow-ligth};
-  --post-moz-box-shadow-default: var(#{--post-moz-box-shadow-dark});
+  --post-moz-box-shadow-default: var(#{--post-moz-box-shadow-ligth});
 
   //post-box-shadow
   --post-box-shadow-dark: #{$post-box-shadow-dark};
   --post-box-shadow-ligth: #{$post-box-shadow-ligth};
-  --post-box-shadow-default: var(#{--post-box-shadow-dark});
+  --post-box-shadow-default: var(#{--post-box-shadow-ligth});
 
 }

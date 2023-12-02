@@ -8,27 +8,34 @@ import { useEffect, useState } from 'react';
 import Tags from './../../components/Tags/Tags';
 import { useNavigate } from "react-router-dom";
 import { Path } from "../../Path/Patch";
+import ButtonTheme from "../../components/ButtonTheme/ButtonTheme";
 
 const Home: React.FC = () => {
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
     const [hasToken, setHasToken] = useState<boolean>(false)
+    
 
     useEffect(() => {
         dispatch(getPost())
-    }, [dispatch,getPost])
+    }, [dispatch, getPost])
+
+
 
     useEffect(() => {
-        const user = !!window.localStorage.getItem('token')
+        const user = Boolean(window.localStorage.getItem('token'))
         setHasToken(user)
+        if (user === false) {
+            navigate(Path.WelcomPage)
+        }
     }, [])
 
+    useEffect(() => {
+    
+    }, [hasToken])
 
-    if (!hasToken) {
-        navigate(Path.WelcomPage)
-    }
     return (
-        <>
+        <div className={s.container_button}>
             <Header />
             <div className={s.container}>
                 <SortRating />
@@ -39,7 +46,8 @@ const Home: React.FC = () => {
                     </div>
                 </div>
             </div>
-        </>
+            <ButtonTheme />
+        </div>
     )
 }
 

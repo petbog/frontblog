@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { Path } from '../../Path/Patch'
 import s from './ErrorPage.module.scss'
+import ButtonTheme from '../../components/ButtonTheme/ButtonTheme'
 
 const ErrorPage = () => {
     return (
