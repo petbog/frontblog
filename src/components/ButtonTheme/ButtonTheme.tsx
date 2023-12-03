@@ -1,3 +1,4 @@
+import { Theme } from '../../Context/ThemeContext';
 import { useTheme } from '../../Context/hooks/useTheme';
 import s from './ButtonTheme.module.scss'
 
@@ -6,7 +7,7 @@ const ButtonTheme = () => {
 
 
     const handleTheme = () => {
-        theme.changeTheme(theme.theme === 'ligth' ? 'dark' : 'ligth')
+        theme.changeTheme(theme.theme === Theme.LIGTH ? Theme.DARK : Theme.LIGTH)
     }
 
 

@@ -1,6 +1,7 @@
 import { ReactNode, useState } from 'react'
-import { ThemeContext } from '../ThemeContext'
+import { Theme, ThemeContext } from '../ThemeContext'
 import { ChangeCssRootVareibals } from '../../model/ChangeCssRootVareibals'
+import { storage } from '../../model/Storage'
 
 type props = {
     children: ReactNode
@@ -9,9 +10,11 @@ type props = {
 
 export const ThemeProvider = ({ children, ...props }: props) => {
 
-    const [theme, setSheme] = useState<string>('ligth')
+    const [theme, setSheme] = useState<Theme>(storage.getItem('theme') || Theme.LIGTH)
 
-    const changeTheme = (theme: string) => {
+    ChangeCssRootVareibals(theme)
+    const changeTheme = (theme: Theme) => {
+        storage.setItem('theme', theme)
         setSheme(theme)
         ChangeCssRootVareibals(theme)
     }
