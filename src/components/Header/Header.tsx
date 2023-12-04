@@ -6,6 +6,7 @@ import { Path } from '../../Path/Patch'
 import arrow from '../../img/1492533558-slideupdown_83272.svg'
 import blogSvg from '../../img/blogsvg.svg'
 import email from '../../img/email-envelope-outline-shape-with-rounded-corners_icon-icons.com_56530.svg'
+import ButtonTheme from '../ButtonTheme/ButtonTheme'
 
 const Header: React.FC = () => {
   const authUser = useSelector(selectIsAuth)
@@ -26,7 +27,10 @@ const Header: React.FC = () => {
       <Link className={s.innerLinkForward} to={Path.Home}>
         <div className={s.header_logo}>
           <img src={blogSvg} alt="blogSvg" />
-          <img className={s.header__email} src={email} alt="email" />
+          {/* <img className={s.header__email} src={email} alt="email" /> */}
+          <div className={s.header_theme}>
+            <ButtonTheme />
+          </div>
         </div>
 
       </Link>

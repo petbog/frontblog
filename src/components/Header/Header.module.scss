@@ -16,6 +16,11 @@
         height: 44px;
         border-radius: 13px;
         position: relative;
+        display: flex;
+    }
+
+    &_theme {
+        margin: 10px 0 0 15px;
     }
 
     &__email {
@@ -28,37 +33,31 @@
         z-index: 2;
         opacity: 0;
 
-        &:hover {
-            animation: rotate 3s ease infinite;
+        // &:hover {
+        //     animation: rotate 3s ease infinite;
 
-            @keyframes rotate {
-                0% {
-                    transform: translateX(30px);
-                }
+        //     @keyframes rotate {
+        //         0% {
+        //             transform: translateX(30px);
+        //         }
 
-                25% {
-                    opacity: 1;
-                }
+        //         25% {
+        //             opacity: 1;
+        //         }
 
-                50% {
-                    transform: translateX(50px);
-                }
+        //         50% {
+        //             transform: translateX(50px);
+        //         }
 
-                100% {
-                    transform: translateX(20px);
-                    opacity: 0;
-                }
+        //         100% {
+        //             transform: translateX(20px);
+        //             opacity: 0;
+        //         }
 
 
-            }
-        }
+        //     }
+        // }
     }
-
-    &_logo img:nth-child(1) {
-        width: 80px;
-        height: 47px;
-    }
-
 }
 
 .link {
@@ -241,12 +240,6 @@
 }
 
 @media(max-width:615px) {
-
-    .header_logo img:nth-child(1) {
-        width: 86px;
-        height: 52px;
-        margin: -5px 0 0px 0;
-    }
 
     .disabel {
         display: none;

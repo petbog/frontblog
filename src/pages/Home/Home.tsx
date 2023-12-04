@@ -8,7 +8,6 @@ import { useEffect, useState } from 'react';
 import Tags from './../../components/Tags/Tags';
 import { useNavigate } from "react-router-dom";
 import { Path } from "../../Path/Patch";
-import ButtonTheme from "../../components/ButtonTheme/ButtonTheme";
 
 const Home: React.FC = () => {
     const dispatch = useAppDispatch()
@@ -46,7 +45,6 @@ const Home: React.FC = () => {
                     </div>
                 </div>
             </div>
-            <ButtonTheme />
         </div>
     )
 }
