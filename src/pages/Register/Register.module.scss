@@ -143,12 +143,16 @@
     opacity: 0.4;
     transition: all ease 1s;
     cursor: pointer;
+    width: 24px;
+    height: 24px;
+    fill: var(#{ --color-button-register-default});
 
     &:hover {
       opacity: 1;
     }
   }
 }
+
 .activImg {
   width: 100%;
   height: 100%;
@@ -156,14 +160,16 @@
   object-fit: contain;
 }
 
-.error{
+.error {
   margin: -15px 0 34px 0;
-  &__text{
+
+  &__text {
     font-size: 17px;
     font-weight: 400;
     color: red;
   }
 }
+
 .form_img {
   position: absolute;
   width: 25px;
@@ -198,6 +204,8 @@
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
+  text-decoration: none;
+  color: var(#{--color-button-register-default})
 }
 
 .Form_button::after {
@@ -249,6 +257,10 @@
 
 
 @media(max-width:534px) {
+  .img {
+    margin: 146px 0 15px 0;
+  }
+
   .Form_inner {
     width: 256px;
   }
@@ -266,10 +278,15 @@
   .errorPoppup {
     font-size: 11px;
   }
+
   .Form_container {
     position: relative;
-    height: 93px;
+    height: 77px;
   }
+  
+.Form_container_pass {
+  height: 90px;
+}
 }
 
 

@@ -157,6 +157,7 @@
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
+  color: var(#{--color-button-register-default});
 }
 
 .Form_button::after {

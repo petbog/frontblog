@@ -27,10 +27,14 @@ const Header: React.FC = () => {
       <Link className={s.innerLinkForward} to={Path.Home}>
         <div className={s.header_logo}>
           <img src={blogSvg} alt="blogSvg" />
-          {/* <img className={s.header__email} src={email} alt="email" /> */}
-          <div className={s.header_theme}>
-            <ButtonTheme />
-          </div>
+          {
+            (location.pathname !== Path.Register  && location.pathname !== Path.Auth) ?
+              <div className={s.header_theme}>
+                <ButtonTheme />
+              </div>
+              : '' 
+          }
+
         </div>
 
       </Link>

@@ -81,6 +81,10 @@ $post-moz-box-shadow-ligth: 7px 5px 11px 17px rgba(144, 157, 167, 0.27);
 $post-box-shadow-dark:  2px 2px 11px 3px rgba(246, 250, 252, 0.14);
 $post-box-shadow-ligth: 7px 5px 11px 17px rgba(144, 157, 167, 0.27);
 
+//color-button-register 
+$color-button-register-dark:  #ffffff;
+$color-button-register-ligth: #000;
+
 :root {
   //body-background
   --body-background-dark: #{$body-background-dark};
@@ -171,5 +175,10 @@ $post-box-shadow-ligth: 7px 5px 11px 17px rgba(144, 157, 167, 0.27);
   --post-box-shadow-dark: #{$post-box-shadow-dark};
   --post-box-shadow-ligth: #{$post-box-shadow-ligth};
   --post-box-shadow-default: var(#{--post-box-shadow-ligth});
+
+  //color-button-register
+  --color-button-register-dark: #{$color-button-register-dark};
+  --color-button-register-ligth: #{$color-button-register-ligth};
+  --color-button-register-default: var(#{--color-button-register-ligth});
 
 }
