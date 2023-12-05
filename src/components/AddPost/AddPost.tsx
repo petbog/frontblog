@@ -66,7 +66,7 @@ const AddPost: FC = () => {
                 formData.append('image', file);
                 const { data } = await instanse.post('/upload', formData);
                 setImageUrl(data.url);
-                console.log(data.url)
+                // console.log(data.url)
             } else {
                 alert('Пожалуйста, выберите файл для загрузки.');
             }

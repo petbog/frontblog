@@ -8,6 +8,7 @@ import Header from '../Header/Header'
 import preloader from '../../img/infinite-spinner.svg'
 import Comment from '../Comment/Comment'
 import { selectIdUser } from '../../redux/Slice/authSlise'
+import zamena from '../../img/Прикольные-заставки-на-рабочий-стол-с-надписями-1.jpg'
 
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import { REACT_APP_API_URL } from '../../axios'
@@ -68,7 +69,7 @@ const OnePost: FC = () => {
         setOpenComment(!openComment)
         window.scrollTo(0, document.body.scrollHeight)
     }
-    if (!imageUrl) {
+    if (!fullName) {
         return <img src={preloader} alt="preloader" className={s.preloader} />
     }
     return (
@@ -76,7 +77,9 @@ const OnePost: FC = () => {
             <Header />
             <div className={s.post}>
                 <div className={s.img}>
-                    <img className={s.img__inner} src={`${REACT_APP_API_URL}${imageUrl}`} alt="imageUrl" />
+                    {
+                        imageUrl ? <img className={s.img__inner} src={`${REACT_APP_API_URL}${imageUrl}`} alt="imageUrl" /> :   <img className={s.img__inner} src={zamena} alt="imageUrl" />
+                    }
                 </div>
                 <div className={s.user}>
                     <img className={s.user__avatar} src={`${REACT_APP_API_URL}${avatarUrl}`} alt="" />
@@ -141,10 +144,10 @@ const OnePost: FC = () => {
                     {textareaValue.length > 1 ?
                         <>
                             {
-                                <svg className={s.comment__img} onClick={clearText}  viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+                                <svg className={s.comment__img} onClick={clearText} viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" /></svg>
                             }
                             {
-                                <svg className={s.comment__imgSend} onClick={sendComment} viewBox="0 0 24 24" ><path d="M6.48 6.794l.49 1.963a1 1 0 0 1-1.94.486l-1-4a1 1 0 0 1 1.393-1.15l15 7a1 1 0 0 1 0 1.813l-15 7a1 1 0 0 1-1.385-1.18l2-7A1 1 0 0 1 7 11h4a1 1 0 0 1 0 2H7.754l-1.19 4.167L17.635 12 6.48 6.794z" fill-rule="nonzero"/></svg>
+                                <svg className={s.comment__imgSend} onClick={sendComment} viewBox="0 0 24 24" ><path d="M6.48 6.794l.49 1.963a1 1 0 0 1-1.94.486l-1-4a1 1 0 0 1 1.393-1.15l15 7a1 1 0 0 1 0 1.813l-15 7a1 1 0 0 1-1.385-1.18l2-7A1 1 0 0 1 7 11h4a1 1 0 0 1 0 2H7.754l-1.19 4.167L17.635 12 6.48 6.794z" fill-rule="nonzero" /></svg>
                             }
                         </>
                         : ''}

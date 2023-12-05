@@ -13,14 +13,16 @@ const Lent: FC = () => {
   const status = useSelector(getStatusSelector)
   const user = useSelector(selectIdUser)
 
+
   useEffect(() => { }, [data])
 
   const skeleton = [...new Array(3)].map((_, i) => <Skeleton key={i} />)
 
+  const newData = Array.from(data)
   return (
     <div className="">
       {
-        status === 'loading' ? skeleton : data.map((item) => (
+        status === 'loading' ? skeleton : newData.map((item) => (
           <LentItem key={item._id} isAuner={item.user._id === user} {...item} />
         ))
       }
