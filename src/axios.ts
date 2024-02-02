@@ -2,7 +2,7 @@ import axios from "axios"
 // http://localhost:4444
 // export const REACT_APP_API_URL = 'https://react-blog-x0l9.onrender.com'
 // 'https://react-blog-x0l9.onrender.com'
-export const REACT_APP_API_URL = process.env.REACT_API_API_URL;
+export const REACT_APP_API_URL = 'https://react-blog-bogdanpetrov.amvera.io';
 
 const instanse = axios.create({
     baseURL: REACT_APP_API_URL
